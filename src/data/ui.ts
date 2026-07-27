@@ -89,6 +89,18 @@ export const UI = {
     fi: 'Android Offline',
   },
 
+  footerIsland: {
+    de: 'Game Island',
+    en: 'Game Island',
+    fi: 'Pelisaari',
+  },
+
+  footerDiscord: {
+    de: 'Discord',
+    en: 'Discord',
+    fi: 'Discord',
+  },
+
   footerTips: {
     de: 'TIPPS',
     en: 'TIPS',
@@ -138,9 +150,9 @@ export const UI = {
   },
 
   fanText2: {
-    de: 'Dieses Projekt steht in keiner Verbindung zu Epic Games, Disney oder Lucasfilm Ltd. und wird nicht unterstützt oder offiziell genehmigt.',
-    en: 'This project is not affiliated with, endorsed, sponsored, or approved by Epic Games, Disney, or Lucasfilm Ltd.',
-    fi: 'Tämä projekti ei ole yhteydessä Epic Gamesiin, Disneyhin tai Lucasfilm Ltd:hen eikä niiden tukema tai hyväksymä.',
+    de: 'Dieses Projekt ist ein unabhängiges Fanprojekt und steht in keiner Verbindung zu FOAD, Epic Games, Disney oder Lucasfilm Ltd. Es wird von diesen weder unterstützt noch offiziell genehmigt.',
+    en: 'This is an independent fan project and is not affiliated with, endorsed, sponsored, or officially approved by FOAD, Epic Games, Disney, or Lucasfilm Ltd.',
+    fi: 'Tämä projekti ei ole yhteydessä FOAD, Epic Gamesiin, Disneyhin tai Lucasfilm Ltd:hen eikä niiden tukema tai hyväksymä.',
   },
 
   fanText3: {

@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.7.3
+Status
+
+Droidex has reached a stable architecture.
+
+Future work is expected to focus primarily on game knowledge and community data rather than structural changes.
+
+The architecture serves as a reference implementation for future Fluxx projects.
+
 ## v1.7.1
 
 ### Architecture

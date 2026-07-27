@@ -10,7 +10,7 @@ export function Footer() {
   const [creditsOpen, setCreditsOpen] = useState(false);
 
   async function shareApp() {
-    const url = 'https://tinyurl.com/droidex-app';
+    const url = 'https://fluxx-dev.github.io/droidex';
 
     if (navigator.share) {
       await navigator.share({
@@ -60,12 +60,36 @@ export function Footer() {
             <div className="mt-1">
               {t(UI.footerFork)}:
               <a
-                href="https://github.com/TidoWillems/droidex"
+                href="https://github.com/fluxx-dev/droidex"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-cyan-300 ml-1"
               >
-                TidoWillems/droidex
+                FLUXX DEV
+              </a>
+            </div>
+
+            <div className="mt-1">
+              {t(UI.footerIsland)}:
+              <a
+                href="https://www.fortnite.com/@foad/7865-8305-9184"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-300 ml-1"
+              >
+                FOAD
+              </a>
+            </div>
+
+            <div className="mt-1">
+              {t(UI.footerDiscord)}:
+              <a
+                href="https://discord.gg/droidtycoon"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-300 ml-1"
+              >
+                Droid Tycoon
               </a>
             </div>
           </div>
@@ -141,7 +165,7 @@ export function Footer() {
         )}
 
         <a
-          href="https://tinyurl.com/droidex-app"
+          href="https://fluxx-dev.github.io/droidex"
           target="_blank"
           rel="noreferrer"
           className="

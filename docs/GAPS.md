@@ -26,7 +26,6 @@ Zu prüfen:
 - klarere Verantwortlichkeiten
 - gemeinsame Runtime-Architektur
 
-
 ✅ Knowledge Pipeline (knowledge/)
 ✅ DATA → RULES → FACTS → STATE → UI
 🟡 Platform / Runtime (erst als Muster erkennbar)
