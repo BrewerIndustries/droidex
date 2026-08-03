@@ -321,7 +321,7 @@ export function AboutPage() {
         </div>
 
         <a
-          href="https://github.com/TidoWillems/droidex"
+          href="https://github.com/fluxx-dev/droidex"
           target="_blank"
           rel="noreferrer"
           className="text-cyan-400 text-sm"

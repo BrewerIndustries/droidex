@@ -66,7 +66,7 @@ export function TipsPage() {
         <div className="text-xs text-zinc-400 mb-3">{t(UI.communityText)}</div>
 
         <a
-          href="mailto:tido.willems@gmail.com?subject=Droidex%20Community%20Tip"
+          href="mailto:fluxx-dev@proton.me?subject=Droidex%20Feedback"
           className="text-sm text-cyan-400 hover:text-cyan-300"
         >
           {t(UI.communityReport)}
