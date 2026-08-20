@@ -1,4 +1,4 @@
-const CACHE = 'droidex-v1.8.0';
+const CACHE = 'droidex-v1.9.0';
 
 // Files worth having before the first offline load. index.html is deliberately
 // NOT precached — see the fetch handler.
