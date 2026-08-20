@@ -108,6 +108,7 @@ export function DroidCard({
       {/* Footer */}
       <DroidCardFooter
         droid={droid}
+        tier={tier}
         facts={facts}
         rarityColor={ui.rarityColor}
         badge={ui.badge}

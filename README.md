@@ -47,6 +47,7 @@ No Play Store required.
 ## Features
 
 - Track all Droid Tycoon droids across every tier
+- Per-tier cost / income / sell, with an efficiency rating and payback time
 - Collection tracking
 - Effective Present tracking
 - Rebirth planning
@@ -104,6 +105,64 @@ yet — those cards fall back to the class icon until art lands.
 
 Data source for droids and rebirths:
 https://star-wars-droid-tycoon.fandom.com/wiki/Rebirths
+
+## Droid Economy
+
+Every card shows the numbers for that exact droid *and tier*:
+
+| Field | Meaning |
+| --- | --- |
+| `COST` | Purchase cost in credits |
+| `INC` | Credits per second |
+| `SELL` | Credits back when sold — a flat 70% of cost |
+| `UPG` | Upgrade Chips this tier step costs |
+| `EFF` | Credits/sec earned per 1,000 credits spent — **higher is better** |
+| `PAY` | How long the droid takes to earn its own cost back — **lower is better** |
+| `/CHIP` | Credits/sec the upgrade buys, per chip spent — **higher is better** |
+
+`EFF` and `PAY` are two views of the same income/cost ratio: `EFF` ranks droids
+against each other, `PAY` says what that ratio means in play.
+
+`/CHIP` is the one to read when Upgrade Chips are the bottleneck rather than
+credits — and it ranks droids almost the opposite way round. A Rainbow Mouse has
+20x the credit efficiency of a Rainbow Gunrunner, but the Gunrunner upgrade
+returns 55x more income per chip spent. Epic droids at Rainbow are the sweet
+spot for chips; pushing Commons up the tiers is the worst chip spend in the game
+even though those cards top the `EFF` table.
+
+The interesting consequence: efficiency *drops* through the Gold/Diamond/Rainbow
+upgrades (cost quadruples while income only doubles), then climbs again at
+Beskar, Galactic and Stellar, where cost rises much more slowly than income. A
+Stellar Mouse is the most credit-efficient card in the game; a Stellar Loadlifter
+is among the worst.
+
+Iconic droids are bought with Nova Crystals and earn a percentage of total income
+rather than a flat rate, so they show those values instead of an efficiency
+rating.
+
+Chips *returned on sale* are still missing. The game does pay chips when you sell
+a self-crafted droid and the amount scales with rarity and tier, but no public
+source documents the values, so only the upgrade side (`UPG`, `/CHIP`) is shown.
+
+## Data Sources
+
+Stats are generated and validated by a script rather than hand-maintained. The
+primary source is the community-maintained sheet, cross-checked against three
+others:
+
+| Source | Used for |
+| --- | --- |
+| [Community sheet](https://docs.google.com/spreadsheets/d/1otLCKSCMKICMlnefirQ8KZhh_rdZTd5Mp8h0UYFUiqg) | Cost/income for all 7 tiers, and the Upgrade Chip cost table |
+| [Fandom wiki](https://star-wars-droid-tycoon.fandom.com/wiki/Droidex) | Companion perks, Iconic Nova Crystal prices, rebirth paths |
+| [tycoon-tools](https://tycoon-tools.com/droid-tycoon/value-list/) | Independent all-tier income chart |
+| [erikpeik/droidex](https://github.com/erikpeik/droidex) | Independent cost/income for 54 droids across 5 tiers |
+
+The generator refuses to emit data that fails its checks: every name must resolve
+against `droids.ts`, cost and income must increase along the tier chain, and each
+droid's tier-to-tier steps must match the median for its rarity. That last check
+is what caught the wiki's Rainbow column being a duplicate of its Beskar column —
+sell is a flat 70% of cost, and the real progression is base x 1, 4, 8, **12**,
+16, 20, 24.
 
 ---
 
