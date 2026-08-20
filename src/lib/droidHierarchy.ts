@@ -1,12 +1,4 @@
-import { ALL_CARDS } from '../data/droids';
-
-export const TIER_ORDER = [
-  'DEFAULT',
-  'GOLD',
-  'DIAMOND',
-  'RAINBOW',
-  'BESKAR',
-] as const;
+import { ALL_CARDS, TIER_ORDER } from '../data/droids';
 
 export function hasEffectiveCard(
   present: Set<string>,
@@ -34,15 +26,10 @@ export function hasEffectiveCard(
 }
 
 /**
- * Höchste vorhandene Tierstufe eines Droiden.
+ * Highest tier of a Droid that is currently present.
  *
- * Rückgabe:
- * -1 = nichts vorhanden
- *  0 = DEFAULT
- *  1 = GOLD
- *  2 = DIAMOND
- *  3 = RAINBOW
- *  4 = BESKAR
+ * Returns the index of that tier in TIER_ORDER,
+ * or -1 if the Droid is not present in any tier.
  */
 export function getHighestOwnedTier(
   present: Set<string>,
@@ -60,14 +47,9 @@ export function getHighestOwnedTier(
 }
 
 /**
- * Droid-Fortschritt als 0..5
+ * Droid progress as 0..TIER_ORDER.length
  *
- * 0 = nichts
- * 1 = DEFAULT
- * 2 = GOLD
- * 3 = DIAMOND
- * 4 = RAINBOW
- * 5 = BESKAR
+ * 0 = nothing present, otherwise the highest owned tier index + 1.
  */
 export function getDroidProgress(
   present: Set<string>,
@@ -77,9 +59,7 @@ export function getDroidProgress(
 }
 
 /**
- * Fortschritt in Prozent.
- *
- * 0, 20, 40, 60, 80, 100
+ * Progress as a percentage, 0..100.
  */
 export function getDroidProgressPercent(
   present: Set<string>,

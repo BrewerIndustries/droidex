@@ -6,7 +6,7 @@ const versionSource = fs.readFileSync(versionFile, 'utf8');
 const match = versionSource.match(/APP_VERSION = '(.*?)'/);
 
 if (!match) {
-  throw new Error('APP_VERSION nicht gefunden');
+  throw new Error('APP_VERSION not found');
 }
 
 const version = match[1];
@@ -34,10 +34,10 @@ self.addEventListener('install', (event) => {
       .open(CACHE)
       .then((cache) =>
         cache.addAll([
-          '/droidex/',
-          '/droidex/manifest.webmanifest',
-          '/droidex/icon-192.png',
-          '/droidex/icon-512.png',
+          './',
+          './manifest.webmanifest',
+          './icon-192.png',
+          './icon-512.png',
         ])
       )
   );
@@ -69,5 +69,5 @@ self.addEventListener('fetch', (event) => {
 
 fs.writeFileSync('public/sw.js', sw);
 
-console.log('version.json aktualisiert');
-console.log('sw.js aktualisiert');
+console.log('version.json updated');
+console.log('sw.js updated');

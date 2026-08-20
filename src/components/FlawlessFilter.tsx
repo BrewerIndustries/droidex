@@ -1,5 +1,4 @@
 import { UI } from '../data/ui';
-import { t } from '../lib/t';
 
 export type FlawlessStatus = 'ALL' | 'FLAWLESS' | 'MISSING';
 
@@ -13,9 +12,9 @@ const OPTIONS: {
   label: string;
   color: string;
 }[] = [
-  { value: 'ALL', label: t(UI.all), color: '#6b7280' },
-  { value: 'FLAWLESS', label: 'FREIGESCHALTET', color: '#ffffff' },
-  { value: 'MISSING', label: 'NICHT FREIGESCHALTET', color: '#a1a1aa' },
+  { value: 'ALL', label: UI.all, color: '#6b7280' },
+  { value: 'FLAWLESS', label: 'UNLOCKED', color: '#ffffff' },
+  { value: 'MISSING', label: 'NOT UNLOCKED', color: '#a1a1aa' },
 ];
 
 export function FlawlessFilter({ active, onChange }: Props) {

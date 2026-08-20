@@ -1,5 +1,4 @@
 import { UI } from '../data/ui';
-import { t } from '../lib/t';
 import { useState } from 'react';
 import { TIER_BORDER, TIER_GLOW } from '../lib/droidTheme';
 import { useDroidCardState } from '../hooks/useDroidCardState';
@@ -81,7 +80,7 @@ export function DroidCard({
     <button
       type="button"
       onClick={() => onToggle(id)}
-      title={`${droid.name} (${tier}) — ${t(UI.cardToggle)}`}
+      title={`${droid.name} (${tier}) — ${UI.cardToggle}`}
       className={[
         'relative flex flex-col rounded-lg border-4 overflow-hidden',
         'transition-all duration-150 select-none cursor-pointer',

@@ -1,3 +1,5 @@
+import { REBIRTH_PATH_NUMBERS } from '../data/rebirthPaths';
+
 type Props = {
   value: number;
   onChange: (path: number) => void;
@@ -6,7 +8,7 @@ type Props = {
 export function RebirthPathSelector({ value, onChange }: Props) {
   return (
     <div className="flex justify-center gap-2 py-2">
-      {[1, 2, 3, 4].map((path) => (
+      {REBIRTH_PATH_NUMBERS.map((path) => (
         <button
           key={path}
           onClick={() => onChange(path)}

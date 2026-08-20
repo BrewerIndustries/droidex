@@ -4,7 +4,7 @@
 
 ## Development Flow
 
-Patchnotes
+Patch notes
 ↓
 Knowledge
 ↓

@@ -1,6 +1,6 @@
 # GAPS
 
-Offene Punkte, die noch nicht im Datenmodell oder in der Architektur umgesetzt sind.
+Open items that are not yet reflected in the data model or the architecture.
 
 ---
 
@@ -8,39 +8,39 @@ Offene Punkte, die noch nicht im Datenmodell oder in der Architektur umgesetzt s
 
 ### Platform Layer
 
-Hooks erfüllen derzeit unterschiedliche Verantwortlichkeiten.
+Hooks currently serve several different responsibilities.
 
-Beispiele:
+Examples:
 
-- Domänen-State
-- Browser-/PWA-Integration
+- Domain state
+- Browser / PWA integration
 - localStorage
 - Service Worker
-- Install Prompt
-- Update-System
+- Install prompt
+- Update system
 
-Zu prüfen:
+To review:
 
-- Trennung zwischen Domain Hooks und Platform Hooks
-- mögliche platform/-Domain
-- klarere Verantwortlichkeiten
-- gemeinsame Runtime-Architektur
+- Separation between domain hooks and platform hooks
+- A possible platform/ domain
+- Clearer responsibilities
+- A shared runtime architecture
 
-✅ Knowledge Pipeline (knowledge/)
+✅ Knowledge pipeline (knowledge/)
 ✅ DATA → RULES → FACTS → STATE → UI
-🟡 Platform / Runtime (erst als Muster erkennbar)
+🟡 Platform / Runtime (only emerging as a pattern so far)
 
 ## UI
 
 ### Workspace Synchronisation
 
-Workspace, Collection und DroidGrid besitzen noch keinen vollständig gemeinsamen State.
+Workspace, Collection and DroidGrid do not yet share a fully common state.
 
-Ziel:
+Goal:
 
-- sofortige Synchronisation
-- keine manuellen Refreshes
-- konsistente Filter
+- Immediate synchronisation
+- No manual refreshes
+- Consistent filters
 
 ---
 
@@ -48,14 +48,14 @@ Ziel:
 
 ### Rebirth
 
-    - Unlocks in REBIRTH_PATHS integrieren
+    - Integrate unlocks into REBIRTH_PATHS
 
 - Worker Slot
 - Astromech Slot
 - Battle Slot
 - Lounge Slot
 
-- Max-Level aller Rebirth-Pfade vereinheitlichen
+- Unify the max level across all rebirth paths
 
 ---
 
@@ -63,10 +63,10 @@ Ziel:
 
 ### BB-8
 
-Ability allgemeingültig formulieren.
+Phrase the ability in general terms.
 
 ### Flawless Chance
 
-Noch keine belastbaren Werte vorhanden.
+No reliable values available yet.
 
 ---

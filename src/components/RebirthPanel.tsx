@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { UI } from '../data/ui';
-import { t } from '../lib/t';
 import { getRebirthFacts } from '../lib/rebirthFacts';
 import { RebirthRequirements } from './RebirthRequirements';
 import { RebirthHeader } from './RebirthHeader';
@@ -81,7 +80,7 @@ export function RebirthPanel({
           <div className="flex items-center gap-3 mb-3">
             <div className="need-divider-left flex-1 h-px" />
             <span className="need-label text-[10px] font-black tracking-[0.3em] uppercase">
-              {t(UI.need)}
+              {UI.need}
             </span>
             <div className="need-divider-right flex-1 h-px" />
           </div>
@@ -99,7 +98,7 @@ export function RebirthPanel({
       {open && nextLevel === null && (
         <div className="px-4 pb-4 pt-2 text-center">
           <span className="glow-yellow text-yellow-400 font-black text-sm tracking-widest uppercase">
-            {t(UI.maxRebirth)}
+            {UI.maxRebirth}
           </span>
         </div>
       )}

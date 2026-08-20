@@ -1,34 +1,34 @@
-Neue Informationen auf Seite 2 datasheet
+New information on page 2 of the datasheet
 
-Hier sehe ich genau eine Information, die Droidex meines Wissens nach noch nicht speichert:
+There is exactly one piece of information here that Droidex does not yet store, as far as I know:
 Unlocks
-Nach bestimmten Rebirths werden freigeschaltet:
+After certain rebirths the following are unlocked:
 Worker Slot
 Astromech Slot
 Battle Slot
 Lounge Slot
-und später
+and later
 NONE
-Das ist bisher eher UI-Wissen bzw. implizit vorhanden, aber nicht Bestandteil der Rebirth-Daten.
-Architektonische Idee
-Ich würde diese Information nicht hart im UI codieren, sondern direkt an jeden Rebirth hängen.
-Beispielsweise:
+So far this is more UI knowledge, or implicitly present, but not part of the rebirth data.
+Architectural idea
+I would not hard-code this information in the UI, but attach it directly to each rebirth.
+For example:
 {
 level: 6,
 credits: 14500000,
 unlock: 'WORKER_SLOT',
 ...
 }
-oder allgemeiner:
+or more generally:
 unlock?: 'WORKER_SLOT'
 | 'ASTROMECH_SLOT'
 | 'BATTLE_SLOT'
 | 'LOUNGE_SLOT';
-Das gefällt mir deutlich besser, weil dann:
-RebirthPanel automatisch anzeigen kann
-Companion später darauf zugreifen kann
-Tooltips daraus entstehen können
-Export/Import vollständig bleibt
-ohne irgendwelche Sonderfälle.
+I like that much better, because then:
+RebirthPanel can display it automatically
+The Companion can access it later
+Tooltips can be derived from it
+Export/Import stays complete
+without any special cases.
 
-Eine Beobachtung noch: Die Spalte heißt allgemein "Unlocks". Das ist für Phase 4 ein Hinweis, dass wir das Feld vielleicht gar nicht slotUnlock nennen sollten, sondern einfach unlock. Dann könnten dort später auch Nova-, Cosmetic- oder andere Freischaltungen stehen, ohne das Modell erneut ändern zu müssen. Das wirkt für die kommende Nova-Integration wesentlich zukunftssicherer.
+One more observation: the column is called "Unlocks" in general terms. For phase 4 that is a hint that we should perhaps not name the field slotUnlock at all, but simply unlock. Then Nova, cosmetic or other unlocks could go there later without having to change the model again. That feels considerably more future-proof for the upcoming Nova integration.

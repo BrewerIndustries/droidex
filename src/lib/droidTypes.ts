@@ -8,7 +8,14 @@ export type Rarity =
 
 export type DroidType = 'WORKER' | 'ASTROMECH' | 'BATTLE';
 
-export type Tier = 'DEFAULT' | 'GOLD' | 'DIAMOND' | 'RAINBOW' | 'BESKAR';
+export type Tier =
+  | 'DEFAULT'
+  | 'GOLD'
+  | 'DIAMOND'
+  | 'RAINBOW'
+  | 'BESKAR'
+  | 'GALACTIC'
+  | 'STELLAR';
 
 export type TierOrAll = Tier | 'ALL';
 

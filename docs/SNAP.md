@@ -42,22 +42,22 @@ Next
 - Keep React components focused on rendering.
 - Expand Companion through reusable domain knowledge.
 
-### zukunftiges Muster sieser SNAP:
+### Future template for this SNAP:
 
 ## 2026-08
 
 Changed
 
-Neue oder überarbeitete Module.
+New or reworked modules.
 
 Added
 
-Neue Funktionen oder Systeme.
+New features or systems.
 
 Result
 
-Welche Auswirkungen das auf die Architektur oder das Verhalten hat.
+What impact this has on the architecture or behaviour.
 
 Next
 
-Der nächste logische Entwicklungsschritt.
+The next logical development step.

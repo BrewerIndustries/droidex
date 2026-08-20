@@ -1,7 +1,6 @@
 import type { TierOrAll } from '../lib/droidTypes';
 import { TIER_ORDER } from '../data/droids';
 import { UI } from '../data/ui';
-import { t } from '../lib/t';
 
 interface Props {
   active: TierOrAll;
@@ -13,7 +12,7 @@ const TIER_STYLE: Record<
   { active: string; inactive: string; label: string }
 > = {
   ALL: {
-    label: t(UI.all),
+    label: UI.all,
     active: 'bg-zinc-700 text-white border-zinc-500',
     inactive: 'text-zinc-500 border-transparent hover:text-zinc-300',
   },
@@ -45,6 +44,18 @@ const TIER_STYLE: Record<
     active:
       'bg-zinc-300/20 text-zinc-100 border-zinc-300 shadow-[0_0_8px_rgba(229,229,229,0.4)]',
     inactive: 'text-zinc-500 border-transparent hover:text-zinc-300',
+  },
+  GALACTIC: {
+    label: 'GALACTIC',
+    active:
+      'bg-purple-900/40 text-purple-300 border-purple-600 shadow-[0_0_8px_rgba(147,51,234,0.45)]',
+    inactive: 'text-purple-900 border-transparent hover:text-purple-500',
+  },
+  STELLAR: {
+    label: 'STELLAR',
+    active:
+      'bg-orange-500/20 text-orange-300 border-orange-400 shadow-[0_0_8px_rgba(251,146,60,0.45)]',
+    inactive: 'text-orange-800 border-transparent hover:text-orange-400',
   },
 };
 

@@ -16,7 +16,15 @@ export interface DroidCard {
   tier: Tier;
 }
 
-const ALL_TIERS: Tier[] = ['DEFAULT', 'GOLD', 'DIAMOND', 'RAINBOW', 'BESKAR'];
+const ALL_TIERS: Tier[] = [
+  'DEFAULT',
+  'GOLD',
+  'DIAMOND',
+  'RAINBOW',
+  'BESKAR',
+  'GALACTIC',
+  'STELLAR',
+];
 const DEFAULT_ONLY: Tier[] = ['DEFAULT'];
 
 export const DROIDS: Droid[] = [
@@ -109,6 +117,7 @@ export const DROIDS: Droid[] = [
   { name: 'RIC', rarity: 'MYTHIC', type: 'WORKER', tiers: ALL_TIERS },
   { name: 'LOADLIFTER', rarity: 'MYTHIC', type: 'WORKER', tiers: ALL_TIERS },
   { name: 'RIC-1200', rarity: 'MYTHIC', type: 'WORKER', tiers: ALL_TIERS },
+  { name: 'LEP', rarity: 'MYTHIC', type: 'WORKER', tiers: ALL_TIERS },
 
   { name: 'DRFT-R', rarity: 'MYTHIC', type: 'ASTROMECH', tiers: ALL_TIERS },
   { name: 'CYCLENS', rarity: 'MYTHIC', type: 'ASTROMECH', tiers: ALL_TIERS },
@@ -129,12 +138,36 @@ export const DROIDS: Droid[] = [
     canBeFlawless: false,
   },
   {
+    name: 'C-3PO',
+    rarity: 'ICONIC',
+    type: 'WORKER',
+    tiers: DEFAULT_ONLY,
+    eventLocked: true,
+    canBeFlawless: false,
+  },
+  {
     name: 'BB8',
     rarity: 'ICONIC',
     type: 'ASTROMECH',
     tiers: DEFAULT_ONLY,
     canBeFlawless: false,
     eventLocked: true,
+  },
+  {
+    name: 'R2-D2',
+    rarity: 'ICONIC',
+    type: 'ASTROMECH',
+    tiers: DEFAULT_ONLY,
+    eventLocked: true,
+    canBeFlawless: false,
+  },
+  {
+    name: 'CHOPPER',
+    rarity: 'ICONIC',
+    type: 'ASTROMECH',
+    tiers: DEFAULT_ONLY,
+    eventLocked: true,
+    canBeFlawless: false,
   },
   {
     name: 'CB-23',
@@ -187,4 +220,6 @@ export const TIER_ORDER: Tier[] = [
   'DIAMOND',
   'RAINBOW',
   'BESKAR',
+  'GALACTIC',
+  'STELLAR',
 ];

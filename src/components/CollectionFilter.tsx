@@ -1,5 +1,4 @@
 import { UI } from '../data/ui';
-import { t } from '../lib/t';
 type CollectionStatus = 'ALL' | 'OWNED' | 'MISSING';
 
 interface Props {
@@ -12,9 +11,9 @@ const OPTIONS: {
   label: string;
   color: string;
 }[] = [
-  { value: 'ALL', label: t(UI.all), color: '#6b7280' },
-  { value: 'OWNED', label: t(UI.owned), color: '#22d3ee' },
-  { value: 'MISSING', label: t(UI.missing), color: '#f87171' },
+  { value: 'ALL', label: UI.all, color: '#6b7280' },
+  { value: 'OWNED', label: UI.owned, color: '#22d3ee' },
+  { value: 'MISSING', label: UI.missing, color: '#f87171' },
 ];
 
 export function CollectionFilter({ active, onChange }: Props) {

@@ -1,21 +1,21 @@
 Knowledge
 
-Droidex speichert keine Wahrheiten.
+Droidex does not store truths.
 
-Droidex speichert den besten aktuell bekannten Wissensstand.
+Droidex stores the best currently known state of knowledge.
 
-Neue Erkenntnisse entstehen aus
+New findings come from
 
-- Patchnotes
+- Patch notes
 - Community
-- Beobachtungen
+- Observations
 - Datasheets
 - Screenshots
 
-Knowledge verändert DATA.
+Knowledge changes DATA.
 
-DATA verändert FACTS.
+DATA changes FACTS.
 
-FACTS verändern den Companion.
+FACTS change the Companion.
 
-Die UI zeigt nur den aktuellen Wissensstand.
+The UI only shows the current state of knowledge.

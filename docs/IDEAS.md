@@ -4,19 +4,19 @@
 
 ### Rebirth
 
-- Direktlink RebirthPanel → RebirthPage
-- Rebirth-Filter auf benötigte Droiden
+- Direct link RebirthPanel → RebirthPage
+- Rebirth filter for required Droids
 
 ### Droid Knowledge
 
-- Companion-Effekte
-- Upgrade-Chip-Quellen
-- Nova-System
-- Squad-Boni
+- Companion effects
+- Upgrade chip sources
+- Nova system
+- Squad bonuses
 
 ### Droid Model
 
-Langfristig:
+Long term:
 
 - rarity
 - tier
@@ -27,10 +27,10 @@ Langfristig:
 - novaCost
 - flawless
 
-Ziel:
+Goal:
 
-Droiden als Wissensobjekte
-statt reine Sammelobjekte.
+Droids as knowledge objects
+instead of pure collectibles.
 
 ---
 
@@ -38,67 +38,67 @@ statt reine Sammelobjekte.
 
 ### Workspace
 
-- Beobachtung:
+- Observation:
 
-Launcher-artige Grid-Layouts könnten langfristig
-eine geeignete Organisationsform werden, falls
-Droidex neben Collection und Rebirth weitere
-gleichwertige Systeme (Timer, Companion, Events,
-Trading, Daily usw.) erhält.
+Launcher-style grid layouts could become a suitable
+form of organisation in the long run, if Droidex
+gains further systems of equal weight alongside
+Collection and Rebirth (Timer, Companion, Events,
+Trading, Daily and so on).
 
-Nicht als freies Widget-System,
-sondern als strukturierter Workspace.
+Not as a free-form widget system,
+but as a structured workspace.
 
-- gemeinsamer Workspace
-- einheitliche Panel-Header
-- gemeinsame Panel-Komponente
-- identische Animationen
-- identische Pfeile
-- nur äußere Ecken abrunden
-- zentraler Open-State
-- RebirthPanel vollständig integrieren
+- Shared workspace
+- Consistent panel headers
+- Shared panel component
+- Identical animations
+- Identical arrows
+- Round only the outer corners
+- Central open state
+- Fully integrate RebirthPanel
 
 ### Navigation
 
-- App-Seiten per Slide wechseln
+- Switch app pages with a slide transition
 
 ### DroidGrid
 
-- Ein-/Ausblenden per Dreieck
-- Quick-Edit für alle Zustände
+- Show/hide via triangle
+- Quick edit for all states
 
 ### TierDNA
 
-- DNA-basierte Filter
-- DNA-Statistiken
-- Droid-Details
-- Companion-Erklärungen
+- DNA-based filters
+- DNA statistics
+- Droid details
+- Companion explanations
 
 ### Flawless
 
-- Flawless-Statistiken
-- Flawless Collection
-- Fehlende Flawless-Droids
+- Flawless statistics
+- Flawless collection
+- Missing Flawless Droids
 
 ### About
 
-Verbesserte Projektbeschreibung
-für Community und GitHub.
+Improved project description
+for the community and GitHub.
 
 ---
 
 ## Companion
 
-Geplante Fähigkeiten:
+Planned capabilities:
 
 - getSellAdvice()
 - Companion Explanation UI
-- TierDNA erklären
+- Explain TierDNA
 
-Langfristig:
+Long term:
 
-Companion soll Empfehlungen
-statt Status liefern.
+The Companion should provide recommendations
+instead of status.
 
 ---
 
@@ -106,27 +106,27 @@ statt Status liefern.
 
 ### State Layer
 
-Weitere Hooks:
+Further hooks:
 
 - useRebirthState()
 - useCollectionState()
 - useWorkspaceState()
 - useAboutState()
 
-Ziel:
+Goal:
 
-Komponenten bestehen langfristig
-fast ausschließlich aus Rendering.
+In the long run, components should consist
+almost entirely of rendering.
 
 ### Debug
 
-- TypeScript Debug-Skripte
-- CLI-Tests
-- Rebirth-Analyse
-- Datenvalidierung
-- Savegame-Prüfung
+- TypeScript debug scripts
+- CLI tests
+- Rebirth analysis
+- Data validation
+- Savegame check
 
-Beispiel:
+Example:
 
 npx tsx scripts/checkRebirth.ts
 
@@ -136,16 +136,16 @@ npx tsx scripts/checkRebirth.ts
 
 ### Data-driven Updates
 
-Neue Inhalte sollen überwiegend
-über DATA-Dateien entstehen.
+New content should mostly come about
+through DATA files.
 
 ### Architecture
 
-Neue Features werden zuerst
-einer Domain zugeordnet,
-erst danach implementiert.
+New features are first assigned
+to a domain, and only
+implemented afterwards.
 
-### Weitere Module
+### Further Modules
 
 - Nova Shop
 - Hats
@@ -164,18 +164,18 @@ erst danach implementiert.
 
 ## Research
 
-### In-App Konsistenz
+### In-App Consistency
 
-Rebirth- und Collection-Zustände
-sollen sich niemals widersprechen.
+Rebirth and Collection states
+should never contradict each other.
 
-Mögliche Lösung:
+Possible solution:
 
-- Rebirth nur aktiv,
-  wenn Droid gesammelt wurde.
+- Rebirth only active
+  if the Droid has been collected.
 
-- Aktivieren eines Rebirth-Droiden
-  setzt Collection automatisch.
+- Activating a Rebirth Droid
+  sets Collection automatically.
 
-- Collection und Rebirth
-  bleiben dauerhaft konsistent.
+- Collection and Rebirth
+  stay consistent permanently.

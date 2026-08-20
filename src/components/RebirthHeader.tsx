@@ -1,5 +1,4 @@
 import { UI } from '../data/ui';
-import { t } from '../lib/t';
 
 type Props = {
   open: boolean;
@@ -42,7 +41,7 @@ export function RebirthHeader({
     >
       <div className="flex items-center gap-3">
         <span className="glow-orange text-orange-400 font-bold text-sm tracking-widest uppercase">
-          {t(UI.rebirth)}
+          {UI.rebirth}
         </span>
 
         <div className="flex items-center gap-1.5">
@@ -77,13 +76,13 @@ export function RebirthHeader({
           <span className="text-zinc-500 text-xs flex items-center gap-0.5">
             <span className="text-orange-700">→</span>
             <span>
-              {t(UI.rebirth)}{' '}
+              {UI.rebirth}{' '}
               <span className="text-zinc-300 font-bold">{nextLevel}</span>
             </span>
           </span>
         ) : (
           <span className="text-yellow-400 text-xs font-bold tracking-wide">
-            {t(UI.max)}
+            {UI.max}
           </span>
         )}
       </div>
@@ -92,12 +91,12 @@ export function RebirthHeader({
         {nextLevel !== null &&
           (ready ? (
             <span className="glow-green text-xs font-bold text-green-400">
-              {t(UI.ready)}
+              {UI.ready}
             </span>
           ) : (
             <div className="flex flex-col items-end gap-0.5">
               <span className="text-xs font-bold text-red-400">
-                {ownedCount}/{totalCount} {t(UI.droids)}
+                {ownedCount}/{totalCount} {UI.droids}
               </span>
 
               <div className="flex gap-0.5">
