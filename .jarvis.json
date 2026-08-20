@@ -1,0 +1,13 @@
+{
+  "id": "droidex",
+  "name": "Droidex",
+  "description": "Offline-first companion for Fortnite Star Wars: Droid Tycoon — track your droid collection across every tier, plan rebirths, watch future rebirth requirements, and run an offline income timer. Installable PWA with local-only save data.",
+  "category": "games",
+  "tech": ["React 18", "TypeScript", "Vite", "Tailwind CSS", "localStorage", "Service Worker", "PWA", "GitHub Pages"],
+  "status": { "prod": "in_progress", "dev": "live" },
+  "deploy": {
+    "prod": { "url": "https://droidex.dabrewer.dev/" },
+    "dev": { "url": "https://droidex.dabrewer.dev/dev/" }
+  },
+  "repo": "https://github.com/BrewerIndustries/droidex"
+}

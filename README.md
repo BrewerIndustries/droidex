@@ -4,13 +4,19 @@ An offline-first companion for Fortnite Star Wars: Droid Tycoon.
 
 Originally inspired by the Droidex project created by Erik Peik.
 
-Today Droidex is developed independently by FLUXX DEV and has evolved into a knowledge-driven companion focused on collection management, rebirth planning and long-term progression.
+Upstream, Droidex is developed by FLUXX DEV as a knowledge-driven companion focused on collection management, rebirth planning and long-term progression.
+
+This repository is the Brewer Industries fork. It is English-only (the upstream de/en/fi localization has been collapsed) and adds the GALACTIC and STELLAR tiers.
 
 ---
 
 ## Live App
 
-https://fluxx-dev.github.io/droidex/
+Prod (`main`) — https://droidex.dabrewer.dev/
+
+Dev (`dev`) — https://droidex.dabrewer.dev/dev/
+
+Upstream — https://fluxx-dev.github.io/droidex/
 
 ---
 
@@ -78,13 +84,19 @@ https://docs.google.com/spreadsheets/d/1otLCKSCMKICMlnefirQ8KZhh_rdZTd5Mp8h0UYFU
 
 Current game coverage:
 
-- 258 documented droids
+- 66 documented droids / 432 tier cards
 - DEFAULT
 - GOLD
 - DIAMOND
 - RAINBOW
-- BESKAR tiers
+- BESKAR
+- GALACTIC
+- STELLAR tiers
 - Rebirths documented through 23
+
+GALACTIC and STELLAR are wired through the tier chain, filters, theming and the
+tier-DNA strip. Droid artwork and rebirth requirements for those two tiers are
+not documented yet — cards fall back to the class icon until art lands.
 
 ---
 
@@ -148,7 +160,7 @@ Erik Peik
 
 https://github.com/erikpeik/droidex
 
-Additional work in this fork:
+Additional work in the FLUXX DEV fork:
 
 - Offline-first architecture
 - Local-first persistence
@@ -185,6 +197,21 @@ Fortnite is a trademark of Epic Games.
 Star Wars and related names are trademarks of Lucasfilm Ltd. / Disney.
 
 All game-related assets, names, and imagery belong to their respective owners.
+
+---
+
+## Development
+
+```
+npm install
+npm run dev      # http://localhost:8888
+npm run build
+```
+
+Deployment is automatic: pushing to `dev` runs `.github/workflows/pages.yml`,
+which builds **both** branches and publishes `main` to `/` and `dev` to `/dev/`
+on one GitHub Pages site. Pushing to `main` alone does not redeploy — re-run the
+workflow or push to `dev`.
 
 ---
 

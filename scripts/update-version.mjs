@@ -34,10 +34,10 @@ self.addEventListener('install', (event) => {
       .open(CACHE)
       .then((cache) =>
         cache.addAll([
-          '/droidex/',
-          '/droidex/manifest.webmanifest',
-          '/droidex/icon-192.png',
-          '/droidex/icon-512.png',
+          './',
+          './manifest.webmanifest',
+          './icon-192.png',
+          './icon-512.png',
         ])
       )
   );

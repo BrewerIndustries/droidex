@@ -2,18 +2,18 @@
   "name": "Droidex Android Offline",
   "short_name": "Droidex",
   "description": "Offline-first Droid tracker",
-  "start_url": "/droidex/#/",
-  "scope": "/droidex/",
+  "start_url": "./#/",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
   "orientation": "portrait",
   "categories": ["games", "productivity"],
-  "id": "/droidex/",
+  "id": "./",
   "lang": "en",
   "screenshots": [
     {
-      "src": "/droidex/screenshot1.png",
+      "src": "./screenshot1.png",
       "sizes": "1080x2400",
       "type": "image/png"
     }
@@ -23,12 +23,12 @@
 
   "icons": [
     {
-      "src": "/droidex/icon-192.png",
+      "src": "./icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/droidex/icon-512.png",
+      "src": "./icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

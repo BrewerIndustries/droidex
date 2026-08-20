@@ -39,7 +39,7 @@ export function Footer() {
           onClick={() => setCreditsOpen(!creditsOpen)}
           className="w-full text-center font-bold tracking-wider"
         >
-          PROJEKT & CREDITS {creditsOpen ? '▲' : '▼'}
+          PROJECT & CREDITS {creditsOpen ? '▲' : '▼'}
         </button>
 
         {creditsOpen && (
