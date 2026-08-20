@@ -1,5 +1,4 @@
 import { UI } from '../data/ui';
-import { t } from '../lib/t';
 
 interface Props {
   requiredCredits: string;
@@ -22,12 +21,12 @@ export function RequiredCreditsCard({ requiredCredits }: Props) {
         </span>
 
         <span className="text-amber-600 text-[8px] uppercase tracking-widest relative z-10">
-          {t(UI.credits)}
+          {UI.credits}
         </span>
       </div>
 
       <span className="text-zinc-400 text-[10px] font-bold w-[88px] text-center truncate">
-        {t(UI.credits)}
+        {UI.credits}
       </span>
     </div>
   );

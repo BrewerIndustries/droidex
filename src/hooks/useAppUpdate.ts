@@ -26,10 +26,10 @@ export function useAppUpdate() {
         .catch(() => {});
     };
 
-    // Sofort beim Start
+    // Immediately on startup
     checkForUpdate();
 
-    // Wenn App wieder sichtbar wird
+    // When the app becomes visible again
     const onVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
         checkForUpdate();

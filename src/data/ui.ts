@@ -1,334 +1,105 @@
 export const UI = {
-  aboutTitle: {
-    de: 'Droidex Android Offline',
-    en: 'Droidex Android Offline',
-    fi: 'Droidex Android Offline',
-  },
+  aboutTitle: 'Droidex Android Offline',
 
-  aboutText: {
-    de: 'Sammlungs-Tracker und Begleiter für Fortnite Star Wars Droid-Fortschritt.',
-    en: 'Collection tracker and companion for Fortnite Star Wars Droid collection progress.',
-    fi: 'Kokoelman seuranta- ja apusovellus Fortnite Star Wars -droidien edistymiseen.',
-  },
+  aboutText: 'Collection tracker and companion for Fortnite Star Wars Droid collection progress.',
 
-  features: {
-    de: 'FUNKTIONEN',
-    en: 'FEATURES',
-    fi: 'OMINAISUUDET',
-  },
+  features: 'FEATURES',
 
-  builtWith: {
-    de: 'ERSTELLT MIT',
-    en: 'BUILT WITH',
-    fi: 'RAKENNETTU',
-  },
+  builtWith: 'BUILT WITH',
 
-  specialTools: {
-    de: 'SPEZIALWERKZEUGE',
-    en: 'SPECIAL TOOLS',
-    fi: 'ERIKOISTYÖKALUT',
-  },
+  specialTools: 'SPECIAL TOOLS',
 
-  fork: {
-    de: 'QUELLCODE',
-    en: 'SOURCECODE',
-    fi: 'LÄHDEKOODI',
-  },
+  fork: 'SOURCECODE',
 
-  github: {
-    de: 'Quellcode auf GitHub ansehen →',
-    en: 'View source on GitHub →',
-    fi: 'Näytä lähdekoodi GitHubissa →',
-  },
+  github: 'View source on GitHub →',
 
-  collected: {
-    de: 'Gesamt',
-    en: 'Collected',
-    fi: 'Kerätty',
-  },
+  collected: 'Collected',
 
-  rebirth: {
-    de: 'Rebirth',
-    en: 'Rebirth',
-    fi: 'Rebirth',
-  },
+  rebirth: 'Rebirth',
 
-  complete: {
-    de: 'abgeschlossen',
-    en: 'complete',
-    fi: 'valmis',
-  },
+  complete: 'complete',
 
-  tracked: {
-    de: 'erfasst',
-    en: 'tracked',
-    fi: 'seurattu',
-  },
+  tracked: 'tracked',
 
-  unknown: {
-    de: 'unbekannt',
-    en: 'TBD',
-    fi: 'tuntematon',
-  },
+  unknown: 'TBD',
 
-  max: {
-    de: 'MAX',
-    en: 'MAX',
-    fi: 'MAX',
-  },
+  max: 'MAX',
 
-  footerOriginal: {
-    de: 'Original',
-    en: 'Original',
-    fi: 'Alkuperäinen',
-  },
+  footerOriginal: 'Original',
 
-  footerFork: {
-    de: 'Android Offline',
-    en: 'Android Offline',
-    fi: 'Android Offline',
-  },
+  footerFork: 'Android Offline',
 
-  footerIsland: {
-    de: 'Game Island',
-    en: 'Game Island',
-    fi: 'Pelisaari',
-  },
+  footerIsland: 'Game Island',
 
-  footerDiscord: {
-    de: 'Discord',
-    en: 'Discord',
-    fi: 'Discord',
-  },
+  footerDiscord: 'Discord',
 
-  footerTips: {
-    de: 'TIPPS',
-    en: 'TIPS',
-    fi: 'VINKIT',
-  },
+  footerTips: 'TIPS',
 
-  footerAbout: {
-    de: 'INFO',
-    en: 'ABOUT',
-    fi: 'TIETOA',
-  },
+  footerAbout: 'ABOUT',
 
-  footerShare: {
-    de: 'TEILEN',
-    en: 'SHARE',
-    fi: 'JAA',
-  },
+  footerShare: 'SHARE',
 
-  footerInstall: {
-    de: 'INSTALLIEREN',
-    en: 'INSTALL',
-    fi: 'ASENNA',
-  },
+  footerInstall: 'INSTALL',
 
-  footerApp: {
-    de: 'APP',
-    en: 'APP',
-    fi: 'SOVELLUS',
-  },
+  footerApp: 'APP',
 
-  copied: {
-    de: 'Link kopiert',
-    en: 'Link copied',
-    fi: 'Linkki kopioitu',
-  },
+  copied: 'Link copied',
 
-  fanProject: {
-    de: 'FANPROJEKT HINWEIS',
-    en: 'FAN PROJECT NOTICE',
-    fi: 'FANIPROJEKTIN HUOMAUTUS',
-  },
+  fanProject: 'FAN PROJECT NOTICE',
 
-  fanText1: {
-    de: 'Droidex Android Offline ist ein Fanprojekt.',
-    en: 'Droidex Android Offline is a fan-made project.',
-    fi: 'Droidex Android Offline on faniprojekti.',
-  },
+  fanText1: 'Droidex Android Offline is a fan-made project.',
 
-  fanText2: {
-    de: 'Dieses Projekt ist ein unabhängiges Fanprojekt und steht in keiner Verbindung zu FOAD, Epic Games, Disney oder Lucasfilm Ltd. Es wird von diesen weder unterstützt noch offiziell genehmigt.',
-    en: 'This is an independent fan project and is not affiliated with, endorsed, sponsored, or officially approved by FOAD, Epic Games, Disney, or Lucasfilm Ltd.',
-    fi: 'Tämä projekti ei ole yhteydessä FOAD, Epic Gamesiin, Disneyhin tai Lucasfilm Ltd:hen eikä niiden tukema tai hyväksymä.',
-  },
+  fanText2: 'This is an independent fan project and is not affiliated with, endorsed, sponsored, or officially approved by FOAD, Epic Games, Disney, or Lucasfilm Ltd.',
 
-  fanText3: {
-    de: 'Fortnite ist eine Marke von Epic Games. Star Wars und verwandte Namen sind Marken von Lucasfilm Ltd. / Disney.',
-    en: 'Fortnite is a trademark of Epic Games. Star Wars and related names are trademarks of Lucasfilm Ltd. / Disney.',
-    fi: 'Fortnite on Epic Gamesin tavaramerkki. Star Wars ja siihen liittyvät nimet ovat Lucasfilm Ltd:n / Disneyn tavaramerkkejä.',
-  },
+  fanText3: 'Fortnite is a trademark of Epic Games. Star Wars and related names are trademarks of Lucasfilm Ltd. / Disney.',
 
-  fanText4: {
-    de: 'Alle spielbezogenen Inhalte, Namen und Grafiken gehören ihren jeweiligen Eigentümern.',
-    en: 'All game-related assets, names, and imagery belong to their respective owners.',
-    fi: 'Kaikki peliin liittyvät sisällöt, nimet ja grafiikat kuuluvat niiden omistajille.',
-  },
+  fanText4: 'All game-related assets, names, and imagery belong to their respective owners.',
 
-  cardToggle: {
-    de: 'antippen zum Umschalten',
-    en: 'click to toggle',
-    fi: 'napauta vaihtaaksesi',
-  },
+  cardToggle: 'click to toggle',
 
-  rebirthRequired: {
-    de: 'Benötigt für Rebirth',
-    en: 'Required for rebirth',
-    fi: 'Tarvitaan Rebirthiin',
-  },
+  rebirthRequired: 'Required for rebirth',
 
-  rebirthRequiredPlural: {
-    de: 'Benötigt für Rebirths',
-    en: 'Required for rebirths',
-    fi: 'Tarvitaan Rebirtheihin',
-  },
+  rebirthRequiredPlural: 'Required for rebirths',
 
-  eventLocked: {
-    de: 'EVENT GESPERRT',
-    en: 'EVENT LOCKED',
-    fi: 'TAPAHTUMA LUKITTU',
-  },
+  eventLocked: 'EVENT LOCKED',
 
-  all: {
-    de: 'ALLE',
-    en: 'ALL',
-    fi: 'KAIKKI',
-  },
+  all: 'ALL',
 
-  owned: {
-    de: 'BESITZT',
-    en: 'OWNED',
-    fi: 'OMISTETTU',
-  },
+  owned: 'OWNED',
 
-  missing: {
-    de: 'FEHLEND',
-    en: 'MISSING',
-    fi: 'PUUTTUU',
-  },
+  missing: 'MISSING',
 
-  worker: {
-    de: 'ARBEITER',
-    en: 'WORKER',
-    fi: 'TYÖLÄINEN',
-  },
+  worker: 'WORKER',
 
-  astromech: {
-    de: 'ASTROMECH',
-    en: 'ASTROMECH',
-    fi: 'ASTROMECH',
-  },
+  astromech: 'ASTROMECH',
 
-  battle: {
-    de: 'KAMPF',
-    en: 'BATTLE',
-    fi: 'TAISTELU',
-  },
+  battle: 'BATTLE',
 
-  ready: {
-    de: '✓ BEREIT',
-    en: '✓ READY',
-    fi: '✓ VALMIS',
-  },
+  ready: '✓ READY',
 
-  need: {
-    de: 'BENÖTIGT',
-    en: 'NEED',
-    fi: 'TARVITAAN',
-  },
+  need: 'NEED',
 
-  credits: {
-    de: 'Credits',
-    en: 'Credits',
-    fi: 'Krediitit',
-  },
+  credits: 'Credits',
 
-  droids: {
-    de: 'Droids',
-    en: 'droids',
-    fi: 'droidit',
-  },
+  droids: 'droids',
 
-  maxRebirth: {
-    de: '★ MAX REBIRTH ERREICHT ★',
-    en: '★ MAX REBIRTH REACHED ★',
-    fi: '★ MAKSIMI REBIRTH SAAVUTETTU ★',
-  },
+  maxRebirth: '★ MAX REBIRTH REACHED ★',
 
-  appGuide: {
-    de: 'APP HILFE',
-    en: 'APP GUIDE',
-    fi: 'SOVELLUSOHJE',
-  },
+  appGuide: 'APP GUIDE',
 
-  feature1: {
-    de: '✓ Sammlung verfolgen',
-    en: '✓ Track collection progress',
-    fi: '✓ Seuraa kokoelman edistymistä',
-  },
+  feature1: '✓ Track collection progress',
 
-  feature2: {
-    de: '✓ Rebirth-Planung verwalten',
-    en: '✓ Manage rebirth planning',
-    fi: '✓ Hallitse Rebirth-suunnittelua',
-  },
+  feature2: '✓ Manage rebirth planning',
 
-  feature3: {
-    de: '✓ Als Offline-PWA installierbar',
-    en: '✓ Install as offline PWA',
-    fi: '✓ Asennettavissa offline-PWA:na',
-  },
+  feature3: '✓ Install as offline PWA',
 
-  feature4: {
-    de: '✓ Community-Tipps und Entdeckungen',
-    en: '✓ Community tips and discoveries',
-    fi: '✓ Yhteisön vinkit ja löydökset',
-  },
+  feature4: '✓ Community tips and discoveries',
 
-  thumbnailTool: {
-    de: 'Screenshot-Zuschneidepipeline für Droid-Vorschaubilder.',
-    en: 'Screenshot crop extraction pipeline for Droid thumbnails.',
-    fi: 'Kuvakaappausten rajausputki droidien esikatselukuville.',
-  },
+  thumbnailTool: 'Screenshot crop extraction pipeline for Droid thumbnails.',
 
-  rebirthBadgeTitle: {
-    de: 'STATUSANZEIGE',
-    en: 'STATUS INDICATOR',
-    fi: 'TILAOSOITIN',
-  },
+  rebirthBadgeTitle: 'STATUS INDICATOR',
 
-  rebirthBadgeText: {
-    de: `Die kleine Statusanzeige kombiniert Verfügbarkeit und zukünftige Rebirth-Nutzung.
-
-●
-Der Droid ist aktuell verfügbar.
-
-○
-Der Droid wurde gesammelt, ist aber derzeit nicht verfügbar.
-
-↻1, ↻2, ↻3 ...
-Der Droid wird in zukünftigen Rebirth-Stufen des gewählten Pfades erneut benötigt.
-
-✓
-Der aktuell gewählte Rebirth liegt bereits hinter dem letzten bekannten Einsatz dieses Droids.
-Er wird im gewählten Pfad nicht mehr benötigt.
-
-Beispiele:
-
-● ↻1
-Verfügbar und noch einmal benötigt.
-
-○ ↻3·5·8
-Nicht verfügbar, wird aber später erneut benötigt.
-
-● ↻1 ✓
-Verfügbar und letzter bekannter Einsatz erreicht.
-
-Die Anzeige hilft bei der Planung von Tycoon-, Lounge- und Rebirth-Droids.`,
-
-    en: `The status indicator combines availability and future Rebirth usage.
+  rebirthBadgeText: `The status indicator combines availability and future Rebirth usage.
 
 ●
 The Droid is currently available.
@@ -356,103 +127,26 @@ Available and last known use reached.
 
 This indicator helps with planning Tycoon, Lounge and Rebirth Droids.`,
 
-    fi: `Tilailmaisin yhdistää saatavuuden ja tulevan Rebirth-käytön.
+  offlineTimerTitle: 'OFFLINE TIMER',
 
-●
-Droidi on tällä hetkellä saatavilla.
+  offlineTimerText: 'Plan your offline credit cycles directly inside Droidex.',
 
-○
-Droidi on kerätty, mutta ei ole tällä hetkellä saatavilla.
+  installedVersion: 'INSTALLED VERSION',
 
-↻1, ↻2, ↻3 ...
-Droidia tarvitaan myöhemmissä valitun polun Rebirth-vaiheissa.
+  availableVersion: 'AVAILABLE VERSION',
 
-✓
-Valittu Rebirth on jo tämän droidin viimeisen tunnetun käyttökerran jälkeen.
-Sitä ei enää tarvita valitulla polulla.
+  footerCommunity: 'COMMUNITY',
+  communityTitle: 'COMMUNITY',
 
-Esimerkkejä:
+  communityText: 'Discovery, correction or tip?',
 
-● ↻1
-Saatavilla ja tarvitaan vielä kerran.
+  communityReport: '✉ Report discovery',
 
-○ ↻3·5·8
-Ei saatavilla, mutta tarvitaan myöhemmin uudelleen.
+  rebirthPathsTitle: 'REBIRTH PATHS',
 
-● ↻1 ✓
-Saatavilla ja viimeinen tunnettu käyttökerta on saavutettu.
-
-Merkintä auttaa Tycoon-, Lounge- ja Rebirth-droidien suunnittelussa.`,
-  },
-
-  offlineTimerTitle: {
-    de: 'OFFLINE TIMER',
-    en: 'OFFLINE TIMER',
-    fi: 'OFFLINE TIMER',
-  },
-
-  offlineTimerText: {
-    de: 'Plane deine Offline-Credit-Zyklen direkt in Droidex.',
-    en: 'Plan your offline credit cycles directly inside Droidex.',
-    fi: 'Suunnittele offline-krediittijaksosi suoraan Droidexissa.',
-  },
-
-  installedVersion: {
-    de: 'INSTALLIERTE VERSION',
-    en: 'INSTALLED VERSION',
-    fi: 'ASENNETTU VERSIO',
-  },
-
-  availableVersion: {
-    de: 'VERFÜGBARE VERSION',
-    en: 'AVAILABLE VERSION',
-    fi: 'SAATAVILLA OLEVA VERSIO',
-  },
-
-  footerCommunity: {
-    de: 'COMMUNITY',
-    en: 'COMMUNITY',
-    fi: 'YHTEISÖ',
-  },
-  communityTitle: {
-    de: 'COMMUNITY',
-    en: 'COMMUNITY',
-    fi: 'YHTEISÖ',
-  },
-
-  communityText: {
-    de: 'Entdeckung, Korrektur oder Tipp?',
-    en: 'Discovery, correction or tip?',
-    fi: 'Löytö, korjaus vai vinkki?',
-  },
-
-  communityReport: {
-    de: '✉ Entdeckung melden',
-    en: '✉ Report discovery',
-    fi: '✉ Ilmoita löydöstä',
-  },
-
-  rebirthPathsTitle: {
-    de: 'REBIRTH-PFADE',
-    en: 'REBIRTH PATHS',
-    fi: 'REBIRTH-POLUT',
-  },
-
-  rebirthPathsText: {
-    de: `RB1–RB4 stehen für die vier bekannten Rebirth-Anforderungspfade.
-
-Jeder Pfad verwendet andere Droid-Kombinationen.
-
-Die Auswahl oben in Droidex zeigt dir die Anforderungen des gewählten Pfades.`,
-    en: `RB1–RB4 represent the four known Rebirth requirement paths.
+  rebirthPathsText: `RB1–RB4 represent the four known Rebirth requirement paths.
 
 Each path uses different Droid combinations.
 
 The selector at the top of Droidex shows the requirements for the chosen path.`,
-    fi: `RB1–RB4 tarkoittavat neljää tunnettua Rebirth-vaatimuspolkua.
-
-Jokainen polku käyttää eri droidiyhdistelmiä.
-
-Droidexin yläosan valinta näyttää valitun polun vaatimukset.`,
-  },
 };

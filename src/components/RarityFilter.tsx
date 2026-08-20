@@ -1,6 +1,5 @@
 import type { Rarity } from '../lib/droidTypes';
 import { UI } from '../data/ui';
-import { t } from '../lib/t';
 
 type RarityOrAll = Rarity | 'ALL';
 
@@ -14,7 +13,7 @@ const OPTIONS: {
   label: string;
   color: string;
 }[] = [
-  { value: 'ALL', label: t(UI.all), color: '#6b7280' },
+  { value: 'ALL', label: UI.all, color: '#6b7280' },
   { value: 'COMMON', label: 'COMMON', color: '#16a34a' },
   { value: 'RARE', label: 'RARE', color: '#3b82f6' },
   { value: 'EPIC', label: 'EPIC', color: '#a855f7' },

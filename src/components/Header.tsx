@@ -2,7 +2,6 @@ import { OfflineTimer } from './OfflineTimer';
 import { Link, NavLink } from 'react-router-dom';
 import { ALL_CARDS, TOTAL_DROIDS, DROIDS } from '../data/droids';
 import { UI } from '../data/ui';
-import { t } from '../lib/t';
 import { useAppUpdate } from '../hooks/useAppUpdate';
 import { useLocation } from 'react-router-dom';
 
@@ -80,7 +79,7 @@ export function Header({
             }
           >
             <span className="text-xs uppercase tracking-widest">
-              {t(UI.rebirth)}
+              {UI.rebirth}
             </span>
 
             <span
@@ -177,9 +176,9 @@ export function Header({
 
       {/* Footer Info */}
       <div className="hidden sm:block text-[10px] text-zinc-600">
-        {knownTotal} {t(UI.tracked)}
+        {knownTotal} {UI.tracked}
         {' · '}
-        {TOTAL_DROIDS - knownTotal} {t(UI.unknown)}
+        {TOTAL_DROIDS - knownTotal} {UI.unknown}
       </div>
 
       {updateAvailable && location.pathname !== '/about' && (
@@ -192,7 +191,7 @@ export function Header({
       hover:text-cyan-300  
     "
         >
-          ⬤ UPDATE VERFÜGBAR · v{latestVersion}
+          ⬤ UPDATE AVAILABLE · v{latestVersion}
         </NavLink>
       )}
     </header>

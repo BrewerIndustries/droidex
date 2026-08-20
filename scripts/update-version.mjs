@@ -6,7 +6,7 @@ const versionSource = fs.readFileSync(versionFile, 'utf8');
 const match = versionSource.match(/APP_VERSION = '(.*?)'/);
 
 if (!match) {
-  throw new Error('APP_VERSION nicht gefunden');
+  throw new Error('APP_VERSION not found');
 }
 
 const version = match[1];

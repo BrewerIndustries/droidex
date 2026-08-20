@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { TIPS } from '../data/tips';
 import { TipCard } from './TipCard';
 import { UI } from '../data/ui';
-import { t } from '../lib/t';
 
 export function TipsPage() {
   const [filter, setFilter] = useState('ALL');
@@ -60,16 +59,16 @@ export function TipsPage() {
 
       <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
         <div className="text-cyan-400 text-xs tracking-widest font-bold mb-2">
-          {t(UI.communityTitle)}
+          {UI.communityTitle}
         </div>
 
-        <div className="text-xs text-zinc-400 mb-3">{t(UI.communityText)}</div>
+        <div className="text-xs text-zinc-400 mb-3">{UI.communityText}</div>
 
         <a
           href="mailto:fluxx-dev@proton.me?subject=Droidex%20Feedback"
           className="text-sm text-cyan-400 hover:text-cyan-300"
         >
-          {t(UI.communityReport)}
+          {UI.communityReport}
         </a>
       </div>
     </div>

@@ -1,7 +1,6 @@
 import type { TierOrAll } from '../lib/droidTypes';
 import { TIER_ORDER } from '../data/droids';
 import { UI } from '../data/ui';
-import { t } from '../lib/t';
 
 interface Props {
   active: TierOrAll;
@@ -13,7 +12,7 @@ const TIER_STYLE: Record<
   { active: string; inactive: string; label: string }
 > = {
   ALL: {
-    label: t(UI.all),
+    label: UI.all,
     active: 'bg-zinc-700 text-white border-zinc-500',
     inactive: 'text-zinc-500 border-transparent hover:text-zinc-300',
   },

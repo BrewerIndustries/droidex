@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
 import { UI } from '../data/ui';
-import { t } from '../lib/t';
 import { useState } from 'react';
 
 export function Footer() {
@@ -25,9 +24,9 @@ export function Footer() {
     try {
       await navigator.clipboard.writeText(url);
 
-      alert(t(UI.copied));
+      alert(UI.copied);
     } catch {
-      window.prompt(t(UI.copied), url);
+      window.prompt(UI.copied, url);
     }
   }
 
@@ -46,7 +45,7 @@ export function Footer() {
         {creditsOpen && (
           <div className="mt-3">
             <div>
-              {t(UI.footerOriginal)}:
+              {UI.footerOriginal}:
               <a
                 href="https://github.com/erikpeik/droidex"
                 target="_blank"
@@ -58,7 +57,7 @@ export function Footer() {
             </div>
 
             <div className="mt-1">
-              {t(UI.footerFork)}:
+              {UI.footerFork}:
               <a
                 href="https://github.com/fluxx-dev/droidex"
                 target="_blank"
@@ -70,7 +69,7 @@ export function Footer() {
             </div>
 
             <div className="mt-1">
-              {t(UI.footerIsland)}:
+              {UI.footerIsland}:
               <a
                 href="https://www.fortnite.com/@foad/7865-8305-9184"
                 target="_blank"
@@ -82,7 +81,7 @@ export function Footer() {
             </div>
 
             <div className="mt-1">
-              {t(UI.footerDiscord)}:
+              {UI.footerDiscord}:
               <a
                 href="https://discord.gg/droidtycoon"
                 target="_blank"
@@ -106,7 +105,7 @@ export function Footer() {
             transition-all
           "
         >
-          {t(UI.footerTips)}
+          {UI.footerTips}
         </Link>
 
         <Link
@@ -119,7 +118,7 @@ export function Footer() {
             transition-all
           "
         >
-          {t(UI.footerAbout)}
+          {UI.footerAbout}
         </Link>
 
         <a
@@ -134,7 +133,7 @@ export function Footer() {
     transition-all
   "
         >
-          {t(UI.footerCommunity)}
+          {UI.footerCommunity}
         </a>
 
         <button
@@ -147,7 +146,7 @@ export function Footer() {
             transition-all
           "
         >
-          {t(UI.footerShare)}
+          {UI.footerShare}
         </button>
 
         {canInstall && (
@@ -160,7 +159,7 @@ export function Footer() {
               shadow-[0_0_12px_rgba(16,185,129,.2)]
             "
           >
-            {t(UI.footerInstall)}
+            {UI.footerInstall}
           </button>
         )}
 
@@ -174,7 +173,7 @@ export function Footer() {
             shadow-[0_0_12px_rgba(34,211,238,.25)]
           "
         >
-          {t(UI.footerApp)}
+          {UI.footerApp}
         </a>
       </div>
       <div className="mt-4 pt-3 border-t border-zinc-800 text-[10px] leading-relaxed text-zinc-600">
@@ -183,19 +182,19 @@ export function Footer() {
           className="w-full text-center"
         >
           <div className="font-bold tracking-wider">
-            {t(UI.fanProject)} {fanOpen ? '▲' : '▼'}
+            {UI.fanProject} {fanOpen ? '▲' : '▼'}
           </div>
         </button>
 
         {fanOpen && (
           <>
-            <p className="mt-3">{t(UI.fanText1)}</p>
+            <p className="mt-3">{UI.fanText1}</p>
 
-            <p className="mt-2">{t(UI.fanText2)}</p>
+            <p className="mt-2">{UI.fanText2}</p>
 
-            <p className="mt-2">{t(UI.fanText3)}</p>
+            <p className="mt-2">{UI.fanText3}</p>
 
-            <p className="mt-2">{t(UI.fanText4)}</p>
+            <p className="mt-2">{UI.fanText4}</p>
           </>
         )}
       </div>

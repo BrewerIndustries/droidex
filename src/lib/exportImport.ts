@@ -4,7 +4,7 @@ export function exportData() {
   const data = getCurrentData();
 
   if (!data) {
-    alert('Keine Daten gefunden.');
+    alert('No data found.');
     return;
   }
 
@@ -21,10 +21,10 @@ export async function importData(file: File) {
     !Array.isArray(data.present) ||
     !Array.isArray(data.flawless)
   ) {
-    throw new Error('Ungültige Droidex-Datei');
+    throw new Error('Invalid Droidex file');
   }
 
-  if (!confirm('Vorhandene Droidex-Daten überschreiben?')) {
+  if (!confirm('Overwrite existing Droidex data?')) {
     return;
   }
 

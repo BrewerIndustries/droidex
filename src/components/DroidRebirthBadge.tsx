@@ -1,5 +1,4 @@
 import { UI } from '../data/ui';
-import { t } from '../lib/t';
 import { RefreshCw } from 'lucide-react';
 
 interface Props {
@@ -45,8 +44,8 @@ export function DroidRebirthBadge({
         "
         title={`${futureUsage} ${
           rebirthLevels.length > 1
-            ? t(UI.rebirthRequiredPlural)
-            : t(UI.rebirthRequired)
+            ? UI.rebirthRequiredPlural
+            : UI.rebirthRequired
         } ${rebirthLevels.join(', ')}`}
         onClick={(e) => {
           e.stopPropagation();

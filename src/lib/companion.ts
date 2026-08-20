@@ -5,14 +5,14 @@ export function getFutureUsage(
   lastRequiredRebirth?: number
 ): string {
   if (lastRequiredRebirth === undefined) {
-    return 'Nie für Rebirth benötigt';
+    return 'Never required for Rebirth';
   }
 
   if (currentRebirth > lastRequiredRebirth) {
-    return 'Nicht mehr benötigt';
+    return 'No longer required';
   }
 
-  return `Benötigt bis RB${lastRequiredRebirth}`;
+  return `Required until RB${lastRequiredRebirth}`;
 }
 
 export function getFutureUseCount(
@@ -66,10 +66,10 @@ export function getReadyReason(
   }
 
   if (missing.length === 1) {
-    return `${missing[0].name} fehlt`;
+    return `${missing[0].name} missing`;
   }
 
-  return `${missing.length} Droiden fehlen`;
+  return `${missing.length} Droids missing`;
 }
 
 export function getReadyExplanation(
@@ -83,10 +83,10 @@ export function getReadyExplanation(
   const missing = getMissingDroids(present, droids);
 
   if (missing.length === 0) {
-    return ['Alle Anforderungen erfüllt'];
+    return ['All requirements met'];
   }
 
-  return missing.map((droid) => `${droid.name} fehlt`);
+  return missing.map((droid) => `${droid.name} missing`);
 }
 
 export function isReady(
@@ -112,12 +112,12 @@ export function getRequirementExplanation(
     );
 
     if (required) {
-      usages.push(`Benötigt für RB${level.from} → RB${level.to}`);
+      usages.push(`Required for RB${level.from} → RB${level.to}`);
     }
   });
 
   if (usages.length === 0) {
-    return ['Nicht für Rebirth benötigt'];
+    return ['Not required for Rebirth'];
   }
 
   return usages;

@@ -6,11 +6,11 @@ FACTS Layer
 
 Reason
 
-Mehrere UIs berechneten dieselben Werte.
+Several UIs were computing the same values.
 
 Consequence
 
-Alle Gameplay-Fakten entstehen zentral.
+All gameplay facts are produced centrally.
 
 Status
 

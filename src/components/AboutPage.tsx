@@ -1,7 +1,6 @@
 import { APP_VERSION } from '../data/version';
 import { GUIDE } from '../data/guide';
 import { UI } from '../data/ui';
-import { t } from '../lib/t';
 import { useAppUpdate } from '../hooks/useAppUpdate';
 import { useState } from 'react';
 
@@ -54,19 +53,19 @@ export function AboutPage() {
   return (
     <div className="p-4 space-y-4">
       <div>
-        <h1 className="text-white text-xl font-bold">{t(UI.aboutTitle)}</h1>
+        <h1 className="text-white text-xl font-bold">{UI.aboutTitle}</h1>
 
-        <p className="text-zinc-500 text-sm mt-2">{t(UI.aboutText)}</p>
+        <p className="text-zinc-500 text-sm mt-2">{UI.aboutText}</p>
 
         <div className="mt-2 space-y-2">
           <p className="text-zinc-600 text-xs">
-            {t(UI.installedVersion)}: v{APP_VERSION}
+            {UI.installedVersion}: v{APP_VERSION}
           </p>
 
           {updateAvailable && (
             <>
               <p className="text-cyan-400 text-xs">
-                {t(UI.availableVersion)}: v{latestVersion}
+                {UI.availableVersion}: v{latestVersion}
               </p>
 
               <button
@@ -153,12 +152,12 @@ export function AboutPage() {
               try {
                 await importData(file);
               } catch {
-                alert('Ungültige Droidex-Datei');
+                alert('Invalid Droidex file');
               }
             }}
           />
           <div className="text-xs text-zinc-500 space-y-1">
-            <div>Backup enthält:</div>
+            <div>Backup contains:</div>
 
             <div>✓ Collected</div>
             <div>✓ Present</div>
@@ -166,8 +165,8 @@ export function AboutPage() {
             <div>✓ Rebirth Path</div>
             <div>✓ Rebirth Level</div>
             <div className="pt-2 text-[11px] text-zinc-600">
-              Exportiert als JSON-Datei. Kann zwischen Geräten übertragen
-              werden.
+              Exported as a JSON file. Can be transferred between
+              devices.
             </div>
           </div>
         </div>
@@ -267,13 +266,13 @@ export function AboutPage() {
       </div>
 
       <div className="text-cyan-400 text-[10px] font-bold tracking-widest">
-        {t(UI.appGuide)}
+        {UI.appGuide}
       </div>
       <ul className="mt-3 text-sm text-zinc-300 space-y-2">
-        <li>{t(UI.feature1)}</li>
-        <li>{t(UI.feature2)}</li>
-        <li>{t(UI.feature3)}</li>
-        <li>{t(UI.feature4)}</li>
+        <li>{UI.feature1}</li>
+        <li>{UI.feature2}</li>
+        <li>{UI.feature3}</li>
+        <li>{UI.feature4}</li>
       </ul>
       <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
         <div className="text-cyan-400 text-[10px] font-bold tracking-widest">
@@ -284,11 +283,11 @@ export function AboutPage() {
           {GUIDE.map((item) => (
             <div key={item.id}>
               <div className="text-cyan-300 text-sm font-medium">
-                {t(item.title)}
+                {item.title}
               </div>
 
               <div className="text-sm text-zinc-300 whitespace-pre-wrap">
-                {t(item.text)}
+                {item.text}
               </div>
             </div>
           ))}
@@ -297,7 +296,7 @@ export function AboutPage() {
 
       <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
         <div className="text-cyan-400 text-[10px] font-bold tracking-widest">
-          {t(UI.builtWith)}
+          {UI.builtWith}
         </div>
 
         <div className="mt-3 text-sm text-zinc-300 space-y-1">
@@ -310,14 +309,14 @@ export function AboutPage() {
 
       <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
         <div className="text-cyan-400 text-[10px] font-bold tracking-widest">
-          {t(UI.specialTools)}
+          {UI.specialTools}
         </div>
-        <p className="mt-3 text-sm text-zinc-300">{t(UI.thumbnailTool)}</p>
+        <p className="mt-3 text-sm text-zinc-300">{UI.thumbnailTool}</p>
       </div>
 
       <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
         <div className="text-cyan-400 text-[10px] font-bold tracking-widest">
-          {t(UI.fork)}
+          {UI.fork}
         </div>
 
         <a
@@ -326,7 +325,7 @@ export function AboutPage() {
           rel="noreferrer"
           className="text-cyan-400 text-sm"
         >
-          {t(UI.github)}
+          {UI.github}
         </a>
       </div>
 

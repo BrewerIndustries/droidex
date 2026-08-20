@@ -21,7 +21,7 @@ export function useOfflineTimer() {
       try {
         return JSON.parse(raw) as TimerData;
       } catch {
-        // nächsten Kandidaten probieren
+        // try the next candidate
       }
     }
 

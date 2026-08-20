@@ -34,9 +34,9 @@ export function hasEffectiveCard(
 }
 
 /**
- * Höchste vorhandene Tierstufe eines Droiden.
+ * Highest tier of a Droid that is currently present.
  *
- * Rückgabe:
+ * Returns:
  * -1 = nichts vorhanden
  *  0 = DEFAULT
  *  1 = GOLD

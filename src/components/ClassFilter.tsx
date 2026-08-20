@@ -1,6 +1,5 @@
 import type { DroidType } from '../lib/droidTypes';
 import { UI } from '../data/ui';
-import { t } from '../lib/t';
 
 type DroidTypeOrAll = DroidType | 'ALL';
 
@@ -14,10 +13,10 @@ const OPTIONS: {
   label: string;
   color: string;
 }[] = [
-  { value: 'ALL', label: t(UI.all), color: '#6b7280' },
-  { value: 'WORKER', label: t(UI.worker), color: '#16a34a' },
-  { value: 'ASTROMECH', label: t(UI.astromech), color: '#7c3aed' },
-  { value: 'BATTLE', label: t(UI.battle), color: '#dc2626' },
+  { value: 'ALL', label: UI.all, color: '#6b7280' },
+  { value: 'WORKER', label: UI.worker, color: '#16a34a' },
+  { value: 'ASTROMECH', label: UI.astromech, color: '#7c3aed' },
+  { value: 'BATTLE', label: UI.battle, color: '#dc2626' },
 ];
 
 export function ClassFilter({ active, onChange }: Props) {

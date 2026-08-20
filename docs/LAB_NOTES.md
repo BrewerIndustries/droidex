@@ -2,54 +2,52 @@
 
 ## Purpose
 
-LAB_NOTES dokumentiert Erkenntnisse,
-Experimente und Architektur-Entdeckungen.
+LAB_NOTES documents findings,
+experiments and architecture discoveries.
 
-Hier wird festgehalten,
-warum sich Droidex verändert hat.
+This is where we record
+why Droidex changed.
 
-Nicht jeder Versuch wird übernommen.
-Nicht jede Idee wird umgesetzt.
-Gerade deshalb bleiben diese Notizen erhalten.
+Not every attempt is adopted.
+Not every idea is implemented.
+That is exactly why these notes are kept.
 
-LAB_NOTES dokumentiert keine Entscheidungen.
+LAB_NOTES does not document decisions.
 
-Nur Erkenntnisse.
+Only findings.
 
-Entscheidungen gehören nach DECISIONS.
+Decisions belong in DECISIONS.
 
 # 1. Architecture Discoveries
 
 ### Filter Extraction - 20260705
 
-Die erste vollständige UI-Logik wurde erfolgreich
-aus einer React-Komponente extrahiert.
+The first complete piece of UI logic was successfully
+extracted from a React component.
 
-getVisibleCards() bildet den ersten Schritt
-zu einer eigenständigen Domain für Ansichten.
+getVisibleCards() is the first step
+towards a standalone domain for views.
 
-Dadurch entwickelte sich DroidGrid von
+As a result DroidGrid evolved from
 
-UI + Regeln
+UI + rules
 
-zu
+to
 
-UI + Rendering.
+UI + rendering.
 
-Dieses Muster soll zukünftig auch für
+This pattern should also be used in future for
 
 - Rebirth Facts
 - View Models
 - Workspace
 
-verwendet werden.
-
 ## Workspace Architecture
 
-Die Hauptoberfläche besteht nicht aus
-mehreren unabhängigen Komponenten.
+The main surface does not consist of
+several independent components.
 
-Sie bildet einen gemeinsamen Workspace.
+It forms a shared workspace.
 
 Navigation
 
@@ -63,22 +61,22 @@ Filter
 → Collection
 → Rebirth
 
-Panels entwickeln sich zu
-wiederverwendbaren UI-Bausteinen.
+Panels are evolving into
+reusable UI building blocks.
 
-Ziel:
+Goal:
 
-Eine gemeinsame Panel-Architektur
-statt mehrerer Einzelkomponenten.
+A shared panel architecture
+instead of several individual components.
 
 Interaction
-→ vereinheitlichen
+→ unify
 
 Appearance
-→ vereinheitlichen
+→ unify
 
 State
-→ zentralisieren
+→ centralise
 
 UI Architecture Discovery
 
@@ -148,91 +146,91 @@ of a collection of helper functions.
 
 ### Companion
 
-Die mathematisch korrekte Antwort
-ist nicht immer die hilfreichste.
+The mathematically correct answer
+is not always the most helpful one.
 
-Spieler treffen Entscheidungen
-anhand der angezeigten Information.
+Players make decisions
+based on the information shown.
 
-LAST darf deshalb erst erscheinen,
-wenn der aktuelle Einsatz
-wirklich der letzte Einsatz
-dieses Droiden ist.
+LAST may therefore only appear
+once the current use
+really is the last use
+of that Droid.
 
-Die Anzeige beschreibt nun
-die verbleibenden Einsätze
-einschließlich des aktuellen Rebirths.
+The display now describes
+the remaining uses
+including the current rebirth.
 
-Dadurch unterstützt Companion
-Verkaufsentscheidungen,
-statt lediglich Daten zu zählen.
+This way the Companion supports
+selling decisions,
+instead of merely counting data.
 
 ✓ getReadyExplanation()
 
-noch keine UI
+no UI yet
 
 ### Companion + Hierarchy
 
-Companion erzeugt nicht nur Antworten.
+The Companion does not only produce answers.
 
-Companion erzeugt Antworten
-aus anderen Companion-Erkenntnissen.
+The Companion produces answers
+from other Companion findings.
 
-Companion wurde erstmals als eigenes
-System in der AboutPage sichtbar gemacht.
+Companion was made visible as a system
+of its own for the first time on the AboutPage.
 
-Der Companion entwickelte sich von
-einer Hilfsfunktionssammlung zu einer
-Interpretationsschicht mit eigener Roadmap.
+The Companion evolved from
+a collection of helper functions into an
+interpretation layer with a roadmap of its own.
 
-Companion darf Besitzzustände nicht
-direkt gegen present prüfen.
+The Companion must not check ownership states
+directly against present.
 
-Gameplay-Relevanz basiert auf
+Gameplay relevance is based on
 Effective Present.
 
 getMissingDroids()
-und getReadyReason()
-verwenden daher hasEffectiveCard().
+and getReadyReason()
+therefore use hasEffectiveCard().
 
-Dadurch bleiben Companion,
-RebirthPage und Droid Hierarchy
-konsistent.
+This keeps Companion,
+RebirthPage and Droid Hierarchy
+consistent.
 
 20260622
 
-## Companion Verdichtung
+## Companion Consolidation
 
-Rebirth-Zukunftslogik wurde aus der UI
-in companion.ts verschoben.
+Rebirth future logic was moved out of the UI
+into companion.ts.
 
-Die RebirthPage zeigt Zukunftsinformationen,
-berechnet sie jedoch nicht mehr selbst.
+The RebirthPage shows future information,
+but no longer computes it itself.
 
-Companion entwickelt sich damit von einer
-Hilfsfunktionensammlung zu einer zentralen
-Interpretationsschicht.
+Companion is thereby evolving from a
+collection of helper functions into a central
+interpretation layer.
 
 ## Companion
 
-Neue Funktionen werden zuerst als
-Interpretation gebaut und danach
-in bestehende UIs integriert.
+New features are built as
+interpretation first, and only then
+integrated into existing UIs.
 
-Ziel:
+Goal:
 
-Wissen zentralisieren,
-UI vereinfachen.
+Centralise knowledge,
+simplify the UI.
 
-## Erkenntnisse
+## Findings
 
-Neue Architektur-Ebene
+New architecture layer
 
 ✓ useDroidCardState
 ✓ useDroidGridState
 
-View-State wird schrittweise
-aus den Komponenten extrahiert.
+View state is being extracted
+from the components step by step.
 
 Pattern
 
@@ -250,30 +248,30 @@ STATE
 
 UI
 
-Architektur-Erkenntnis
-Gerade passiert etwas, das sehr gut zu euren LAB_NOTES passt:
-Vorher:
-Rebirth berechnet Rebirth-Wissen
-RebirthPage berechnet Rebirth-Wissen
-DroidCard berechnet Rebirth-Wissen
-Nach Companion:
-Companion berechnet Wissen
+Architecture finding
+Something is happening right now that fits these LAB_NOTES very well:
+Before:
+Rebirth computes rebirth knowledge
+RebirthPage computes rebirth knowledge
+DroidCard computes rebirth knowledge
+After Companion:
+Companion computes knowledge
 
-RebirthPanel zeigt Wissen
-RebirthPage zeigt Wissen
-DroidCard zeigt Wissen
-Das ist exakt die Entkopplung, die ihr bei TierDNA schon erreicht habt.
+RebirthPanel shows knowledge
+RebirthPage shows knowledge
+DroidCard shows knowledge
+That is exactly the decoupling already achieved with TierDNA.
 
 ## Companion Layer
 
-companion.ts eingeführt.
+companion.ts introduced.
 
-Zweck:
+Purpose:
 
-Nicht neue Daten speichern,
-sondern bestehende Systeme erklären.
+Not to store new data,
+but to explain existing systems.
 
-Companion bildet eine Interpretationsschicht über:
+Companion forms an interpretation layer over:
 
 - Rebirth
 - Present
@@ -281,65 +279,65 @@ Companion bildet eine Interpretationsschicht über:
 - TierDNA
 - Droid Hierarchy
 
-Geplante Funktionen:
+Planned functions:
 
 - getReadyReason()
 - getMissingDroids()
 - getFutureUsage()
 
-Ziel:
+Goal:
 
-Aus Zuständen Antworten ableiten.
+Derive answers from states.
 
 # 3. UI Discoveries
 
 ### AboutPage
 
-Die AboutPage entwickelte sich von einer
-Informationsseite zu einer Statusseite.
+The AboutPage evolved from an
+information page into a status page.
 
-Systeme, Daten und aktueller Zustand
-erwiesen sich als wertvoller
-als reine Projektbeschreibung.
+Systems, data and current state
+proved more valuable
+than a pure project description.
 
-Nutzer suchen primär Orientierung
-über den aktuellen Stand des Systems.
+Users primarily look for orientation
+about the current state of the system.
 
 ### TierDNA
 
-Ein Droid wird mental als Entwicklungslinie wahrgenommen.
+A Droid is mentally perceived as a line of development.
 
 D G D R B
 
-Verdichtete Darstellung
-schlägt generischen Fortschrittsbalken.
+A condensed representation
+beats a generic progress bar.
 
 ### Rebirth UX
 
-Statusanzeigen dürfen zugleich Aktionen sein.
+Status displays may be actions at the same time.
 
 READY
 ✓
 x/y
 
-statt zusätzlicher Buttons.
+instead of additional buttons.
 
-### Header Verdichtung
+### Header Consolidation
 
-Informationsdichte kann erhöht werden,
-solange die visuelle Struktur erhalten bleibt.
+Information density can be increased,
+as long as the visual structure is preserved.
 
-### Backup-System
+### Backup System
 
-- Export/Import basiert auf vollständigem droidex_v2 State.
-- Keine Feld-selektiven Exporte.
-- Nutzerrelevante Fortschritte werden automatisch mitgesichert.
-- UI kommuniziert gesicherte Bereiche als Statusliste.
-- Zukünftige Erweiterungen über backupVersion möglich.
+- Export/Import is based on the complete droidex_v2 state.
+- No field-selective exports.
+- Progress relevant to the user is backed up automatically.
+- The UI communicates the backed-up areas as a status list.
+- Future extensions are possible via backupVersion.
 
 # 4. Architecture Patterns
 
-Neue Architektur-Ebene
+New architecture layer
 
 DATA
 ↓
@@ -357,27 +355,27 @@ UI
 
 # 5. Systems
 
-Backup-System
+Backup system
 
 # 6. Documentation
 
-### SNAP Entkopplung
+### SNAP Decoupling
 
 SNAP
-= aktueller Zustand
+= current state
 
 LAB_NOTES
-= Forschung
+= research
 
 CHANGELOG
-= Historie
+= history
 
 # 7. Open Questions
 
-Noch offene Architekturfragen.
+Architecture questions that are still open.
 
-Beispiele:
+Examples:
 
-- Wann entsteht eine neue FACTS-Datei?
-- Welche Aufgaben gehören langfristig in Companion?
-- Wie entwickelt sich die STATE-Schicht?
+- When does a new FACTS file come into being?
+- Which responsibilities belong in Companion in the long run?
+- How does the STATE layer evolve?

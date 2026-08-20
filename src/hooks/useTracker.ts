@@ -15,7 +15,7 @@ function readLocalStorage(): StoredState | null {
     localStorage.getItem(STORAGE_KEY),
     localStorage.getItem(BACKUP_KEY),
 
-    // Migration von v1
+    // Migration from v1
     localStorage.getItem('droidex_v1'),
     localStorage.getItem('droidex_v1_backup'),
   ];
@@ -26,7 +26,7 @@ function readLocalStorage(): StoredState | null {
     try {
       const state = JSON.parse(raw) as StoredState;
 
-      // automatisch nach v2 migrieren
+      // migrate to v2 automatically
       writeLocalStorage(state);
 
       return state;
