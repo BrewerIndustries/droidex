@@ -48,14 +48,14 @@ const TIER_STYLE: Record<
   GALACTIC: {
     label: 'GALACTIC',
     active:
-      'bg-indigo-500/20 text-indigo-300 border-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.4)]',
-    inactive: 'text-indigo-800 border-transparent hover:text-indigo-400',
+      'bg-purple-900/40 text-purple-300 border-purple-600 shadow-[0_0_8px_rgba(147,51,234,0.45)]',
+    inactive: 'text-purple-900 border-transparent hover:text-purple-500',
   },
   STELLAR: {
     label: 'STELLAR',
     active:
-      'bg-fuchsia-500/20 text-fuchsia-300 border-fuchsia-400 shadow-[0_0_8px_rgba(232,121,249,0.4)]',
-    inactive: 'text-fuchsia-800 border-transparent hover:text-fuchsia-400',
+      'bg-orange-500/20 text-orange-300 border-orange-400 shadow-[0_0_8px_rgba(251,146,60,0.45)]',
+    inactive: 'text-orange-800 border-transparent hover:text-orange-400',
   },
 };
 

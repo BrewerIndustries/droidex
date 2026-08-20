@@ -16,8 +16,10 @@ export function req(tier: Tier, name: string): RebirthDroidReq {
   return { name, tier, cardId: `${name}_${tier}` };
 }
 
-// "Base" in the guide = DEFAULT tier
-// MONO-WLKR → MONO-WALKER, OPTI-STRK → OPTI-STRIKE
+// Source: https://star-wars-droid-tycoon.fandom.com/wiki/Rebirths (v1.26, 5 paths, RB 0-35)
+// "Base" in the wiki = DEFAULT tier. MONO-WLKR -> MONO-WALKER, OPTI-STRK -> OPTI-STRIKE.
+// The wiki's trailing "*" (droid re-used by a later rebirth) is dropped; Droidex derives
+// that from the path data itself.
 export const REBIRTH_LEVELS: RebirthLevel[] = [
   {
     from: 0,
@@ -70,9 +72,9 @@ export const REBIRTH_LEVELS: RebirthLevel[] = [
     to: 6,
     credits: '9.85M',
     droids: [
-      req('GOLD', 'GROUNDMECH'),
-      req('DIAMOND', 'ARG'),
       req('DIAMOND', 'A-LT'),
+      req('DIAMOND', 'ARG'),
+      req('GOLD', 'GROUNDMECH'),
     ],
   },
   {
@@ -80,9 +82,9 @@ export const REBIRTH_LEVELS: RebirthLevel[] = [
     to: 7,
     credits: '14.5M',
     droids: [
-      req('GOLD', 'BB'),
-      req('DIAMOND', 'B1 SECURITY'),
       req('DIAMOND', 'BU-4D'),
+      req('DIAMOND', 'B1 SECURITY'),
+      req('GOLD', 'BB'),
     ],
   },
   {
@@ -90,9 +92,9 @@ export const REBIRTH_LEVELS: RebirthLevel[] = [
     to: 8,
     credits: '36M',
     droids: [
-      req('GOLD', 'UTIL-TEC'),
-      req('GOLD', 'LO'),
       req('DIAMOND', 'HOV-R'),
+      req('GOLD', 'LO'),
+      req('GOLD', 'UTIL-TEC'),
     ],
   },
   {
@@ -100,9 +102,9 @@ export const REBIRTH_LEVELS: RebirthLevel[] = [
     to: 9,
     credits: '89M',
     droids: [
-      req('RAINBOW', 'GROUNDMECH'),
-      req('GOLD', 'R6'),
       req('GOLD', 'TRAK-R'),
+      req('GOLD', 'R6'),
+      req('RAINBOW', 'GROUNDMECH'),
     ],
   },
   {
@@ -110,9 +112,9 @@ export const REBIRTH_LEVELS: RebirthLevel[] = [
     to: 10,
     credits: '220M',
     droids: [
-      req('RAINBOW', 'LO'),
-      req('RAINBOW', 'HAUL-R'),
       req('GOLD', 'STRIKE-ORB'),
+      req('RAINBOW', 'HAUL-R'),
+      req('RAINBOW', 'LO'),
     ],
   },
   {
@@ -239,6 +241,126 @@ export const REBIRTH_LEVELS: RebirthLevel[] = [
       req('BESKAR', 'OPTI-STRIKE'),
       req('BESKAR', 'MONO-WALKER'),
       req('BESKAR', 'R7'),
+    ],
+  },
+  {
+    from: 23,
+    to: 24,
+    credits: '9.00T',
+    droids: [
+      req('BESKAR', 'BB9'),
+      req('BESKAR', 'CYCLO-GRAV'),
+      req('DEFAULT', 'MO-TRAK'),
+    ],
+  },
+  {
+    from: 24,
+    to: 25,
+    credits: '13.50T',
+    droids: [
+      req('BESKAR', 'B2-RP'),
+      req('DEFAULT', 'IG'),
+      req('GOLD', 'DRFT-R'),
+    ],
+  },
+  {
+    from: 25,
+    to: 26,
+    credits: '21.00T',
+    droids: [
+      req('GOLD', 'CYCLENS'),
+      req('DIAMOND', 'LOADLIFTER'),
+      req('RAINBOW', 'RIC-1200'),
+    ],
+  },
+  {
+    from: 26,
+    to: 27,
+    credits: '32.00T',
+    droids: [
+      req('DIAMOND', 'KX'),
+      req('RAINBOW', 'TRI-TEK'),
+      req('BESKAR', 'SNOW MOUSE'),
+    ],
+  },
+  {
+    from: 27,
+    to: 28,
+    credits: '45.00T',
+    droids: [
+      req('GALACTIC', 'PROTO-ROLLER'),
+      req('RAINBOW', 'MO-TRAK'),
+      req('BESKAR', 'DRFT-R'),
+    ],
+  },
+  {
+    from: 28,
+    to: 29,
+    credits: '68.00T',
+    droids: [
+      req('GALACTIC', 'MONO-WALKER'),
+      req('GALACTIC', 'MECHA-DROID'),
+      req('BESKAR', 'IG'),
+    ],
+  },
+  {
+    from: 29,
+    to: 30,
+    credits: '100.00T',
+    droids: [
+      req('GALACTIC', 'B2-RP'),
+      req('BESKAR', 'CYCLENS'),
+      req('GALACTIC', 'LOADLIFTER'),
+    ],
+  },
+  {
+    from: 30,
+    to: 31,
+    credits: '150.00T',
+    droids: [
+      req('STELLAR', 'SEN-TRI'),
+      req('BESKAR', 'PROTO-ROLLER'),
+      req('BESKAR', 'KX'),
+    ],
+  },
+  {
+    from: 31,
+    to: 32,
+    credits: '230.00T',
+    droids: [
+      req('GALACTIC', 'ORB-WALKER'),
+      req('GALACTIC', 'OPTI-POD'),
+      req('BESKAR', 'RIC'),
+    ],
+  },
+  {
+    from: 32,
+    to: 33,
+    credits: '345.00T',
+    droids: [
+      req('STELLAR', 'B1 HEAVY'),
+      req('GALACTIC', 'CYCLO-GRAV'),
+      req('GALACTIC', 'DRFT-R'),
+    ],
+  },
+  {
+    from: 33,
+    to: 34,
+    credits: '520.00T',
+    droids: [
+      req('STELLAR', 'GROUNDMECH'),
+      req('STELLAR', 'BB'),
+      req('GALACTIC', 'CYCLENS'),
+    ],
+  },
+  {
+    from: 34,
+    to: 35,
+    credits: '778.00T',
+    droids: [
+      req('STELLAR', 'BB9'),
+      req('STELLAR', 'IG'),
+      req('STELLAR', 'SNOW MOUSE'),
     ],
   },
 ];

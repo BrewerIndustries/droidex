@@ -15,8 +15,8 @@ const TIER_DNA: Record<string, { letter: string; color: string }> = {
   DIAMOND: { letter: 'D', color: 'text-sky-300' },
   RAINBOW: { letter: 'R', color: 'text-purple-400' },
   BESKAR: { letter: 'B', color: 'text-zinc-100' },
-  GALACTIC: { letter: 'G', color: 'text-indigo-400' },
-  STELLAR: { letter: 'S', color: 'text-fuchsia-400' },
+  GALACTIC: { letter: 'G', color: 'text-purple-500' },
+  STELLAR: { letter: 'S', color: 'text-orange-400' },
 };
 
 export function TierDNA({ progress }: Props) {

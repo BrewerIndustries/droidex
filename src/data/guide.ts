@@ -30,8 +30,8 @@ export const GUIDE = [
   {
     id: 'rebirth-paths',
     category: 'REBIRTH',
-    title: 'RB1–RB4',
-    text: 'Epic Droid Tycoon uses multiple known rebirth paths. Droidex supports RB1 through RB4 and adapts requirements dynamically.',
+    title: 'RB1–RB5',
+    text: 'Epic Droid Tycoon uses multiple known rebirth paths. Droidex supports RB1 through RB5, covering rebirths 0 to 35, and adapts requirements dynamically.',
   },
 
   {

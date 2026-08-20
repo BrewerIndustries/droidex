@@ -148,7 +148,7 @@ This indicator helps with planning Tycoon, Lounge and Rebirth Droids.`,
 
   rebirthPathsTitle: 'REBIRTH PATHS',
 
-  rebirthPathsText: `RB1–RB4 represent the four known Rebirth requirement paths.
+  rebirthPathsText: `RB1–RB5 represent the five known Rebirth requirement paths.
 
 Each path uses different Droid combinations.
 
