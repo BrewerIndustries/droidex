@@ -2,12 +2,16 @@ import { type LucideIcon } from 'lucide-react';
 import { DroidRebirthBadge } from './DroidRebirthBadge';
 import { TierDNA } from './TierDNA';
 import type { Droid } from '../data/droids';
+import type { Tier } from '../lib/droidTypes';
 import { DROID_INFO } from '../data/droidInfo';
 import { getDroidFacts } from '../lib/droidFacts';
 import { DroidAbilities } from './DroidAbilities';
+import { DroidStats } from './DroidStats';
 
 interface Props {
   droid: Droid;
+
+  tier: Tier;
 
   facts: ReturnType<typeof getDroidFacts>;
 
@@ -32,6 +36,7 @@ interface Props {
 
 export function DroidCardFooter({
   droid,
+  tier,
   facts,
   rarityColor,
   badge,
@@ -70,6 +75,8 @@ export function DroidCardFooter({
           {droid.rarity}
         </span>
       </div>
+
+      <DroidStats droidName={droid.name} tier={tier} />
 
       <DroidAbilities info={info} />
 

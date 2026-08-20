@@ -47,6 +47,7 @@ No Play Store required.
 ## Features
 
 - Track all Droid Tycoon droids across every tier
+- Per-tier cost / income / sell, with an efficiency rating and payback time
 - Collection tracking
 - Effective Present tracking
 - Rebirth planning
@@ -104,6 +105,37 @@ yet — those cards fall back to the class icon until art lands.
 
 Data source for droids and rebirths:
 https://star-wars-droid-tycoon.fandom.com/wiki/Rebirths
+
+## Droid Economy
+
+Every card shows the numbers for that exact droid *and tier*:
+
+| Field | Meaning |
+| --- | --- |
+| `COST` | Purchase cost in credits |
+| `INC` | Credits per second |
+| `SELL` | Credits back when sold — a flat 70% of cost |
+| `CHIPS` | Upgrade Chips returned on sale (see below) |
+| `EFF` | Credits/sec earned per 1,000 credits spent — **higher is better** |
+| `PAY` | How long the droid takes to earn its own cost back — **lower is better** |
+
+`EFF` and `PAY` are two views of the same income/cost ratio: `EFF` ranks droids
+against each other, `PAY` says what that ratio means in play.
+
+The interesting consequence: efficiency *drops* through the Gold/Diamond/Rainbow
+upgrades (cost quadruples while income only doubles), then climbs again at
+Beskar, Galactic and Stellar, where cost rises much more slowly than income. A
+Stellar Mouse is the most credit-efficient card in the game; a Stellar Loadlifter
+is among the worst.
+
+Iconic droids are bought with Nova Crystals and earn a percentage of total income
+rather than a flat rate, so they show those values instead of an efficiency
+rating.
+
+`CHIPS` reads `TBD`. The game does pay Upgrade Chips when you sell a self-crafted
+droid, and the amount scales with rarity and tier, but no public source documents
+the values — the field is wired up and will populate as soon as the numbers are
+known.
 
 ---
 
