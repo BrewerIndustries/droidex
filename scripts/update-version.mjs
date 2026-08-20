@@ -69,5 +69,5 @@ self.addEventListener('fetch', (event) => {
 
 fs.writeFileSync('public/sw.js', sw);
 
-console.log('version.json aktualisiert');
-console.log('sw.js aktualisiert');
+console.log('version.json updated');
+console.log('sw.js updated');

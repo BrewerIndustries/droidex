@@ -16,7 +16,15 @@ export interface DroidCard {
   tier: Tier;
 }
 
-const ALL_TIERS: Tier[] = ['DEFAULT', 'GOLD', 'DIAMOND', 'RAINBOW', 'BESKAR'];
+const ALL_TIERS: Tier[] = [
+  'DEFAULT',
+  'GOLD',
+  'DIAMOND',
+  'RAINBOW',
+  'BESKAR',
+  'GALACTIC',
+  'STELLAR',
+];
 const DEFAULT_ONLY: Tier[] = ['DEFAULT'];
 
 export const DROIDS: Droid[] = [
@@ -187,4 +195,6 @@ export const TIER_ORDER: Tier[] = [
   'DIAMOND',
   'RAINBOW',
   'BESKAR',
+  'GALACTIC',
+  'STELLAR',
 ];

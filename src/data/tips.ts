@@ -39,7 +39,7 @@ export const TIPS = [
 
     title: 'Plan Rebirth Strategically',
 
-    text: 'Before rebirthing, it is often worth collecting rare droids, event progress, and important unlocks. Reb irthing too early can slow progression.',
+    text: 'Before rebirthing, it is often worth collecting rare droids, event progress, and important unlocks. Rebirthing too early can slow progression.',
 
     verified: true,
   },
@@ -159,7 +159,7 @@ export const TIPS = [
 
     title: 'Higher Tiers Also Count',
 
-    text: 'If a rebirth requires a Gold, Diamond, Rainbow or Beskar droid, higher quality versions can also be used. A Beskar droid can satisfy Rainbow, Diamond and Gold requirements.',
+    text: 'If a rebirth requires a Gold, Diamond, Rainbow or Beskar droid, higher quality versions can also be used. A Beskar droid can satisfy Rainbow, Diamond and Gold requirements, and Galactic or Stellar can satisfy anything below them.',
 
     verified: true,
   },
@@ -181,7 +181,7 @@ export const TIPS = [
 
     title: 'Understand Droid Quality',
 
-    text: 'Each droid can exist in multiple quality tiers: Standard → Gold → Diamond → Rainbow → Beskar. Every droid also has a rarity such as Common, Rare, Epic or Legendary.',
+    text: 'Each droid can exist in multiple quality tiers: Standard → Gold → Diamond → Rainbow → Beskar → Galactic → Stellar. Every droid also has a rarity such as Common, Rare, Epic or Legendary.',
 
     verified: true,
   },

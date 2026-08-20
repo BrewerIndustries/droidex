@@ -1,4 +1,3 @@
-
 type Tip = {
   id: string;
 
@@ -38,9 +37,7 @@ export function TipCard({ tip }: Props) {
       </div>
 
       {/* Body */}
-      <p className="mt-3 text-sm text-zinc-300 leading-relaxed">
-        {tip.text}
-      </p>
+      <p className="mt-3 text-sm text-zinc-300 leading-relaxed">{tip.text}</p>
 
       {/* Status */}
       <div className="mt-4 pt-3 border-t border-zinc-800">

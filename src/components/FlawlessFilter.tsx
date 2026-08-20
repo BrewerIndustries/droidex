@@ -13,7 +13,7 @@ const OPTIONS: {
   color: string;
 }[] = [
   { value: 'ALL', label: UI.all, color: '#6b7280' },
-  { value: 'FLAWLESS', label: 'FREIGESCHALTET', color: '#ffffff' },
+  { value: 'FLAWLESS', label: 'UNLOCKED', color: '#ffffff' },
   { value: 'MISSING', label: 'NOT UNLOCKED', color: '#a1a1aa' },
 ];
 

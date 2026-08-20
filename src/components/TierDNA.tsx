@@ -1,31 +1,38 @@
 // src/components/TierDNA.tsx
 
+import { TIER_ORDER } from '../data/droids';
+
 interface Props {
   progress: number;
 }
 
+// One marker per tier, in TIER_ORDER, so the strip never drifts from the
+// tier list. Letters repeat across tiers (DEFAULT/DIAMOND, GOLD/GALACTIC);
+// the colour is what tells them apart.
+const TIER_DNA: Record<string, { letter: string; color: string }> = {
+  DEFAULT: { letter: 'D', color: 'text-zinc-300' },
+  GOLD: { letter: 'G', color: 'text-amber-400' },
+  DIAMOND: { letter: 'D', color: 'text-sky-300' },
+  RAINBOW: { letter: 'R', color: 'text-purple-400' },
+  BESKAR: { letter: 'B', color: 'text-zinc-100' },
+  GALACTIC: { letter: 'G', color: 'text-indigo-400' },
+  STELLAR: { letter: 'S', color: 'text-fuchsia-400' },
+};
+
 export function TierDNA({ progress }: Props) {
   return (
     <div className="flex justify-center gap-0.5 text-[6px] font-black">
-      <span className={progress >= 1 ? 'text-zinc-300' : 'text-zinc-700'}>
-        {progress >= 1 ? '■' : '□'}D
-      </span>
+      {TIER_ORDER.map((tier, index) => {
+        const dna = TIER_DNA[tier];
+        const reached = progress >= index + 1;
 
-      <span className={progress >= 2 ? 'text-amber-400' : 'text-zinc-700'}>
-        {progress >= 2 ? '■' : '□'}G
-      </span>
-
-      <span className={progress >= 3 ? 'text-sky-300' : 'text-zinc-700'}>
-        {progress >= 3 ? '■' : '□'}D
-      </span>
-
-      <span className={progress >= 4 ? 'text-purple-400' : 'text-zinc-700'}>
-        {progress >= 4 ? '■' : '□'}R
-      </span>
-
-      <span className={progress >= 5 ? 'text-zinc-100' : 'text-zinc-700'}>
-        {progress >= 5 ? '■' : '□'}B
-      </span>
+        return (
+          <span key={tier} className={reached ? dna.color : 'text-zinc-700'}>
+            {reached ? '■' : '□'}
+            {dna.letter}
+          </span>
+        );
+      })}
     </div>
   );
 }

@@ -1,7 +1,8 @@
 export const UI = {
   aboutTitle: 'Droidex Android Offline',
 
-  aboutText: 'Collection tracker and companion for Fortnite Star Wars Droid collection progress.',
+  aboutText:
+    'Collection tracker and companion for Fortnite Star Wars Droid collection progress.',
 
   features: 'FEATURES',
 
@@ -49,11 +50,14 @@ export const UI = {
 
   fanText1: 'Droidex Android Offline is a fan-made project.',
 
-  fanText2: 'This is an independent fan project and is not affiliated with, endorsed, sponsored, or officially approved by FOAD, Epic Games, Disney, or Lucasfilm Ltd.',
+  fanText2:
+    'This is an independent fan project and is not affiliated with, endorsed, sponsored, or officially approved by FOAD, Epic Games, Disney, or Lucasfilm Ltd.',
 
-  fanText3: 'Fortnite is a trademark of Epic Games. Star Wars and related names are trademarks of Lucasfilm Ltd. / Disney.',
+  fanText3:
+    'Fortnite is a trademark of Epic Games. Star Wars and related names are trademarks of Lucasfilm Ltd. / Disney.',
 
-  fanText4: 'All game-related assets, names, and imagery belong to their respective owners.',
+  fanText4:
+    'All game-related assets, names, and imagery belong to their respective owners.',
 
   cardToggle: 'click to toggle',
 

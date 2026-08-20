@@ -19,6 +19,9 @@ export const TIER_BORDER: Record<string, string> = {
   GOLD: 'border-amber-400',
   DIAMOND: 'border-sky-300',
   RAINBOW: 'border-transparent',
+  BESKAR: 'border-zinc-300',
+  GALACTIC: 'border-indigo-400',
+  STELLAR: 'border-fuchsia-400',
 };
 
 export const TIER_GLOW: Record<string, string> = {
@@ -26,4 +29,7 @@ export const TIER_GLOW: Record<string, string> = {
   GOLD: '0 0 10px 2px rgba(251,191,36,0.4)',
   DIAMOND: '0 0 10px 2px rgba(147,220,255,0.4)',
   RAINBOW: '0 0 12px 3px rgba(168,85,247,0.4)',
+  BESKAR: '0 0 10px 2px rgba(229,229,229,0.4)',
+  GALACTIC: '0 0 12px 3px rgba(129,140,248,0.45)',
+  STELLAR: '0 0 12px 3px rgba(232,121,249,0.45)',
 };

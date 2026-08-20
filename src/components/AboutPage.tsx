@@ -87,7 +87,7 @@ export function AboutPage() {
     disabled:opacity-50
   "
               >
-                {updating ? 'AKTUALISIERE...' : 'APP AKTUALISIEREN'}
+                {updating ? 'UPDATING...' : 'UPDATE APP'}
               </button>
             </>
           )}
@@ -165,8 +165,7 @@ export function AboutPage() {
             <div>✓ Rebirth Path</div>
             <div>✓ Rebirth Level</div>
             <div className="pt-2 text-[11px] text-zinc-600">
-              Exported as a JSON file. Can be transferred between
-              devices.
+              Exported as a JSON file. Can be transferred between devices.
             </div>
           </div>
         </div>

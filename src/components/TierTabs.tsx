@@ -45,6 +45,18 @@ const TIER_STYLE: Record<
       'bg-zinc-300/20 text-zinc-100 border-zinc-300 shadow-[0_0_8px_rgba(229,229,229,0.4)]',
     inactive: 'text-zinc-500 border-transparent hover:text-zinc-300',
   },
+  GALACTIC: {
+    label: 'GALACTIC',
+    active:
+      'bg-indigo-500/20 text-indigo-300 border-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.4)]',
+    inactive: 'text-indigo-800 border-transparent hover:text-indigo-400',
+  },
+  STELLAR: {
+    label: 'STELLAR',
+    active:
+      'bg-fuchsia-500/20 text-fuchsia-300 border-fuchsia-400 shadow-[0_0_8px_rgba(232,121,249,0.4)]',
+    inactive: 'text-fuchsia-800 border-transparent hover:text-fuchsia-400',
+  },
 };
 
 const TIER_WITH_ALL: TierOrAll[] = ['ALL', ...TIER_ORDER];
