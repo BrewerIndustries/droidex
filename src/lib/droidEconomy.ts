@@ -1,5 +1,11 @@
 import type { Tier } from './droidTypes';
-import { DROID_STATS, SELL_RATIO, type TierStats } from '../data/droidStats';
+import {
+  DROID_STATS,
+  SELL_RATIO,
+  UPGRADE_CHIP_COST,
+  type TierStats,
+} from '../data/droidStats';
+import { TIER_ORDER } from '../data/droids';
 
 export interface DroidEconomy {
   /** Purchase cost in credits, or null for Iconics (bought with Nova Crystals). */
@@ -15,6 +21,17 @@ export interface DroidEconomy {
   efficiency: number | null;
   /** Seconds for the droid's income to repay its own cost. Lower is better. */
   paybackSeconds: number | null;
+  /**
+   * Upgrade Chips needed to bring the droid up into this tier from the one
+   * below. null at DEFAULT, which is bought rather than upgraded into.
+   */
+  upgradeChips: number | null;
+  /**
+   * Credits/sec gained per Upgrade Chip spent on that upgrade. Higher is
+   * better, and it is the number to compare when chips are the bottleneck
+   * rather than credits — it favours very different droids than `efficiency`.
+   */
+  chipValue: number | null;
   /**
    * Upgrade Chips returned when the droid is sold.
    *
@@ -36,14 +53,26 @@ export function getDroidEconomy(name: string, tier: Tier): DroidEconomy | null {
   const cost = s?.cost ?? null;
   const income = s?.income ?? null;
 
+  const upgradeChips =
+    UPGRADE_CHIP_COST[entry.rarity.toUpperCase()]?.[tier] ?? null;
+
+  // Income the upgrade actually buys you, per chip spent.
+  const prevTier = TIER_ORDER[TIER_ORDER.indexOf(tier) - 1];
+  const prevIncome = prevTier ? (entry.tiers[prevTier]?.income ?? null) : null;
+  const chipValue =
+    upgradeChips && income !== null && prevIncome !== null
+      ? (income - prevIncome) / upgradeChips
+      : null;
+
   return {
     cost,
     income,
     sell: cost === null ? null : Math.round(cost * SELL_RATIO),
     efficiency: cost && income ? (income / cost) * 1000 : null,
     paybackSeconds: cost && income ? cost / income : null,
-    chipsOnSale:
-      s && 'chipsOnSale' in s ? ((s as any).chipsOnSale ?? null) : null,
+    upgradeChips,
+    chipValue,
+    chipsOnSale: null,
     costNote: entry.costNote,
     incomeNote: entry.incomeNote,
   };
