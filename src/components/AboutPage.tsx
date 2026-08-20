@@ -5,6 +5,7 @@ import { useAppUpdate } from '../hooks/useAppUpdate';
 import { useState } from 'react';
 
 import { getSystemStatus } from '../lib/systemStatus';
+import { useStoragePersistence } from '../hooks/useStoragePersistence';
 
 import { exportData, importData } from '../lib/exportImport';
 import { createUpdateBackup } from '../lib/backup';
@@ -14,7 +15,12 @@ export function AboutPage() {
   const [updating, setUpdating] = useState(false);
   const fileInputId = 'droidex-import';
 
-  const system = getSystemStatus();
+  const { statusItem: persistenceStatus } = useStoragePersistence();
+
+  const system = [
+    ...getSystemStatus(),
+    ...(persistenceStatus ? [persistenceStatus] : []),
+  ];
 
   const ready = system.filter((item) => item.ok).length;
   const total = system.length;

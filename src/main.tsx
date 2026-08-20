@@ -4,6 +4,10 @@ import { HashRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import { recoverIfNecessary } from './lib/backup';
+import { requestPersistentStorage } from './lib/storagePersistence';
+
+// Ask up front so the save is in persistent mode before anything is written.
+void requestPersistentStorage();
 
 if (recoverIfNecessary()) {
   window.location.reload();

@@ -54,7 +54,7 @@ No Play Store required.
 - Future rebirth indicators
 - Flawless tracking
 - Offline income timer
-- Local data storage
+- Local data storage, kept in persistent mode so browsers do not evict it
 - Offline-first operation
 - Mobile-friendly interface
 - Installable PWA
@@ -76,6 +76,22 @@ Keeping these droids active in your Tycoon or parked in the Lounge can save you 
 Required rebirth droids are visible directly on Droid Cards and in the Rebirth section.
 
 ---
+
+## Saved Progress
+
+There is no account and no server. Progress lives in `localStorage` on the device
+you played on, written on every change, and the About page can export it to a
+JSON file to move between devices or keep as a backup.
+
+On startup Droidex calls `navigator.storage.persist()`, which moves the origin
+from the browser's default "best effort" storage into persistent mode so the save
+is exempt from eviction under storage pressure. Browsers grant this on their own
+heuristics — installing Droidex as an app is the surest way to get it. The About
+page's **Storage Durability** row reports which mode you are actually in, so the
+answer is never a guess.
+
+This matters most on iOS: WebKit clears script-writable storage after seven days
+without interaction. A home-screen install is exempt, a browser tab is not.
 
 ## Data
 
