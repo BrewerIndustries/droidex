@@ -18,6 +18,7 @@ const OPTIONS: {
   { value: 'RARE', label: 'RARE', color: '#3b82f6' },
   { value: 'EPIC', label: 'EPIC', color: '#a855f7' },
   { value: 'LEGENDARY', label: 'LEGENDARY', color: '#f59e0b' },
+  { value: 'MYTHIC', label: 'MYTHIC', color: '#ef4444' },
   { value: 'ICONIC', label: 'ICONIC', color: '#ff00aa' },
 ];
 

@@ -5,6 +5,7 @@ export const RARITY_COLOR: Record<string, string> = {
   RARE: '#3b82f6',
   EPIC: '#a855f7',
   LEGENDARY: '#f59e0b',
+  MYTHIC: '#ef4444',
   ICONIC: '#ff00aa',
 };
 
