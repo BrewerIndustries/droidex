@@ -3,6 +3,11 @@
 const STORAGE_KEY = 'droidex_v2';
 const UPDATE_BACKUP_KEY = 'droidex_v2_update_backup';
 
+// Device-local reminder bookkeeping. Deliberately kept out of droidex_v2:
+// importing someone else's save should not claim you have backed yours up.
+const LAST_EXPORT_KEY = 'droidex_last_export_at';
+const SNOOZE_KEY = 'droidex_backup_snooze_until';
+
 // Internal Helpers
 
 function getRawData() {
@@ -97,6 +102,33 @@ export function recoverIfNecessary() {
 
     return false;
   }
+}
+
+// Export reminder bookkeeping
+
+function readTime(key: string): number | null {
+  const raw = localStorage.getItem(key);
+  if (!raw) return null;
+  const n = Number(raw);
+  return Number.isFinite(n) ? n : null;
+}
+
+/** When the user last downloaded a backup, or null if they never have. */
+export function getLastExportAt(): number | null {
+  return readTime(LAST_EXPORT_KEY);
+}
+
+export function markExported(now: number = Date.now()) {
+  localStorage.setItem(LAST_EXPORT_KEY, String(now));
+  localStorage.removeItem(SNOOZE_KEY);
+}
+
+export function getSnoozedUntil(): number | null {
+  return readTime(SNOOZE_KEY);
+}
+
+export function snoozeBackupReminder(days: number, now: number = Date.now()) {
+  localStorage.setItem(SNOOZE_KEY, String(now + days * 86_400_000));
 }
 
 // Status

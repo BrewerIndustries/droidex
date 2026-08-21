@@ -12,6 +12,9 @@ import { RebirthPathSelector } from './components/RebirthPathSelector';
 import { Workspace } from './components/Workspace';
 import { TeamPage } from './components/TeamPage';
 import { TabNav } from './components/TabNav';
+import { BackupReminder } from './components/BackupReminder';
+import { useBackupReminder } from './hooks/useBackupReminder';
+import { useStoragePersistence } from './hooks/useStoragePersistence';
 import { autoStationFor } from './lib/team';
 
 type RarityOrAll = Rarity | 'ALL';
@@ -62,6 +65,13 @@ export default function App() {
       setCollectionStatus('ALL');
     }
   }, [location.pathname]);
+
+  const { persistence } = useStoragePersistence();
+
+  const backupReminder = useBackupReminder({
+    collectedCount: collected.size,
+    storagePersisted: persistence ? persistence.persisted : null,
+  });
 
   /**
    * One-click team toggle from a Droidex card: drop the droid into its class
@@ -169,6 +179,15 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
         </Routes>
       </div>
+      <BackupReminder
+        visible={backupReminder.visible}
+        atRisk={backupReminder.atRisk}
+        neverExported={backupReminder.neverExported}
+        daysSinceExport={backupReminder.daysSinceExport}
+        onSnooze={backupReminder.snooze}
+        onDone={backupReminder.dismiss}
+      />
+
       <Footer />
     </div>
   );

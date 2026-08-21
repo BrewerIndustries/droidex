@@ -1,4 +1,9 @@
-import { exportBackup, getCurrentData, saveCurrentData } from './backup';
+import {
+  exportBackup,
+  getCurrentData,
+  markExported,
+  saveCurrentData,
+} from './backup';
 
 export function exportData() {
   const data = getCurrentData();
@@ -9,6 +14,7 @@ export function exportData() {
   }
 
   exportBackup(data);
+  markExported();
 }
 
 export async function importData(file: File) {
