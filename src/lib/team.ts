@@ -131,6 +131,30 @@ export function canAssign(
 }
 
 /**
+ * Where a one-click "add to team" should put this droid.
+ *
+ * Prefers the workstation matching its class, since that is the only placement
+ * that earns. Falls back to the Lounge, which still counts the droid as on hand
+ * for rebirth requirements. Returns null when everything is full, so the caller
+ * can explain why nothing happened rather than failing silently.
+ */
+export function autoStationFor(
+  cardId: string,
+  assignments: TeamAssignments,
+  rebirthLevel: number
+): Station | null {
+  const card = cardIndex.get(cardId);
+  if (!card) return null;
+
+  const preferred = card.droid.type as Station;
+  for (const station of [preferred, 'LOUNGE' as Station]) {
+    if (canAssign(cardId, station, assignments, rebirthLevel).ok)
+      return station;
+  }
+  return null;
+}
+
+/**
  * Cards eligible for a station: owned, class-appropriate, and not already
  * placed somewhere. "Owned" is `collected` rather than `present`, because
  * assigning a droid is what marks it present in the first place.

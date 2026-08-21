@@ -325,7 +325,7 @@ export function AboutPage() {
         </div>
 
         <a
-          href="https://github.com/fluxx-dev/droidex"
+          href="https://github.com/BrewerIndustries/droidex"
           target="_blank"
           rel="noreferrer"
           className="text-cyan-400 text-sm"
@@ -337,7 +337,7 @@ export function AboutPage() {
       <div className="bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden">
         <img
           src={`${import.meta.env.BASE_URL}og-image.png`}
-          alt="Droidex Android Offline"
+          alt="Droidex"
           className="w-full"
         />
       </div>

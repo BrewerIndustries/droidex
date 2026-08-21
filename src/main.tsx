@@ -20,7 +20,11 @@ createRoot(document.getElementById('root')!).render(
     </HashRouter>
   </StrictMode>
 );
-if ('serviceWorker' in navigator) {
+// Production only. In dev, Vite serves unhashed module paths like
+// /src/App.tsx, and the worker's cache-first rule for non-navigation requests
+// pins them — so edits stop appearing and the app boots against stale modules.
+// Hashed production filenames do not have that problem.
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`);
   });

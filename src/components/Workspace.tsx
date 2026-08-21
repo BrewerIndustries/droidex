@@ -1,3 +1,4 @@
+import type { TeamAssignments } from '../lib/team';
 import { FilterPanel } from './FilterPanel';
 import { CollectionPanel } from './CollectionPanel';
 import { RebirthPanel } from './RebirthPanel';
@@ -50,6 +51,9 @@ type Props = {
   onToggleCollected: (id: string) => void;
   onTogglePresent: (id: string) => void;
   onToggleFlawless: (id: string) => void;
+
+  team: TeamAssignments;
+  onTeamToggle: (id: string) => void;
 };
 
 export function Workspace(props: Props) {
@@ -110,6 +114,8 @@ export function Workspace(props: Props) {
             onToggleCollected={props.onToggleCollected}
             onTogglePresent={props.onTogglePresent}
             onToggleFlawless={props.onToggleFlawless}
+            team={props.team}
+            onTeamToggle={props.onTeamToggle}
           />
         </div>
         <RebirthPanel
