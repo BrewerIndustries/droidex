@@ -1,5 +1,5 @@
 export const UI = {
-  aboutTitle: 'Droidex Android Offline',
+  aboutTitle: 'Droidex',
 
   aboutText:
     'Collection tracker and companion for Fortnite Star Wars Droid collection progress.',
@@ -26,15 +26,6 @@ export const UI = {
 
   max: 'MAX',
 
-  footerOriginal: 'Original',
-
-  footerFork: 'Android Offline',
-
-  footerIsland: 'Game Island',
-
-  footerDiscord: 'Discord',
-
-  footerTeam: 'TEAM',
   footerTips: 'TIPS',
 
   footerAbout: 'ABOUT',
@@ -43,13 +34,11 @@ export const UI = {
 
   footerInstall: 'INSTALL',
 
-  footerApp: 'APP',
-
   copied: 'Link copied',
 
   fanProject: 'FAN PROJECT NOTICE',
 
-  fanText1: 'Droidex Android Offline is a fan-made project.',
+  fanText1: 'Droidex is a fan-made project.',
 
   fanText2:
     'This is an independent fan project and is not affiliated with, endorsed, sponsored, or officially approved by FOAD, Epic Games, Disney, or Lucasfilm Ltd.',
@@ -145,7 +134,7 @@ This indicator helps with planning Tycoon, Lounge and Rebirth Droids.`,
 
   communityText: 'Discovery, correction or tip?',
 
-  communityReport: '✉ Report discovery',
+  communityReport: '→ Share a discovery on the FOAD Discord',
 
   rebirthPathsTitle: 'REBIRTH PATHS',
 

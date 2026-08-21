@@ -1,3 +1,4 @@
+import type { TeamAssignments } from '../lib/team';
 import { Panel } from './Panel';
 import { DroidGrid } from './DroidGrid';
 
@@ -33,6 +34,9 @@ type Props = {
   onToggleCollected: (id: string) => void;
   onTogglePresent: (id: string) => void;
   onToggleFlawless: (id: string) => void;
+
+  team: TeamAssignments;
+  onTeamToggle: (id: string) => void;
 };
 
 export function CollectionPanel(props: Props) {
@@ -60,6 +64,8 @@ export function CollectionPanel(props: Props) {
         onToggle={props.onToggleCollected}
         onTogglePresent={props.onTogglePresent}
         onToggleFlawless={props.onToggleFlawless}
+        team={props.team}
+        onTeamToggle={props.onTeamToggle}
         highlightedIds={props.highlightedIds}
       />
     </Panel>

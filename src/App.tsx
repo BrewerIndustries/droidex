@@ -11,6 +11,8 @@ import { AboutPage } from './components/AboutPage';
 import { RebirthPathSelector } from './components/RebirthPathSelector';
 import { Workspace } from './components/Workspace';
 import { TeamPage } from './components/TeamPage';
+import { TabNav } from './components/TabNav';
+import { autoStationFor } from './lib/team';
 
 type RarityOrAll = Rarity | 'ALL';
 type DroidTypeOrAll = DroidType | 'ALL';
@@ -61,6 +63,20 @@ export default function App() {
     }
   }, [location.pathname]);
 
+  /**
+   * One-click team toggle from a Droidex card: drop the droid into its class
+   * workstation if there is room, otherwise the Lounge, and take it back off
+   * the team if it is already placed.
+   */
+  const handleTeamToggle = (cardId: string) => {
+    if (team[cardId]) {
+      unassignDroid(cardId);
+      return;
+    }
+    const station = autoStationFor(cardId, team, rebirthLevel);
+    if (station) assignDroid(cardId, station);
+  };
+
   return (
     <div className="min-h-screen bg-black flex flex-col font-mono">
       <Header
@@ -72,6 +88,8 @@ export default function App() {
           setCollectionStatus('MISSING');
         }}
       />
+
+      <TabNav />
 
       <RebirthPathSelector value={rebirthPath} onChange={setRebirthPath} />
 
@@ -110,6 +128,8 @@ export default function App() {
                 onToggleCollected={toggleCollected}
                 onTogglePresent={togglePresent}
                 onToggleFlawless={toggleFlawless}
+                team={team}
+                onTeamToggle={handleTeamToggle}
               />
             }
           />

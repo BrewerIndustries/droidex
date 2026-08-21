@@ -65,7 +65,9 @@ export function TipsPage() {
         <div className="text-xs text-zinc-400 mb-3">{UI.communityText}</div>
 
         <a
-          href="mailto:fluxx-dev@proton.me?subject=Droidex%20Feedback"
+          href="https://discord.gg/foad"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-sm text-cyan-400 hover:text-cyan-300"
         >
           {UI.communityReport}

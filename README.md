@@ -67,6 +67,12 @@ No Play Store required.
 The **Team** tab mirrors your actual base. Assign collected droids to stations
 and it totals what they earn.
 
+Two ways in: pick a slot on the Team tab, or click the **⊕ badge in a card's
+lower-right corner** in the Droidex. That one-click add drops the droid into its
+class workstation if there is room, falls back to the Lounge, and greys out when
+both are full. The badge shows the station's initial once placed; clicking again
+takes the droid off the team.
+
 | Station | Slots at RB0 | Earns |
 | --- | --- | --- |
 | Worker / Astromech / Battle | 4 / 3 / 2 | Yes — class-matched |
@@ -257,6 +263,10 @@ Many Droidex features, game data, and gameplay improvements are inspired by comm
 ---
 
 ## Credits
+
+Droidex began as Erik Peik's project and was developed further by FLUXX DEV.
+This repository is the Brewer Industries fork; in-app links point here rather
+than upstream.
 
 Original project:
 

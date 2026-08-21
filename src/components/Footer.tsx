@@ -6,14 +6,13 @@ import { useState } from 'react';
 export function Footer() {
   const { canInstall, install } = useInstallPrompt();
   const [fanOpen, setFanOpen] = useState(false);
-  const [creditsOpen, setCreditsOpen] = useState(false);
 
   async function shareApp() {
-    const url = 'https://fluxx-dev.github.io/droidex';
+    const url = 'https://droidex.dabrewer.dev';
 
     if (navigator.share) {
       await navigator.share({
-        title: 'Droidex Android Offline',
+        title: 'Droidex',
         text: 'Track Fortnite Star Wars Droid collection progress.',
         url,
       });
@@ -34,80 +33,7 @@ export function Footer() {
     <footer className="px-4 py-3 border-t border-zinc-800 bg-black text-center text-xs text-zinc-500">
       <div className="font-semibold text-zinc-400">Droidex</div>
 
-      <div className="mt-3">
-        <button
-          onClick={() => setCreditsOpen(!creditsOpen)}
-          className="w-full text-center font-bold tracking-wider"
-        >
-          PROJECT & CREDITS {creditsOpen ? '▲' : '▼'}
-        </button>
-
-        {creditsOpen && (
-          <div className="mt-3">
-            <div>
-              {UI.footerOriginal}:
-              <a
-                href="https://github.com/erikpeik/droidex"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-cyan-300 ml-1"
-              >
-                erikpeik/droidex
-              </a>
-            </div>
-
-            <div className="mt-1">
-              {UI.footerFork}:
-              <a
-                href="https://github.com/fluxx-dev/droidex"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-cyan-300 ml-1"
-              >
-                FLUXX DEV
-              </a>
-            </div>
-
-            <div className="mt-1">
-              {UI.footerIsland}:
-              <a
-                href="https://www.fortnite.com/@foad/7865-8305-9184"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-cyan-300 ml-1"
-              >
-                FOAD
-              </a>
-            </div>
-
-            <div className="mt-1">
-              {UI.footerDiscord}:
-              <a
-                href="https://discord.gg/droidtycoon"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-cyan-300 ml-1"
-              >
-                Droid Tycoon
-              </a>
-            </div>
-          </div>
-        )}
-      </div>
       <div className="mt-3 flex gap-2 overflow-x-auto pb-2 justify-center">
-        <Link
-          to="/team"
-          className="
-            px-3 py-1 rounded border text-[10px]
-            border-zinc-700 text-zinc-500
-            hover:border-cyan-400
-            hover:text-cyan-300
-            transition-all
-          "
-        >
-          {UI.footerTeam}
-        </Link>
-
         <Link
           to="/tips"
           className="
@@ -175,19 +101,6 @@ export function Footer() {
             {UI.footerInstall}
           </button>
         )}
-
-        <a
-          href="https://fluxx-dev.github.io/droidex"
-          target="_blank"
-          rel="noreferrer"
-          className="
-            px-3 py-1 rounded border text-[10px]
-            border-cyan-500 text-cyan-300
-            shadow-[0_0_12px_rgba(34,211,238,.25)]
-          "
-        >
-          {UI.footerApp}
-        </a>
       </div>
       <div className="mt-4 pt-3 border-t border-zinc-800 text-[10px] leading-relaxed text-zinc-600">
         <button
