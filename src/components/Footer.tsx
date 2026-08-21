@@ -96,6 +96,19 @@ export function Footer() {
       </div>
       <div className="mt-3 flex gap-2 overflow-x-auto pb-2 justify-center">
         <Link
+          to="/team"
+          className="
+            px-3 py-1 rounded border text-[10px]
+            border-zinc-700 text-zinc-500
+            hover:border-cyan-400
+            hover:text-cyan-300
+            transition-all
+          "
+        >
+          {UI.footerTeam}
+        </Link>
+
+        <Link
           to="/tips"
           className="
             px-3 py-1 rounded border text-[10px]

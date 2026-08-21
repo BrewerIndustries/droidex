@@ -47,6 +47,7 @@ No Play Store required.
 ## Features
 
 - Track all Droid Tycoon droids across every tier
+- Team tab: assign droids to stations and see live earnings
 - Per-tier cost / income / sell, with an efficiency rating and payback time
 - Collection tracking
 - Effective Present tracking
@@ -60,6 +61,27 @@ No Play Store required.
 - Installable PWA
 
 ---
+
+## Team
+
+The **Team** tab mirrors your actual base. Assign collected droids to stations
+and it totals what they earn.
+
+| Station | Slots at RB0 | Earns |
+| --- | --- | --- |
+| Worker / Astromech / Battle | 4 / 3 / 2 | Yes — class-matched |
+| Lounge | 5 | No — parked storage |
+| Companion | 1 | No — contributes its perk |
+
+Slot counts grow with your rebirth level (rebirths 1-22 grant extra slots), so
+the tab shows the capacity you actually have. Earnings are the sum of assigned
+workstation income multiplied by the rebirth credit bonus, shown per second, per
+minute and per hour.
+
+**A droid in a station is on hand.** Assigning marks it present, so the Rebirth
+tab immediately counts it against requirements — including via higher tiers, so
+a Beskar Loadlifter in a worker station satisfies a Diamond Loadlifter
+requirement. Removing a droid from its station clears that again.
 
 ## Rebirth Planning
 

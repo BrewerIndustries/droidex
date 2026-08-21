@@ -1,4 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import type { TeamAssignments } from '../lib/team';
+import type { Station } from '../data/rebirthUnlocks';
 
 const STORAGE_KEY = 'droidex_v2';
 const BACKUP_KEY = 'droidex_v2_backup';
@@ -9,6 +11,9 @@ interface StoredState {
 
   rebirthLevel: number;
   rebirthPath: number;
+
+  /** cardId -> station. Absent in saves written before the Team tab existed. */
+  team?: TeamAssignments;
 }
 function readLocalStorage(): StoredState | null {
   const candidates = [
@@ -56,6 +61,10 @@ export function useTracker(_uid: string | null) {
 
   const [rebirthPath, setRebirthPathState] = useState<number>(1);
 
+  const [team, setTeam] = useState<TeamAssignments>({});
+
+  const teamRef = useRef(team);
+
   const rebirthPathRef = useRef(rebirthPath);
 
   const rebirthLevelRef = useRef(rebirthLevel);
@@ -69,6 +78,10 @@ export function useTracker(_uid: string | null) {
   }, [rebirthPath]);
 
   useEffect(() => {
+    teamRef.current = team;
+  }, [team]);
+
+  useEffect(() => {
     const local = readLocalStorage();
 
     setCollected(new Set(local?.collected ?? []));
@@ -78,6 +91,10 @@ export function useTracker(_uid: string | null) {
     setRebirthLevelState(local?.rebirthLevel ?? 0);
 
     setRebirthPathState(local?.rebirthPath ?? 1);
+
+    const loadedTeam = local?.team ?? {};
+    setTeam(loadedTeam);
+    teamRef.current = loadedTeam;
   }, []);
 
   const toggleCollected = useCallback(
@@ -97,6 +114,7 @@ export function useTracker(_uid: string | null) {
           flawless: Array.from(flawless),
           rebirthLevel: rebirthLevelRef.current,
           rebirthPath: rebirthPathRef.current,
+          team: teamRef.current,
         });
 
         return next;
@@ -122,6 +140,7 @@ export function useTracker(_uid: string | null) {
           flawless: Array.from(flawless),
           rebirthLevel: rebirthLevelRef.current,
           rebirthPath: rebirthPathRef.current,
+          team: teamRef.current,
         });
 
         return next;
@@ -147,6 +166,7 @@ export function useTracker(_uid: string | null) {
           flawless: Array.from(next),
           rebirthLevel: rebirthLevelRef.current,
           rebirthPath: rebirthPathRef.current,
+          team: teamRef.current,
         });
 
         return next;
@@ -167,6 +187,7 @@ export function useTracker(_uid: string | null) {
 
           rebirthLevel: level,
           rebirthPath: rebirthPathRef.current,
+          team: teamRef.current,
         });
 
         return prev;
@@ -187,6 +208,7 @@ export function useTracker(_uid: string | null) {
 
           rebirthLevel: rebirthLevelRef.current,
           rebirthPath: path,
+          team: teamRef.current,
         });
 
         return prev;
@@ -195,10 +217,70 @@ export function useTracker(_uid: string | null) {
     [present, flawless]
   );
 
+  /**
+   * Put a droid in a station. A droid sitting in a slot is by definition on
+   * hand, so this also marks it present and the rebirth tracker picks it up.
+   */
+  const assignDroid = useCallback(
+    (cardId: string, station: Station) => {
+      const nextTeam = { ...teamRef.current, [cardId]: station };
+      teamRef.current = nextTeam;
+      setTeam(nextTeam);
+
+      setPresent((prev) => {
+        const next = new Set(prev);
+        next.add(cardId);
+
+        writeLocalStorage({
+          collected: Array.from(collected),
+          present: Array.from(next),
+          flawless: Array.from(flawless),
+          rebirthLevel: rebirthLevelRef.current,
+          rebirthPath: rebirthPathRef.current,
+          team: nextTeam,
+        });
+
+        return next;
+      });
+    },
+    [collected, flawless]
+  );
+
+  /** Take a droid out of its station. Symmetric with assign: it stops being present. */
+  const unassignDroid = useCallback(
+    (cardId: string) => {
+      const nextTeam = { ...teamRef.current };
+      delete nextTeam[cardId];
+      teamRef.current = nextTeam;
+      setTeam(nextTeam);
+
+      setPresent((prev) => {
+        const next = new Set(prev);
+        next.delete(cardId);
+
+        writeLocalStorage({
+          collected: Array.from(collected),
+          present: Array.from(next),
+          flawless: Array.from(flawless),
+          rebirthLevel: rebirthLevelRef.current,
+          rebirthPath: rebirthPathRef.current,
+          team: nextTeam,
+        });
+
+        return next;
+      });
+    },
+    [collected, flawless]
+  );
+
   return {
     collected,
     present,
     flawless,
+
+    team,
+    assignDroid,
+    unassignDroid,
 
     toggleCollected,
     togglePresent,

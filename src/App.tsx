@@ -10,6 +10,7 @@ import { TipsPage } from './components/TipsPage';
 import { AboutPage } from './components/AboutPage';
 import { RebirthPathSelector } from './components/RebirthPathSelector';
 import { Workspace } from './components/Workspace';
+import { TeamPage } from './components/TeamPage';
 
 type RarityOrAll = Rarity | 'ALL';
 type DroidTypeOrAll = DroidType | 'ALL';
@@ -21,6 +22,10 @@ export default function App() {
     collected,
     present,
     flawless,
+
+    team,
+    assignDroid,
+    unassignDroid,
 
     toggleCollected,
     togglePresent,
@@ -125,6 +130,18 @@ export default function App() {
                     }
                   });
                 }}
+              />
+            }
+          />
+          <Route
+            path="/team"
+            element={
+              <TeamPage
+                team={team}
+                collected={collected}
+                rebirthLevel={rebirthLevel}
+                onAssign={assignDroid}
+                onUnassign={unassignDroid}
               />
             }
           />

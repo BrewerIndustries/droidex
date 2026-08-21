@@ -34,6 +34,7 @@ export const UI = {
 
   footerDiscord: 'Discord',
 
+  footerTeam: 'TEAM',
   footerTips: 'TIPS',
 
   footerAbout: 'ABOUT',
