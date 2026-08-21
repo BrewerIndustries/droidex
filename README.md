@@ -111,6 +111,17 @@ There is no account and no server. Progress lives in `localStorage` on the devic
 you played on, written on every change, and the About page can export it to a
 JSON file to move between devices or keep as a backup.
 
+Droidex nudges you to download a backup when one is overdue — a dismissible
+corner prompt, not a blocking dialog. It stays quiet until there are at least 10
+cards to lose, goes away for a fortnight after an export, and takes "Later" for a
+week. When the browser has put the save in best-effort storage it says so, since
+that is the case where it actually matters.
+
+Not to be confused with the **Backup Engine** on the About page. That is
+internal: it snapshots your save when a new version is detected and restores it
+on startup if the main save has gone. It reads "INACTIVE" whenever no update is
+pending, which is its normal idle state.
+
 On startup Droidex calls `navigator.storage.persist()`, which moves the origin
 from the browser's default "best effort" storage into persistent mode so the save
 is exempt from eviction under storage pressure. Browsers grant this on their own
