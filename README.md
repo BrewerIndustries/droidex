@@ -75,9 +75,14 @@ takes the droid off the team.
 
 | Station | Slots at RB0 | Earns |
 | --- | --- | --- |
-| Worker / Astromech / Battle | 4 / 3 / 2 | Yes — class-matched |
+| Worker / Astromech / Battle | 4 / 3 / 2 | Yes — any droid, +10% on class match |
 | Lounge | 5 | No — parked storage |
 | Companion | 1 | No — contributes its perk |
+
+**Slots are typed but not gated.** Any droid can work any station; putting one in
+a station matching its own class earns it 10% more. The Team tab marks which
+placements are getting that bonus, so it is an optimisation to chase rather than
+a rule to obey.
 
 Slot counts grow with your rebirth level (rebirths 1-22 grant extra slots), so
 the tab shows the capacity you actually have. Earnings are the sum of assigned
