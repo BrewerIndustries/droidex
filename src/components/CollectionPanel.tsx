@@ -36,7 +36,7 @@ type Props = {
   onToggleFlawless: (id: string) => void;
 
   team: TeamAssignments;
-  onTeamToggle: (id: string) => void;
+  onTeamOpen: (id: string) => void;
 };
 
 export function CollectionPanel(props: Props) {
@@ -65,7 +65,7 @@ export function CollectionPanel(props: Props) {
         onTogglePresent={props.onTogglePresent}
         onToggleFlawless={props.onToggleFlawless}
         team={props.team}
-        onTeamToggle={props.onTeamToggle}
+        onTeamOpen={props.onTeamOpen}
         highlightedIds={props.highlightedIds}
       />
     </Panel>

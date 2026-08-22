@@ -15,7 +15,8 @@ import { TabNav } from './components/TabNav';
 import { BackupReminder } from './components/BackupReminder';
 import { useBackupReminder } from './hooks/useBackupReminder';
 import { useStoragePersistence } from './hooks/useStoragePersistence';
-import { autoStationFor } from './lib/team';
+import type { Station } from './data/rebirthUnlocks';
+import { StationPicker } from './components/StationPicker';
 
 type RarityOrAll = Rarity | 'ALL';
 type DroidTypeOrAll = DroidType | 'ALL';
@@ -73,19 +74,9 @@ export default function App() {
     storagePersisted: persistence ? persistence.persisted : null,
   });
 
-  /**
-   * One-click team toggle from a Droidex card: drop the droid into its class
-   * workstation if there is room, otherwise the Lounge, and take it back off
-   * the team if it is already placed.
-   */
-  const handleTeamToggle = (cardId: string) => {
-    if (team[cardId]) {
-      unassignDroid(cardId);
-      return;
-    }
-    const station = autoStationFor(cardId, team, rebirthLevel);
-    if (station) assignDroid(cardId, station);
-  };
+  // Which card's station chooser is open, if any. Any droid can work any
+  // station, so the placement is a real choice rather than something to guess.
+  const [stationPickerFor, setStationPickerFor] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-black flex flex-col font-mono">
@@ -139,7 +130,7 @@ export default function App() {
                 onTogglePresent={togglePresent}
                 onToggleFlawless={toggleFlawless}
                 team={team}
-                onTeamToggle={handleTeamToggle}
+                onTeamOpen={setStationPickerFor}
               />
             }
           />
@@ -179,6 +170,23 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
         </Routes>
       </div>
+      {stationPickerFor && (
+        <StationPicker
+          cardId={stationPickerFor}
+          team={team}
+          rebirthLevel={rebirthLevel}
+          onPick={(station: Station) => {
+            assignDroid(stationPickerFor, station);
+            setStationPickerFor(null);
+          }}
+          onRemove={() => {
+            unassignDroid(stationPickerFor);
+            setStationPickerFor(null);
+          }}
+          onClose={() => setStationPickerFor(null)}
+        />
+      )}
+
       <BackupReminder
         visible={backupReminder.visible}
         atRisk={backupReminder.atRisk}

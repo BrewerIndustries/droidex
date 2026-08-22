@@ -32,9 +32,7 @@ interface Props {
 
   /** Station this droid occupies, or null when it is not on the team. */
   teamStation: Station | null;
-  /** Where a one-click add would place it, or null when nothing is free. */
-  teamTarget: Station | null;
-  onTeamToggle: (id: string) => void;
+  onTeamOpen: (id: string) => void;
 }
 
 export function DroidCard({
@@ -56,8 +54,7 @@ export function DroidCard({
   futureUseCountMap,
 
   teamStation,
-  teamTarget,
-  onTeamToggle,
+  onTeamOpen,
 }: Props) {
   const { droid, tier, id } = card;
   const [imgFailed, setImgFailed] = useState(false);
@@ -140,11 +137,7 @@ export function DroidCard({
         onToggleFlawless={onToggleFlawless}
       />
       <OwnedBadge visible={facts.owned} />
-      <TeamBadge
-        station={teamStation}
-        target={teamTarget}
-        onToggle={() => onTeamToggle(id)}
-      />
+      <TeamBadge station={teamStation} onOpen={() => onTeamOpen(id)} />
       <EventLockedOverlay visible={facts.eventLocked && !facts.owned} />
     </button>
   );

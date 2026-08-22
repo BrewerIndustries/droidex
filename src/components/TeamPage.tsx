@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import type { TeamAssignments } from '../lib/team';
+import { candidatesFor, getStationGroups, getTeamEarnings } from '../lib/team';
 import {
-  canAssign,
-  eligibleFor,
-  getStationGroups,
-  getTeamEarnings,
-} from '../lib/team';
-import {
+  CLASS_MATCH_BONUS,
   MAX_KNOWN_MULTIPLIER_LEVEL,
   EARNING_STATIONS,
   type Station,
@@ -32,9 +28,9 @@ const STATION_LABEL: Record<Station, string> = {
 };
 
 const STATION_NOTE: Record<Station, string> = {
-  WORKER: 'Generates credits',
-  ASTROMECH: 'Generates credits',
-  BATTLE: 'Generates credits',
+  WORKER: 'Any droid works here — Workers earn +10%',
+  ASTROMECH: 'Any droid works here — Astromechs earn +10%',
+  BATTLE: 'Any droid works here — Battle droids earn +10%',
   LOUNGE: 'Parked — earns nothing, still counts as on hand for rebirths',
   COMPANION: 'Follows you — contributes its perk, not income',
 };
@@ -80,6 +76,10 @@ export function TeamPage({
         <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-xs tabular-nums">
           <Row label="Base rate" value={`${formatCredits(earnings.base)}/s`} />
           <Row
+            label={`Class match (${earnings.matched}/${earnings.working})`}
+            value={`+${formatCredits(earnings.classBonus)}/s`}
+          />
+          <Row
             label={`Rebirth ${rebirthLevel} bonus`}
             value={`+${Math.round(earnings.multiplier * 100)}%`}
           />
@@ -96,7 +96,8 @@ export function TeamPage({
 
         <div className="mt-2 text-[10px] text-zinc-600">
           {assignedCount} droid{assignedCount === 1 ? '' : 's'} assigned ·
-          earnings count workstations only
+          earnings count workstations only · a droid in a station matching its
+          class earns 10% more
         </div>
       </div>
 
@@ -146,7 +147,22 @@ export function TeamPage({
                   </span>
                   {m.income !== null && (
                     <span className="text-[10px] text-emerald-400 tabular-nums">
-                      {formatCredits(m.income)}/s
+                      {formatCredits(m.income + m.classMatchBonus)}/s
+                    </span>
+                  )}
+                  {m.income !== null && (
+                    <span
+                      title={
+                        m.classMatch
+                          ? `${m.type} in a ${m.station} station — earning the 10% class bonus`
+                          : `${m.type} in a ${m.station} station — no class bonus`
+                      }
+                      className={[
+                        'text-[9px] font-bold',
+                        m.classMatch ? 'text-cyan-300' : 'text-zinc-700',
+                      ].join(' ')}
+                    >
+                      +10%
                     </span>
                   )}
                   <button
@@ -222,18 +238,27 @@ function Picker({
 }) {
   const [search, setSearch] = useState('');
 
-  const options = eligibleFor(station, collected, team)
-    .filter((c) => c.droid.name.toLowerCase().includes(search.toLowerCase()))
-    .sort((a, b) => {
-      // Where the station pays out, put the best earners first — that is the
-      // whole question being asked. Elsewhere, alphabetical.
-      if (EARNING_STATIONS.includes(station)) {
-        const ia = getDroidEconomy(a.droid.name, a.tier)?.income ?? 0;
-        const ib = getDroidEconomy(b.droid.name, b.tier)?.income ?? 0;
-        if (ia !== ib) return ib - ia;
-      }
-      return a.droid.name.localeCompare(b.droid.name);
-    });
+  const q = search.trim().toLowerCase();
+  const matches = candidatesFor(station, collected, team, rebirthLevel).filter(
+    (c) => c.card.droid.name.toLowerCase().includes(q)
+  );
+
+  // Eligible first, best earner first where the station pays out; the rest
+  // follow greyed out so a search never comes back mysteriously empty.
+  const sorted = [...matches].sort((a, b) => {
+    if (a.eligible !== b.eligible) return a.eligible ? -1 : 1;
+    if (a.eligible && EARNING_STATIONS.includes(station)) {
+      const rate = (c: typeof a) =>
+        (getDroidEconomy(c.card.droid.name, c.card.tier)?.income ?? 0) *
+        (c.classMatch ? 1 + CLASS_MATCH_BONUS : 1);
+      const ia = rate(a);
+      const ib = rate(b);
+      if (ia !== ib) return ib - ia;
+    }
+    return a.card.droid.name.localeCompare(b.card.droid.name);
+  });
+
+  const eligibleCount = sorted.filter((c) => c.eligible).length;
 
   return (
     <div className="mt-2 border-t border-zinc-800 pt-2">
@@ -253,41 +278,80 @@ function Picker({
         </button>
       </div>
 
-      {options.length === 0 ? (
+      {sorted.length === 0 ? (
         <div className="mt-2 text-[10px] text-zinc-600">
-          No unassigned{' '}
-          {station === 'LOUNGE' || station === 'COMPANION' ? '' : `${station} `}
-          droids collected yet. Mark droids as collected in the Droidex first.
+          {q
+            ? `Nothing collected matches "${search.trim()}".`
+            : 'No droids collected yet. Mark them as collected in the Droidex first.'}
         </div>
       ) : (
-        <div className="mt-2 max-h-52 overflow-y-auto space-y-1">
-          {options.map((c) => {
-            const check = canAssign(c.id, station, team, rebirthLevel);
-            return (
+        <>
+          {eligibleCount === 0 && (
+            <div className="mt-2 text-[10px] text-amber-500/80">
+              Everything collected is already placed somewhere.
+            </div>
+          )}
+
+          <div className="mt-2 max-h-52 overflow-y-auto space-y-1">
+            {sorted.map(({ card, eligible, reason, classMatch }) => (
               <button
-                key={c.id}
+                key={card.id}
                 type="button"
-                disabled={!check.ok}
-                onClick={() => onPick(c.id)}
-                title={check.reason}
-                className="w-full flex items-center gap-2 bg-zinc-950 border border-zinc-800 rounded px-2 py-1 text-left hover:border-cyan-700 disabled:opacity-40"
+                disabled={!eligible}
+                onClick={() => onPick(card.id)}
+                title={
+                  eligible
+                    ? classMatch
+                      ? `Assign to a ${station} slot — matches its class, earns 10% more`
+                      : `Assign to a ${station} slot — no class bonus`
+                    : `Cannot go here — ${reason}`
+                }
+                className={[
+                  'w-full flex items-center gap-2 rounded border px-2 py-1 text-left',
+                  eligible
+                    ? 'bg-zinc-950 border-zinc-800 hover:border-cyan-700'
+                    : 'bg-zinc-950/40 border-zinc-900 opacity-50 cursor-not-allowed',
+                ].join(' ')}
               >
-                <span className="text-white text-xs font-bold truncate flex-1">
-                  {c.droid.name}
+                <span
+                  className={[
+                    'text-xs font-bold truncate flex-1',
+                    eligible ? 'text-white' : 'text-zinc-500',
+                  ].join(' ')}
+                >
+                  {card.droid.name}
                 </span>
-                <span className="text-[9px] text-zinc-500">{c.tier}</span>
-                {EARNING_STATIONS.includes(station) && (
-                  <span className="text-[9px] text-emerald-400 tabular-nums">
-                    {formatCredits(
-                      getDroidEconomy(c.droid.name, c.tier)?.income ?? 0
-                    )}
-                    /s
+                <span className="text-[9px] text-zinc-500">{card.tier}</span>
+                {eligible ? (
+                  EARNING_STATIONS.includes(station) && (
+                    <>
+                      <span className="text-[9px] text-emerald-400 tabular-nums">
+                        {formatCredits(
+                          (getDroidEconomy(card.droid.name, card.tier)
+                            ?.income ?? 0) *
+                            (classMatch ? 1 + CLASS_MATCH_BONUS : 1)
+                        )}
+                        /s
+                      </span>
+                      {classMatch && (
+                        <span
+                          title="Class matches this station — earns 10% more"
+                          className="text-[9px] font-bold text-cyan-300"
+                        >
+                          +10%
+                        </span>
+                      )}
+                    </>
+                  )
+                ) : (
+                  <span className="text-[9px] text-zinc-600 uppercase tracking-wide">
+                    {reason}
                   </span>
                 )}
               </button>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

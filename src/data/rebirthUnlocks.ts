@@ -111,9 +111,17 @@ export const CREDIT_MULTIPLIER: Record<number, number> = {
 /** Highest rebirth level the multiplier table covers. */
 export const MAX_KNOWN_MULTIPLIER_LEVEL = 30;
 
-/** Which droid classes a station accepts. LOUNGE and COMPANION take any. */
-export function stationAccepts(station: Station, type: DroidType): boolean {
-  if (station === 'LOUNGE' || station === 'COMPANION') return true;
+/**
+ * Income bonus for putting a droid in a station matching its own class.
+ *
+ * Slots are typed, but they are not gated: any droid can work any station. A
+ * matching class simply earns 10% more, so the type is an optimisation to aim
+ * for rather than a rule to obey.
+ */
+export const CLASS_MATCH_BONUS = 0.1;
+
+/** True when the droid's class matches the station, earning CLASS_MATCH_BONUS. */
+export function isClassMatch(station: Station, type: DroidType): boolean {
   return station === type;
 }
 
