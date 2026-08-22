@@ -16,7 +16,7 @@ interface Props {
   collected: Set<string>;
   rebirthLevel: number;
   onAssign: (cardId: string, station: Station) => void;
-  onUnassign: (cardId: string) => void;
+  onUnassign: (index: number) => void;
 }
 
 const STATION_LABEL: Record<Station, string> = {
@@ -126,7 +126,7 @@ export function TeamPage({
               const Badge = card ? TYPE_BADGE[card.droid.type]?.Icon : null;
               return (
                 <div
-                  key={m.cardId}
+                  key={m.index}
                   className="flex items-center gap-2 bg-zinc-950 border border-zinc-800 rounded px-2 py-1"
                 >
                   {Badge && (
@@ -167,7 +167,7 @@ export function TeamPage({
                   )}
                   <button
                     type="button"
-                    onClick={() => onUnassign(m.cardId)}
+                    onClick={() => onUnassign(m.index)}
                     className="text-[10px] text-zinc-500 hover:text-red-400 px-1"
                     title="Remove from station"
                   >
@@ -288,12 +288,12 @@ function Picker({
         <>
           {eligibleCount === 0 && (
             <div className="mt-2 text-[10px] text-amber-500/80">
-              Everything collected is already placed somewhere.
+              This station is full at rebirth {rebirthLevel}.
             </div>
           )}
 
           <div className="mt-2 max-h-52 overflow-y-auto space-y-1">
-            {sorted.map(({ card, eligible, reason, classMatch }) => (
+            {sorted.map(({ card, eligible, reason, classMatch, already }) => (
               <button
                 key={card.id}
                 type="button"
@@ -322,6 +322,14 @@ function Picker({
                   {card.droid.name}
                 </span>
                 <span className="text-[9px] text-zinc-500">{card.tier}</span>
+                {already > 0 && (
+                  <span
+                    title={`${already} already on the team`}
+                    className="text-[9px] text-cyan-500"
+                  >
+                    ×{already}
+                  </span>
+                )}
                 {eligible ? (
                   EARNING_STATIONS.includes(station) && (
                     <>

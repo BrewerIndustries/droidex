@@ -80,6 +80,10 @@ lets you move the droid or take it off the team.
 | Lounge | 5 | No — parked storage |
 | Companion | 1 | No — contributes its perk |
 
+**You can place several copies of the same droid.** If you have crafted three
+Gold Gonks you can work all three, in the same station or spread across
+different ones. The card badge shows how many are placed.
+
 **Slots are typed but not gated.** Any droid can work any station; putting one in
 a station matching its own class earns it 10% more. The Team tab marks which
 placements are getting that bonus, so it is an optimisation to chase rather than

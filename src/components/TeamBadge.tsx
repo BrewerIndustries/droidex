@@ -1,18 +1,8 @@
-import type { Station } from '../data/rebirthUnlocks';
-
 interface Props {
-  /** The station this droid currently occupies, or null if it is not on the team. */
-  station: Station | null;
+  /** How many copies of this droid are currently placed. */
+  placed: number;
   onOpen: () => void;
 }
-
-const SHORT: Record<Station, string> = {
-  WORKER: 'W',
-  ASTROMECH: 'A',
-  BATTLE: 'B',
-  LOUNGE: 'L',
-  COMPANION: 'C',
-};
 
 /**
  * Bottom-right corner control for putting a droid on the team.
@@ -20,11 +10,11 @@ const SHORT: Record<Station, string> = {
  * Sits inside the card's own button, so the click has to be stopped from
  * bubbling into the collected toggle.
  */
-export function TeamBadge({ station, onOpen }: Props) {
-  const assigned = station !== null;
+export function TeamBadge({ placed, onOpen }: Props) {
+  const assigned = placed > 0;
 
   const title = assigned
-    ? `On the team in a ${station} slot — click to move or remove`
+    ? `${placed} on the team — click to place another, move or remove`
     : 'Add to the team — pick a station';
 
   return (
@@ -42,7 +32,7 @@ export function TeamBadge({ station, onOpen }: Props) {
           : 'bg-black/50 border-2 border-zinc-500 text-zinc-400 cursor-pointer hover:border-cyan-400 hover:text-cyan-300',
       ].join(' ')}
     >
-      {assigned ? SHORT[station] : '+'}
+      {assigned ? placed : '+'}
     </div>
   );
 }

@@ -12,8 +12,11 @@ interface StoredState {
   rebirthLevel: number;
   rebirthPath: number;
 
-  /** cardId -> station. Absent in saves written before the Team tab existed. */
-  team?: TeamAssignments;
+  /**
+   * Placements. Absent in saves written before the Team tab existed, and an
+   * object in saves written before duplicates were supported.
+   */
+  team?: TeamAssignments | Record<string, Station>;
 }
 function readLocalStorage(): StoredState | null {
   const candidates = [
@@ -43,6 +46,21 @@ function readLocalStorage(): StoredState | null {
   return null;
 }
 
+/**
+ * Placements used to be a cardId -> station object, which allowed only one copy
+ * of each droid. Saves in that shape are converted to the list form on load.
+ */
+function migrateTeam(
+  stored: TeamAssignments | Record<string, Station> | undefined
+): TeamAssignments {
+  if (!stored) return [];
+  if (Array.isArray(stored)) return stored;
+  return Object.entries(stored).map(([cardId, station]) => ({
+    cardId,
+    station,
+  }));
+}
+
 function writeLocalStorage(state: StoredState) {
   const payload = JSON.stringify(state);
 
@@ -61,7 +79,7 @@ export function useTracker(_uid: string | null) {
 
   const [rebirthPath, setRebirthPathState] = useState<number>(1);
 
-  const [team, setTeam] = useState<TeamAssignments>({});
+  const [team, setTeam] = useState<TeamAssignments>([]);
 
   const teamRef = useRef(team);
 
@@ -92,7 +110,7 @@ export function useTracker(_uid: string | null) {
 
     setRebirthPathState(local?.rebirthPath ?? 1);
 
-    const loadedTeam = local?.team ?? {};
+    const loadedTeam = migrateTeam(local?.team);
     setTeam(loadedTeam);
     teamRef.current = loadedTeam;
   }, []);
@@ -223,7 +241,7 @@ export function useTracker(_uid: string | null) {
    */
   const assignDroid = useCallback(
     (cardId: string, station: Station) => {
-      const nextTeam = { ...teamRef.current, [cardId]: station };
+      const nextTeam = [...teamRef.current, { cardId, station }];
       teamRef.current = nextTeam;
       setTeam(nextTeam);
 
@@ -246,17 +264,25 @@ export function useTracker(_uid: string | null) {
     [collected, flawless]
   );
 
-  /** Take a droid out of its station. Symmetric with assign: it stops being present. */
+  /**
+   * Take one copy out of its station, by position.
+   *
+   * Symmetric with assign, but only the *last* copy clears `present` — while
+   * another is still working, the droid is very much on hand.
+   */
   const unassignDroid = useCallback(
-    (cardId: string) => {
-      const nextTeam = { ...teamRef.current };
-      delete nextTeam[cardId];
+    (index: number) => {
+      const removed = teamRef.current[index];
+      if (!removed) return;
+
+      const nextTeam = teamRef.current.filter((_, i) => i !== index);
       teamRef.current = nextTeam;
       setTeam(nextTeam);
 
       setPresent((prev) => {
         const next = new Set(prev);
-        next.delete(cardId);
+        const stillPlaced = nextTeam.some((p) => p.cardId === removed.cardId);
+        if (!stillPlaced) next.delete(removed.cardId);
 
         writeLocalStorage({
           collected: Array.from(collected),
