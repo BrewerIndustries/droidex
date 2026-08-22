@@ -10,7 +10,6 @@ import { OwnedBadge } from './OwnedBadge';
 import { EventLockedOverlay } from './EventLockedOverlay';
 import { DroidImage } from './DroidImage';
 import { TeamBadge } from './TeamBadge';
-import type { Station } from '../data/rebirthUnlocks';
 
 interface Props {
   card: DroidCardType;
@@ -30,8 +29,8 @@ interface Props {
 
   futureUseCountMap: Record<string, number>;
 
-  /** Station this droid occupies, or null when it is not on the team. */
-  teamStation: Station | null;
+  /** How many copies of this droid are on the team. */
+  teamPlaced: number;
   onTeamOpen: (id: string) => void;
 }
 
@@ -53,7 +52,7 @@ export function DroidCard({
 
   futureUseCountMap,
 
-  teamStation,
+  teamPlaced,
   onTeamOpen,
 }: Props) {
   const { droid, tier, id } = card;
@@ -137,7 +136,7 @@ export function DroidCard({
         onToggleFlawless={onToggleFlawless}
       />
       <OwnedBadge visible={facts.owned} />
-      <TeamBadge station={teamStation} onOpen={() => onTeamOpen(id)} />
+      <TeamBadge placed={teamPlaced} onOpen={() => onTeamOpen(id)} />
       <EventLockedOverlay visible={facts.eventLocked && !facts.owned} />
     </button>
   );

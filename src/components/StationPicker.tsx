@@ -8,14 +8,15 @@ import {
   type Station,
 } from '../data/rebirthUnlocks';
 import { formatCredits, getDroidEconomy } from '../lib/droidEconomy';
-import type { TeamAssignments } from '../lib/team';
+import { placedCount, usedSlots, type TeamAssignments } from '../lib/team';
 
 interface Props {
   cardId: string;
   team: TeamAssignments;
   rebirthLevel: number;
   onPick: (station: Station) => void;
-  onRemove: () => void;
+  /** Remove one copy, by its position in the placements list. */
+  onRemove: (index: number) => void;
   onClose: () => void;
 }
 
@@ -48,7 +49,10 @@ export function StationPicker({
   const card = cardIndex.get(cardId);
   if (!card) return null;
 
-  const current = team[cardId] ?? null;
+  const placements = team
+    .map((p, index) => ({ ...p, index }))
+    .filter((p) => p.cardId === cardId);
+  const placed = placedCount(team, cardId);
   const income = getDroidEconomy(card.droid.name, card.tier)?.income ?? 0;
 
   return (
@@ -80,12 +84,12 @@ export function StationPicker({
 
         <div className="mt-3 space-y-1">
           {STATIONS.map((station) => {
-            const used = Object.entries(team).filter(
-              ([id, s]) => s === station && id !== cardId
-            ).length;
+            const used = usedSlots(team, station);
             const slots = slotsAt(station, rebirthLevel);
             const full = used >= slots;
-            const here = current === station;
+            const hereCount = placements.filter(
+              (p) => p.station === station
+            ).length;
             const earns = EARNING_STATIONS.includes(station);
             const match = earns && isClassMatch(station, card.droid.type);
             const rate = earns
@@ -96,28 +100,31 @@ export function StationPicker({
               <button
                 key={station}
                 type="button"
-                disabled={full || here}
+                disabled={full}
                 onClick={() => onPick(station)}
                 title={
-                  here
-                    ? 'Already here'
-                    : full
-                      ? `No free ${station} slot at rebirth ${rebirthLevel}`
-                      : match
-                        ? 'Matches its class — earns 10% more'
-                        : undefined
+                  full
+                    ? `No free ${station} slot at rebirth ${rebirthLevel}`
+                    : match
+                      ? 'Matches its class — earns 10% more'
+                      : undefined
                 }
                 className={[
                   'w-full flex items-center gap-2 rounded border px-2 py-1.5 text-left',
-                  here
-                    ? 'border-cyan-600 bg-cyan-500/10'
-                    : full
-                      ? 'border-zinc-900 bg-zinc-950/40 opacity-40 cursor-not-allowed'
+                  full
+                    ? 'border-zinc-900 bg-zinc-950/40 opacity-40 cursor-not-allowed'
+                    : hereCount > 0
+                      ? 'border-cyan-800 bg-cyan-500/5 hover:border-cyan-600'
                       : 'border-zinc-800 bg-zinc-900 hover:border-cyan-700',
                 ].join(' ')}
               >
                 <span className="flex-1 text-xs font-bold text-white">
                   {LABEL[station]}
+                  {hereCount > 0 && (
+                    <span className="ml-1 text-[9px] font-normal text-cyan-400">
+                      ×{hereCount} here
+                    </span>
+                  )}
                 </span>
 
                 {match && (
@@ -138,19 +145,33 @@ export function StationPicker({
           })}
         </div>
 
-        {current && (
-          <button
-            type="button"
-            onClick={onRemove}
-            className="mt-3 w-full rounded border border-zinc-700 px-2 py-1 text-[10px] tracking-wider text-zinc-400 hover:border-red-700 hover:text-red-400"
-          >
-            REMOVE FROM TEAM
-          </button>
+        {placed > 0 && (
+          <div className="mt-3 space-y-1">
+            <div className="text-[9px] tracking-widest text-zinc-600">
+              ON THE TEAM ({placed})
+            </div>
+            {placements.map((p) => (
+              <button
+                key={p.index}
+                type="button"
+                onClick={() => onRemove(p.index)}
+                className="w-full flex items-center gap-2 rounded border border-zinc-800 px-2 py-1 text-left hover:border-red-800"
+              >
+                <span className="flex-1 text-[10px] text-zinc-400">
+                  {LABEL[p.station]}
+                </span>
+                <span className="text-[9px] tracking-wider text-zinc-600">
+                  REMOVE
+                </span>
+              </button>
+            ))}
+          </div>
         )}
 
         <p className="mt-3 text-[9px] leading-relaxed text-zinc-600">
-          Any droid works any station. Matching its class earns 10% more. The
-          Lounge earns nothing but keeps the droid on hand for rebirths.
+          Any droid works any station, and you can place several copies of the
+          same droid. Matching its class earns 10% more. The Lounge earns
+          nothing but keeps the droid on hand for rebirths.
         </p>
       </div>
     </div>

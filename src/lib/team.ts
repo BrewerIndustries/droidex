@@ -11,10 +11,42 @@ import {
   type Station,
 } from '../data/rebirthUnlocks';
 
-/** cardId -> the station that droid is sitting in. */
-export type TeamAssignments = Record<string, Station>;
+/**
+ * One droid sitting in one slot.
+ *
+ * A list rather than a cardId -> station map, because you can craft several of
+ * the same droid and work them in different stations. Keying by cardId capped
+ * every droid at a single placement, which the game does not.
+ */
+export interface TeamPlacement {
+  cardId: string;
+  station: Station;
+}
+
+export type TeamAssignments = TeamPlacement[];
+
+/** Placements are removed by position, which stays unambiguous with duplicates. */
+export type PlacementIndex = number;
+
+/** How many copies of this card are currently placed anywhere. */
+export function placedCount(
+  assignments: TeamAssignments,
+  cardId: string
+): number {
+  return assignments.filter((p) => p.cardId === cardId).length;
+}
+
+/** How many slots of this station are taken. */
+export function usedSlots(
+  assignments: TeamAssignments,
+  station: Station
+): number {
+  return assignments.filter((p) => p.station === station).length;
+}
 
 export interface TeamMember {
+  /** Position in the placements list, for removing this exact copy. */
+  index: PlacementIndex;
   cardId: string;
   name: string;
   tier: Tier;
@@ -57,14 +89,15 @@ const cardIndex = new Map(ALL_CARDS.map((c) => [c.id, c]));
 
 export function getTeam(assignments: TeamAssignments): TeamMember[] {
   const members: TeamMember[] = [];
-  for (const [cardId, station] of Object.entries(assignments)) {
+  assignments.forEach(({ cardId, station }, index) => {
     const card = cardIndex.get(cardId);
-    if (!card) continue; // stale save referencing a droid that no longer exists
+    if (!card) return; // stale save referencing a droid that no longer exists
     const eco = getDroidEconomy(card.droid.name, card.tier);
     const earning = EARNING_STATIONS.includes(station);
     const income = earning ? (eco?.income ?? null) : null;
     const classMatch = earning && isClassMatch(station, card.droid.type);
     members.push({
+      index,
       cardId,
       name: card.droid.name,
       tier: card.tier,
@@ -74,7 +107,7 @@ export function getTeam(assignments: TeamAssignments): TeamMember[] {
       classMatch,
       classMatchBonus: classMatch && income ? income * CLASS_MATCH_BONUS : 0,
     });
-  }
+  });
   return members;
 }
 
@@ -129,14 +162,7 @@ export function canAssign(
   const card = cardIndex.get(cardId);
   if (!card) return { ok: false, reason: 'Unknown droid' };
 
-  const current = assignments[cardId];
-  if (current === station)
-    return { ok: false, reason: 'Already assigned here' };
-
-  const used = Object.entries(assignments).filter(
-    ([id, s]) => s === station && id !== cardId
-  ).length;
-  if (used >= slotsAt(station, rebirthLevel)) {
+  if (usedSlots(assignments, station) >= slotsAt(station, rebirthLevel)) {
     return {
       ok: false,
       reason: `No free ${station} slot at rebirth ${rebirthLevel}`,
@@ -179,15 +205,14 @@ export function autoStationFor(
 }
 
 /**
- * Cards that can be placed: owned, and not already sitting somewhere. "Owned"
- * is `collected` rather than `present`, because assigning a droid is what marks
- * it present in the first place.
+ * Cards that can be placed. "Owned" is `collected` rather than `present`,
+ * because assigning a droid is what marks it present in the first place.
+ *
+ * A card already on the team is still offered — you can craft several of the
+ * same droid and work them in different stations.
  */
-export function eligibleFor(
-  collected: Set<string>,
-  assignments: TeamAssignments
-) {
-  return ALL_CARDS.filter((c) => collected.has(c.id) && !assignments[c.id]);
+export function eligibleFor(collected: Set<string>) {
+  return ALL_CARDS.filter((c) => collected.has(c.id));
 }
 
 export interface Candidate {
@@ -195,6 +220,8 @@ export interface Candidate {
   eligible: boolean;
   /** Whether this droid's class matches the station, earning 10% more. */
   classMatch: boolean;
+  /** How many copies of this card are already placed somewhere. */
+  already: number;
   /** Why it cannot go here, when it cannot. */
   reason?: string;
 }
@@ -218,21 +245,19 @@ export function candidatesFor(
       EARNING_STATIONS.includes(station) &&
       isClassMatch(station, card.droid.type);
 
-    const placed = assignments[card.id];
-    if (placed) {
+    // Already-placed copies do not disqualify a card; you can work several of
+    // the same droid. Only a full station does.
+    const already = placedCount(assignments, card.id);
+    const check = canAssign(card.id, station, assignments, rebirthLevel);
+    if (!check.ok) {
       return {
         card,
         classMatch,
+        already,
         eligible: false,
-        reason: placed === station ? 'already here' : `in ${placed}`,
+        reason: 'no free slot',
       };
     }
-    // Belt and braces: the picker only opens from an empty slot, but do not
-    // let it overfill a station if that ever stops being true.
-    const check = canAssign(card.id, station, assignments, rebirthLevel);
-    if (!check.ok) {
-      return { card, classMatch, eligible: false, reason: 'no free slot' };
-    }
-    return { card, classMatch, eligible: true };
+    return { card, classMatch, already, eligible: true };
   });
 }

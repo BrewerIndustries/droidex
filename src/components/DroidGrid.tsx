@@ -1,4 +1,4 @@
-import type { TeamAssignments } from '../lib/team';
+import { placedCount, type TeamAssignments } from '../lib/team';
 import type { TierOrAll, DroidType, Rarity } from '../lib/droidTypes';
 import { DroidCard } from './DroidCard';
 import { useDroidGridState } from '../hooks/useDroidGridState';
@@ -98,7 +98,7 @@ export function DroidGrid({
           onToggle={onToggle}
           onTogglePresent={onTogglePresent}
           onToggleFlawless={onToggleFlawless}
-          teamStation={team[card.id] ?? null}
+          teamPlaced={placedCount(team, card.id)}
           onTeamOpen={onTeamOpen}
           highlighted={highlightedIds?.has(card.id)}
           rebirthLevels={rebirthMap[card.droid.name]}

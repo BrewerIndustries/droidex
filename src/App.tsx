@@ -179,10 +179,7 @@ export default function App() {
             assignDroid(stationPickerFor, station);
             setStationPickerFor(null);
           }}
-          onRemove={() => {
-            unassignDroid(stationPickerFor);
-            setStationPickerFor(null);
-          }}
+          onRemove={(index: number) => unassignDroid(index)}
           onClose={() => setStationPickerFor(null)}
         />
       )}
