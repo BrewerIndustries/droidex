@@ -1,4 +1,4 @@
-import { autoStationFor, type TeamAssignments } from '../lib/team';
+import type { TeamAssignments } from '../lib/team';
 import type { TierOrAll, DroidType, Rarity } from '../lib/droidTypes';
 import { DroidCard } from './DroidCard';
 import { useDroidGridState } from '../hooks/useDroidGridState';
@@ -27,7 +27,7 @@ interface Props {
   onToggleFlawless: (id: string) => void;
 
   team: TeamAssignments;
-  onTeamToggle: (id: string) => void;
+  onTeamOpen: (id: string) => void;
 
   highlightedIds?: Set<string>;
 }
@@ -51,7 +51,7 @@ export function DroidGrid({
   onTogglePresent,
   onToggleFlawless,
   team,
-  onTeamToggle,
+  onTeamOpen,
 
   highlightedIds,
 }: Props) {
@@ -99,8 +99,7 @@ export function DroidGrid({
           onTogglePresent={onTogglePresent}
           onToggleFlawless={onToggleFlawless}
           teamStation={team[card.id] ?? null}
-          teamTarget={autoStationFor(card.id, team, rebirthLevel)}
-          onTeamToggle={onTeamToggle}
+          onTeamOpen={onTeamOpen}
           highlighted={highlightedIds?.has(card.id)}
           rebirthLevels={rebirthMap[card.droid.name]}
           lastRequiredRebirth={futureUseMap[card.id]}

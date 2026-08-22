@@ -67,11 +67,12 @@ No Play Store required.
 The **Team** tab mirrors your actual base. Assign collected droids to stations
 and it totals what they earn.
 
-Two ways in: pick a slot on the Team tab, or click the **⊕ badge in a card's
-lower-right corner** in the Droidex. That one-click add drops the droid into its
-class workstation if there is room, falls back to the Lounge, and greys out when
-both are full. The badge shows the station's initial once placed; clicking again
-takes the droid off the team.
+Two ways in: pick a slot on the Team tab, or click the **badge in a card's
+lower-right corner** in the Droidex. The badge opens a chooser listing every
+station with what the droid would earn there, which slots are free, and which
+placement carries the class bonus — so the trade-off is visible at the point of
+deciding. Once placed the badge shows the station's initial, and reopening it
+lets you move the droid or take it off the team.
 
 | Station | Slots at RB0 | Earns |
 | --- | --- | --- |
