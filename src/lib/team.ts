@@ -171,3 +171,44 @@ export function eligibleFor(
       stationAccepts(station, c.droid.type)
   );
 }
+
+export interface Candidate {
+  card: (typeof ALL_CARDS)[number];
+  eligible: boolean;
+  /** Why it cannot go here, when it cannot. */
+  reason?: string;
+}
+
+/**
+ * Every collected card, tagged with whether it can go in this station.
+ *
+ * The picker shows the ineligible ones too, greyed out with the reason. Simply
+ * hiding them makes the search look broken — someone who knows they own a droid
+ * searches for it, gets nothing back, and concludes the search is at fault
+ * rather than learning the droid is the wrong class for the slot.
+ */
+export function candidatesFor(
+  station: Station,
+  collected: Set<string>,
+  assignments: TeamAssignments,
+  rebirthLevel: number
+): Candidate[] {
+  return ALL_CARDS.filter((c) => collected.has(c.id)).map((card) => {
+    const placed = assignments[card.id];
+    if (placed) {
+      return {
+        card,
+        eligible: false,
+        reason: placed === station ? 'already here' : `in ${placed}`,
+      };
+    }
+    if (!stationAccepts(station, card.droid.type)) {
+      return { card, eligible: false, reason: `${card.droid.type} droid` };
+    }
+    // Belt and braces: the picker only opens from an empty slot, but do not
+    // let it overfill a station if that ever stops being true.
+    const check = canAssign(card.id, station, assignments, rebirthLevel);
+    if (!check.ok) return { card, eligible: false, reason: 'no free slot' };
+    return { card, eligible: true };
+  });
+}

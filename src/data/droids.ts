@@ -123,7 +123,7 @@ export const DROIDS: Droid[] = [
   { name: 'CYCLENS', rarity: 'MYTHIC', type: 'ASTROMECH', tiers: ALL_TIERS },
   { name: 'MO-TRAK', rarity: 'MYTHIC', type: 'ASTROMECH', tiers: ALL_TIERS },
 
-  { name: 'TRI-TEK', rarity: 'MYTHIC', type: 'BATTLE', tiers: ALL_TIERS },
+  { name: 'TRI-TEK', rarity: 'MYTHIC', type: 'ASTROMECH', tiers: ALL_TIERS },
   { name: 'IG', rarity: 'MYTHIC', type: 'BATTLE', tiers: ALL_TIERS },
   { name: 'KX', rarity: 'MYTHIC', type: 'BATTLE', tiers: ALL_TIERS },
 

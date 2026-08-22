@@ -1,11 +1,6 @@
 import { useState } from 'react';
 import type { TeamAssignments } from '../lib/team';
-import {
-  canAssign,
-  eligibleFor,
-  getStationGroups,
-  getTeamEarnings,
-} from '../lib/team';
+import { candidatesFor, getStationGroups, getTeamEarnings } from '../lib/team';
 import {
   MAX_KNOWN_MULTIPLIER_LEVEL,
   EARNING_STATIONS,
@@ -222,18 +217,24 @@ function Picker({
 }) {
   const [search, setSearch] = useState('');
 
-  const options = eligibleFor(station, collected, team)
-    .filter((c) => c.droid.name.toLowerCase().includes(search.toLowerCase()))
-    .sort((a, b) => {
-      // Where the station pays out, put the best earners first — that is the
-      // whole question being asked. Elsewhere, alphabetical.
-      if (EARNING_STATIONS.includes(station)) {
-        const ia = getDroidEconomy(a.droid.name, a.tier)?.income ?? 0;
-        const ib = getDroidEconomy(b.droid.name, b.tier)?.income ?? 0;
-        if (ia !== ib) return ib - ia;
-      }
-      return a.droid.name.localeCompare(b.droid.name);
-    });
+  const q = search.trim().toLowerCase();
+  const matches = candidatesFor(station, collected, team, rebirthLevel).filter(
+    (c) => c.card.droid.name.toLowerCase().includes(q)
+  );
+
+  // Eligible first, best earner first where the station pays out; the rest
+  // follow greyed out so a search never comes back mysteriously empty.
+  const sorted = [...matches].sort((a, b) => {
+    if (a.eligible !== b.eligible) return a.eligible ? -1 : 1;
+    if (a.eligible && EARNING_STATIONS.includes(station)) {
+      const ia = getDroidEconomy(a.card.droid.name, a.card.tier)?.income ?? 0;
+      const ib = getDroidEconomy(b.card.droid.name, b.card.tier)?.income ?? 0;
+      if (ia !== ib) return ib - ia;
+    }
+    return a.card.droid.name.localeCompare(b.card.droid.name);
+  });
+
+  const eligibleCount = sorted.filter((c) => c.eligible).length;
 
   return (
     <div className="mt-2 border-t border-zinc-800 pt-2">
@@ -253,41 +254,67 @@ function Picker({
         </button>
       </div>
 
-      {options.length === 0 ? (
+      {sorted.length === 0 ? (
         <div className="mt-2 text-[10px] text-zinc-600">
-          No unassigned{' '}
-          {station === 'LOUNGE' || station === 'COMPANION' ? '' : `${station} `}
-          droids collected yet. Mark droids as collected in the Droidex first.
+          {q
+            ? `Nothing collected matches "${search.trim()}".`
+            : 'No droids collected yet. Mark them as collected in the Droidex first.'}
         </div>
       ) : (
-        <div className="mt-2 max-h-52 overflow-y-auto space-y-1">
-          {options.map((c) => {
-            const check = canAssign(c.id, station, team, rebirthLevel);
-            return (
+        <>
+          {eligibleCount === 0 && (
+            <div className="mt-2 text-[10px] text-amber-500/80">
+              Nothing collected can go in a {station} slot right now — the
+              matches below are the wrong class or already placed.
+            </div>
+          )}
+
+          <div className="mt-2 max-h-52 overflow-y-auto space-y-1">
+            {sorted.map(({ card, eligible, reason }) => (
               <button
-                key={c.id}
+                key={card.id}
                 type="button"
-                disabled={!check.ok}
-                onClick={() => onPick(c.id)}
-                title={check.reason}
-                className="w-full flex items-center gap-2 bg-zinc-950 border border-zinc-800 rounded px-2 py-1 text-left hover:border-cyan-700 disabled:opacity-40"
+                disabled={!eligible}
+                onClick={() => onPick(card.id)}
+                title={
+                  eligible
+                    ? `Assign to a ${station} slot`
+                    : `Cannot go here — ${reason}`
+                }
+                className={[
+                  'w-full flex items-center gap-2 rounded border px-2 py-1 text-left',
+                  eligible
+                    ? 'bg-zinc-950 border-zinc-800 hover:border-cyan-700'
+                    : 'bg-zinc-950/40 border-zinc-900 opacity-50 cursor-not-allowed',
+                ].join(' ')}
               >
-                <span className="text-white text-xs font-bold truncate flex-1">
-                  {c.droid.name}
+                <span
+                  className={[
+                    'text-xs font-bold truncate flex-1',
+                    eligible ? 'text-white' : 'text-zinc-500',
+                  ].join(' ')}
+                >
+                  {card.droid.name}
                 </span>
-                <span className="text-[9px] text-zinc-500">{c.tier}</span>
-                {EARNING_STATIONS.includes(station) && (
-                  <span className="text-[9px] text-emerald-400 tabular-nums">
-                    {formatCredits(
-                      getDroidEconomy(c.droid.name, c.tier)?.income ?? 0
-                    )}
-                    /s
+                <span className="text-[9px] text-zinc-500">{card.tier}</span>
+                {eligible ? (
+                  EARNING_STATIONS.includes(station) && (
+                    <span className="text-[9px] text-emerald-400 tabular-nums">
+                      {formatCredits(
+                        getDroidEconomy(card.droid.name, card.tier)?.income ?? 0
+                      )}
+                      /s
+                    </span>
+                  )
+                ) : (
+                  <span className="text-[9px] text-zinc-600 uppercase tracking-wide">
+                    {reason}
                   </span>
                 )}
               </button>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
