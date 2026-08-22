@@ -78,7 +78,7 @@ lets you move the droid or take it off the team.
 | --- | --- | --- |
 | Worker / Astromech / Battle | 4 / 3 / 2 | Yes — any droid, +10% on class match |
 | Lounge | 5 | No — parked storage |
-| Companion | 1 | No — contributes its perk |
+| Companion | 1 | No — grants its perk, shown on the row |
 
 **You can place several copies of the same droid.** If you have crafted three
 Gold Gonks you can work all three, in the same station or spread across

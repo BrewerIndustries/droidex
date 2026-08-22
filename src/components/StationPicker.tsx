@@ -53,7 +53,9 @@ export function StationPicker({
     .map((p, index) => ({ ...p, index }))
     .filter((p) => p.cardId === cardId);
   const placed = placedCount(team, cardId);
-  const income = getDroidEconomy(card.droid.name, card.tier)?.income ?? 0;
+  const eco = getDroidEconomy(card.droid.name, card.tier);
+  const income = eco?.income ?? 0;
+  const perk = eco?.perk ?? '';
 
   return (
     <div
@@ -133,9 +135,15 @@ export function StationPicker({
                   </span>
                 )}
 
-                <span className="text-[10px] tabular-nums text-emerald-400">
-                  {earns ? `${formatCredits(rate)}/s` : '—'}
-                </span>
+                {station === 'COMPANION' && perk ? (
+                  <span className="max-w-[9rem] truncate text-[9px] text-amber-300">
+                    {perk}
+                  </span>
+                ) : (
+                  <span className="text-[10px] tabular-nums text-emerald-400">
+                    {earns ? `${formatCredits(rate)}/s` : '—'}
+                  </span>
+                )}
 
                 <span className="text-[9px] tabular-nums text-zinc-600">
                   {used}/{slots}

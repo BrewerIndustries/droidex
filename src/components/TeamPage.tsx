@@ -32,7 +32,7 @@ const STATION_NOTE: Record<Station, string> = {
   ASTROMECH: 'Any droid works here — Astromechs earn +10%',
   BATTLE: 'Any droid works here — Battle droids earn +10%',
   LOUNGE: 'Parked — earns nothing, still counts as on hand for rebirths',
-  COMPANION: 'Follows you — contributes its perk, not income',
+  COMPANION: 'Follows you — grants its perk instead of income',
 };
 
 const cardIndex = new Map(ALL_CARDS.map((c) => [c.id, c]));
@@ -145,6 +145,14 @@ export function TeamPage({
                   <span className="text-[9px] text-zinc-500 tracking-wide">
                     {m.tier}
                   </span>
+                  {m.station === 'COMPANION' && m.perk && (
+                    <span
+                      title="Active while this droid is your Companion"
+                      className="text-[10px] text-amber-300 truncate max-w-[10rem]"
+                    >
+                      {m.perk}
+                    </span>
+                  )}
                   {m.income !== null && (
                     <span className="text-[10px] text-emerald-400 tabular-nums">
                       {formatCredits(m.income + m.classMatchBonus)}/s
