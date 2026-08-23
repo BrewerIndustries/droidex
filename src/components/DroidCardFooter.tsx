@@ -76,7 +76,7 @@ export function DroidCardFooter({
         </span>
       </div>
 
-      <DroidStats droidName={droid.name} tier={tier} />
+      <DroidStats droidName={droid.name} tier={tier} fusion={droid.fusion} />
 
       <DroidAbilities info={info} />
 
