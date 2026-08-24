@@ -78,7 +78,7 @@ lets you move the droid or take it off the team.
 | --- | --- | --- |
 | Worker / Astromech / Battle | 4 / 3 / 2 | Yes — any droid, +10% on class match |
 | Lounge | 5 | No — parked storage |
-| Companion | 1 | No — contributes its perk |
+| Companion | 1 | No — grants its perk, shown on the row |
 
 **You can place several copies of the same droid.** If you have crafted three
 Gold Gonks you can work all three, in the same station or spread across
@@ -152,7 +152,7 @@ https://docs.google.com/spreadsheets/d/1otLCKSCMKICMlnefirQ8KZhh_rdZTd5Mp8h0UYFU
 
 Current game coverage:
 
-- 70 documented droids / 442 tier cards
+- 87 documented droids / 561 tier cards
 - DEFAULT
 - GOLD
 - DIAMOND
@@ -170,6 +170,28 @@ yet — those cards fall back to the class icon until art lands.
 
 Data source for droids and rebirths:
 https://star-wars-droid-tycoon.fandom.com/wiki/Rebirths
+
+## Fusion Droids
+
+v1.27 added the Fusion lab, unlocked at Rebirth 3: combine three droids into one
+better one. **17 droids are fusion-exclusive** and cannot be bought at all.
+
+Their cards show the recipe instead of the usual cost/efficiency block, because
+those figures do not apply to something with no purchase price:
+
+```
+WHL-EX   RARE   WORKER
+INC      72/s
+FUSE     MOUSE + MOUSE + ARG
+```
+
+The result keeps the tier of what you fused — three Gold droids give a Gold
+result — so fusion droids exist at all seven tiers like any other.
+
+Sell values are deliberately absent. The community sheet is still filling that
+column in and 16 of the 17 currently deviate from the standard tier progression,
+some by absurd margins, so it is better to show nothing than something wrong.
+Companion perks for these droids are not documented anywhere yet either.
 
 ## Droid Economy
 

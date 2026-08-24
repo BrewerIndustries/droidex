@@ -9,6 +9,8 @@ import {
 interface Props {
   droidName: string;
   tier: Tier;
+  /** The three droids that fuse into this one, when it is fusion-exclusive. */
+  fusion?: readonly string[];
 }
 
 /**
@@ -28,9 +30,33 @@ interface Props {
  * thousands of chips but buys thousands of credits/sec, while a Common upgrade
  * is cheap in chips and buys almost nothing.
  */
-export function DroidStats({ droidName, tier }: Props) {
+export function DroidStats({ droidName, tier, fusion }: Props) {
   const eco = getDroidEconomy(droidName, tier);
   if (!eco) return null;
+
+  // Fusion droids have income but no purchase cost, so the credit-efficiency
+  // figures do not apply — what matters instead is the recipe.
+  if (fusion) {
+    return (
+      <div className="mt-1 text-[8px] leading-tight tabular-nums">
+        <div className="flex justify-between gap-1">
+          <span className="text-zinc-600">INC</span>
+          <span className="text-emerald-400/90">
+            {eco.income === null ? '—' : `${formatCredits(eco.income)}/s`}
+          </span>
+        </div>
+        <div
+          className="mt-0.5 pt-0.5 border-t border-zinc-800"
+          title={`Fuse ${fusion.join(' + ')} at this tier`}
+        >
+          <div className="text-fuchsia-400/90 tracking-wide">FUSE</div>
+          <div className="text-zinc-400 leading-snug normal-case">
+            {fusion.join(' + ')}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // Iconics are bought with Nova Crystals and earn a share of total income,
   // so credit-based efficiency does not apply to them.

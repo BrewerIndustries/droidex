@@ -58,6 +58,8 @@ export interface TeamMember {
   classMatch: boolean;
   /** The bonus itself, in credits per second. */
   classMatchBonus: number;
+  /** What this droid grants as Companion. Only active in the Companion slot. */
+  perk: string;
 }
 
 export interface StationGroup {
@@ -106,6 +108,7 @@ export function getTeam(assignments: TeamAssignments): TeamMember[] {
       income,
       classMatch,
       classMatchBonus: classMatch && income ? income * CLASS_MATCH_BONUS : 0,
+      perk: eco?.perk ?? '',
     });
   });
   return members;

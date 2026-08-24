@@ -8,6 +8,12 @@ export interface Droid {
 
   eventLocked?: boolean;
   canBeFlawless?: boolean;
+
+  /**
+   * The three droids that fuse into this one. Fusion-exclusive droids cannot be
+   * bought from the Sandcrawler at all, so they have no purchase cost.
+   */
+  fusion?: [string, string, string];
 }
 
 export interface DroidCard {
@@ -126,6 +132,128 @@ export const DROIDS: Droid[] = [
   { name: 'TRI-TEK', rarity: 'MYTHIC', type: 'ASTROMECH', tiers: ALL_TIERS },
   { name: 'IG', rarity: 'MYTHIC', type: 'BATTLE', tiers: ALL_TIERS },
   { name: 'KX', rarity: 'MYTHIC', type: 'BATTLE', tiers: ALL_TIERS },
+
+  // FUSION EXCLUSIVE (v1.27) — obtainable only at the Fusion lab.
+  // The result keeps the tier of the droids fused, so these have every tier.
+  {
+    name: 'WHL-EX',
+    rarity: 'RARE',
+    type: 'WORKER',
+    tiers: ALL_TIERS,
+    fusion: ['MOUSE', 'MOUSE', 'ARG'],
+  },
+  {
+    name: 'ZRO-TEC',
+    rarity: 'RARE',
+    type: 'ASTROMECH',
+    tiers: ALL_TIERS,
+    fusion: ['ID10', 'ID10', '2BB'],
+  },
+  {
+    name: 'BTL-R',
+    rarity: 'RARE',
+    type: 'BATTLE',
+    tiers: ALL_TIERS,
+    fusion: ['B1 BATTLE', 'R9', 'BDX EXPLORER'],
+  },
+  {
+    name: 'N-UL',
+    rarity: 'EPIC',
+    type: 'WORKER',
+    tiers: ALL_TIERS,
+    fusion: ['GUNRUNNER', 'BB', 'B1 HEAVY'],
+  },
+  {
+    name: 'SCRP-R',
+    rarity: 'EPIC',
+    type: 'ASTROMECH',
+    tiers: ALL_TIERS,
+    fusion: ['GONK', 'R6', 'GROUNDMECH'],
+  },
+  {
+    name: 'ARM-CORE',
+    rarity: 'EPIC',
+    type: 'BATTLE',
+    tiers: ALL_TIERS,
+    fusion: ['ARG', 'ARG', 'B2 HEAVY'],
+  },
+  {
+    name: 'OPT-AR',
+    rarity: 'EPIC',
+    type: 'BATTLE',
+    tiers: ALL_TIERS,
+    fusion: ['R2', 'R2', 'B2 SUPER'],
+  },
+  {
+    name: 'RO-TOR',
+    rarity: 'LEGENDARY',
+    type: 'WORKER',
+    tiers: ALL_TIERS,
+    fusion: ['PIT', 'B1 BATTLE', 'BB9'],
+  },
+  {
+    name: 'FUS-3',
+    rarity: 'LEGENDARY',
+    type: 'WORKER',
+    tiers: ALL_TIERS,
+    fusion: ['BU-4D', 'BU-4D', 'R7'],
+  },
+  {
+    name: 'QIK-BIT',
+    rarity: 'LEGENDARY',
+    type: 'ASTROMECH',
+    tiers: ALL_TIERS,
+    fusion: ['GROUNDMECH', 'GROUNDMECH', 'BB9'],
+  },
+  {
+    name: 'ORB-XL',
+    rarity: 'LEGENDARY',
+    type: 'BATTLE',
+    tiers: ALL_TIERS,
+    fusion: ['CB', 'GUNRUNNER', 'B2-RP'],
+  },
+  {
+    name: 'RIV-3T',
+    rarity: 'MYTHIC',
+    type: 'WORKER',
+    tiers: ALL_TIERS,
+    fusion: ['RIC', 'IG', 'KX'],
+  },
+  {
+    name: 'LUG-G',
+    rarity: 'MYTHIC',
+    type: 'WORKER',
+    tiers: ALL_TIERS,
+    fusion: ['ID10', 'R5', 'LOADLIFTER'],
+  },
+  {
+    name: 'LOW-MO',
+    rarity: 'MYTHIC',
+    type: 'WORKER',
+    tiers: ALL_TIERS,
+    fusion: ['A-LT', 'A-LT', 'LOADLIFTER'],
+  },
+  {
+    name: 'AXI-POD',
+    rarity: 'MYTHIC',
+    type: 'ASTROMECH',
+    tiers: ALL_TIERS,
+    fusion: ['BDX EXPLORER', 'R7', 'RIC'],
+  },
+  {
+    name: 'SRV-O',
+    rarity: 'MYTHIC',
+    type: 'BATTLE',
+    tiers: ALL_TIERS,
+    fusion: ['B1 HEAVY', 'B1 HEAVY', 'RIC-1200'],
+  },
+  {
+    name: 'X-ONK',
+    rarity: 'MYTHIC',
+    type: 'BATTLE',
+    tiers: ALL_TIERS,
+    fusion: ['GONK', 'KX', 'KX'],
+  },
 
   // ICONIC (event locked, DEFAULT only)
 
