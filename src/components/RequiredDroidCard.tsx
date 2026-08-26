@@ -59,11 +59,11 @@ export function RequiredDroidCard({
         futureUseCountMap={futureUseCountMap}
       />
 
-      <span className="text-white text-[10px] font-bold w-[88px] text-center truncate">
+      <span className="text-white text-2xs font-bold w-[5.5rem] text-center truncate">
         {droid.name}
       </span>
 
-      <div className="w-[88px] mt-0.5">
+      <div className="w-[5.5rem] mt-0.5">
         <TierDNA progress={progress} />
       </div>
     </div>

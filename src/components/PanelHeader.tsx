@@ -9,9 +9,9 @@ export function PanelHeader({ title, open, onToggle }: PanelHeaderProps) {
     <button
       type="button"
       onClick={onToggle}
-      className="flex items-center justify-between w-full px-4 py-2.5"
+      className="flex items-center justify-between w-full px-4 py-3 min-h-tap"
     >
-      <span className="text-[10px] font-bold tracking-widest text-zinc-400">
+      <span className="text-2xs font-bold tracking-widest text-zinc-400">
         {title}
       </span>
 

@@ -38,7 +38,7 @@ export function DroidStats({ droidName, tier, fusion }: Props) {
   // figures do not apply — what matters instead is the recipe.
   if (fusion) {
     return (
-      <div className="mt-1 text-[8px] leading-tight tabular-nums">
+      <div className="mt-1 text-4xs leading-tight tabular-nums">
         <div className="flex justify-between gap-1">
           <span className="text-zinc-600">INC</span>
           <span className="text-emerald-400/90">
@@ -62,7 +62,7 @@ export function DroidStats({ droidName, tier, fusion }: Props) {
   // so credit-based efficiency does not apply to them.
   if (eco.cost === null) {
     return (
-      <div className="mt-1 text-[8px] leading-tight text-zinc-500 tabular-nums">
+      <div className="mt-1 text-4xs leading-tight text-zinc-500 tabular-nums">
         <div className="flex justify-between gap-1">
           <span className="text-zinc-600">COST</span>
           <span className="text-amber-400/80 truncate">
@@ -78,7 +78,7 @@ export function DroidStats({ droidName, tier, fusion }: Props) {
   }
 
   return (
-    <div className="mt-1 text-[8px] leading-tight tabular-nums">
+    <div className="mt-1 text-4xs leading-tight tabular-nums">
       <div className="flex justify-between gap-1">
         <span className="text-zinc-600">COST</span>
         <span className="text-amber-400/90">{formatCredits(eco.cost)}</span>

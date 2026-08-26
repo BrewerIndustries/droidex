@@ -25,8 +25,8 @@ export function TeamBadge({ placed, onOpen }: Props) {
       }}
       title={title}
       className={[
-        'absolute bottom-0.5 right-0.5 z-20 w-5 h-5 rounded-full',
-        'flex items-center justify-center text-[9px] font-black transition-all',
+        'absolute bottom-0.5 right-0.5 z-20 w-5 h-5 rounded-full tap-br',
+        'flex items-center justify-center text-3xs font-black transition-all',
         assigned
           ? 'bg-cyan-400 text-black shadow-[0_0_10px_rgba(34,211,238,0.8)] cursor-pointer'
           : 'bg-black/50 border-2 border-zinc-500 text-zinc-400 cursor-pointer hover:border-cyan-400 hover:text-cyan-300',

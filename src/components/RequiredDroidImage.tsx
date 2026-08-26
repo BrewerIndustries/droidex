@@ -29,7 +29,7 @@ export function RequiredDroidImage({
 }: Props) {
   return (
     <div
-      className={`relative w-[88px] h-[88px] rounded-xl border-2 overflow-hidden bg-zinc-900 ${
+      className={`relative w-[5.5rem] h-[5.5rem] rounded-xl border-2 overflow-hidden bg-zinc-900 ${
         isPresent
           ? 'droid-card-owned'
           : isCollected
@@ -48,7 +48,7 @@ export function RequiredDroidImage({
 
       <div className="absolute bottom-0 left-0 right-0 text-center py-0.5 bg-black/60">
         <span
-          className={`text-[8px] font-black uppercase tracking-wide ${
+          className={`text-4xs font-black uppercase tracking-wide ${
             TIER_CLASS[droid.tier] ?? 'text-gray-400'
           }`}
         >
@@ -57,7 +57,7 @@ export function RequiredDroidImage({
       </div>
 
       {futureUseCountMap[droid.cardId] > 0 && (
-        <div className="absolute top-1 right-1 px-1.5 rounded bg-amber-900/90 border border-amber-500/50 text-[9px] font-bold text-amber-300">
+        <div className="absolute top-1 right-1 px-1.5 rounded bg-amber-900/90 border border-amber-500/50 text-3xs font-bold text-amber-300">
           ↻{futureUseCountMap[droid.cardId]}
         </div>
       )}

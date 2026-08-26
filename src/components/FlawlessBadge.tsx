@@ -29,6 +29,7 @@ export function FlawlessBadge({
         w-5
         h-5
         rounded-full
+        tap-tl
         flex
         items-center
         justify-center
