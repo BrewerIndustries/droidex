@@ -86,7 +86,7 @@ export function DroidGrid({
   return (
     <div
       className="grid gap-3 p-4"
-      style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))' }}
+      style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(7.5rem, 1fr))' }}
     >
       {cards.map((card) => (
         <DroidCard

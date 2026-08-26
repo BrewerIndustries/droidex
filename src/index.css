@@ -31,9 +31,46 @@
   }
 }
 
+/**
+ * One dial for the whole app's scale.
+ *
+ * Every size in the UI is expressed in rem — type through the Tailwind scale,
+ * and spacing, widths and radii through Tailwind's own rem-based utilities — so
+ * raising the root font size on a bigger screen grows the interface as a piece
+ * rather than leaving 9px labels stranded on a 13" tablet. Phones stay at the
+ * 16px baseline the layout was drawn against.
+ *
+ * The steps are deliberately gentle. A 12.9" iPad lands on 20px in portrait
+ * (1024pt) and 21px in landscape (1366pt), a ~1.3x lift over the phone.
+ */
 html {
+  font-size: 16px;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+}
+
+@media (min-width: 640px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1280px) {
+  html {
+    font-size: 21px;
+  }
 }
 
 body {
@@ -41,6 +78,40 @@ body {
 }
 
 @layer utilities {
+  /**
+   * Grows an element's tappable area to 44x44 without touching its looks.
+   *
+   * The card badges are deliberately tiny — a 20px dot in the corner of a
+   * thumbnail is the design — but a 20px dot is a miserable target on glass.
+   * The pseudo-element is the target; the dot stays the size it was drawn.
+   *
+   * The area is anchored to the badge's own corner rather than centred on it,
+   * so it grows *into* the card. A centred box would spill past the card edge,
+   * and the card clips its overflow to keep the artwork inside its rounded
+   * border — which quietly ate the half of the target that hung outside.
+   *
+   * Only for controls whose visual size is small on purpose. Anything laid out
+   * in normal flow gets real padding instead, since an overlapping invisible
+   * box would swallow its neighbours' taps.
+   */
+  .tap-tl::after,
+  .tap-br::after {
+    content: '';
+    position: absolute;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+  }
+
+  .tap-tl::after {
+    top: 0;
+    left: 0;
+  }
+
+  .tap-br::after {
+    bottom: 0;
+    right: 0;
+  }
+
   .rainbow-tab {
     background: linear-gradient(
       135deg,

@@ -58,8 +58,49 @@ No Play Store required.
 - Offline income timer
 - Local data storage, kept in persistent mode so browsers do not evict it
 - Offline-first operation
-- Mobile-friendly interface
+- Mobile-friendly interface, scaling up to tablet-sized type and 44pt tap targets
 - Installable PWA
+
+---
+
+## Sizing and touch targets
+
+The interface was drawn phone-first, in hardcoded pixels — which meant a 6px
+label stayed 6px on a 12.9" iPad. Sizing is now expressed in `rem` throughout
+and driven from one dial: the root font size in `src/index.css`.
+
+| Viewport | Root | Effect |
+| --- | --- | --- |
+| Phone (< 640px) | 16px | The baseline the layout was drawn against |
+| 640 / 768px | 17 / 18px | Large phones and small tablets |
+| 1024px (iPad portrait) | 20px | ~1.25x |
+| 1280px+ (iPad landscape) | 21px | ~1.3x |
+
+Type uses the Tailwind scale plus three named steps below `xs` — `text-2xs`,
+`text-3xs`, `text-4xs` — defined in `tailwind.config.ts`. Spacing, widths and
+radii already came from Tailwind's rem-based utilities, so they scale with the
+same dial. The smallest text in the app went from 6px to ~10.5px on a 12.9"
+iPad without the phone layout moving.
+
+Tap targets are held to Apple's 44pt minimum via `min-h-tap` / `min-w-tap`.
+Those tokens are deliberately **px, not rem** — a physical floor is not part of
+the type scale, and expressing it in rem would inflate it to 58px on a tablet.
+
+The card corner badges are a special case: a 20px dot on a thumbnail is the
+design, so they keep their size and gain a 44px hit area from the `.tap-tl` /
+`.tap-br` utilities. The area is anchored to the badge's own corner so it grows
+*into* the card — a centred one spilled past the card edge, where the card's
+`overflow-hidden` silently ate half the target.
+
+Two knock-on fixes came out of the pass: the tier tabs now wrap instead of
+running off the right edge of a phone (they overflowed by 55px before this
+change, leaving STELLAR unreachable), and the rebirth panel is width-capped on
+large screens so the collection grid keeps the space.
+
+One deliberate exception: the collected/flawless progress bars in the header are
+26px tall rather than 44. They are over 1300px wide on a tablet, so they are
+comfortable to hit despite being short, and making them 44px would turn the
+header into a slab.
 
 ---
 

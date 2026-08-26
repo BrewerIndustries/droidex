@@ -68,7 +68,8 @@ export function Header({
       border
       px-3
       py-1.5
-      min-w-[110px]
+      min-h-tap
+      min-w-[6.875rem]
       transition-colors
       ${
         isActive
@@ -102,7 +103,7 @@ export function Header({
               <img
                 src={`${import.meta.env.BASE_URL}icon-192.png`}
                 alt="Droidex"
-                className="h-[88px] w-[88px] object-contain"
+                className="h-[5.5rem] w-[5.5rem] object-contain"
               />
             </Link>
           </div>
@@ -114,7 +115,7 @@ export function Header({
         </div>
         {/* COLLECTED */}
         <div className="mb-0">
-          <div className="relative h-3 rounded-full overflow-hidden flex">
+          <div className="relative h-5 rounded-full overflow-hidden flex">
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0 })}
@@ -134,7 +135,7 @@ export function Header({
     flex items-center justify-between
     px-3
     py-1.3
-    text-[9px] font-bold
+    text-3xs font-bold
     text-zinc-800
     pointer-events-none
   "
@@ -147,7 +148,7 @@ export function Header({
 
         {/* FLAWLESS */}
 
-        <div className="relative h-3 bg-zinc-800 rounded-full overflow-hidden flex">
+        <div className="relative h-5 bg-zinc-800 rounded-full overflow-hidden flex">
           <button
             type="button"
             className="h-full bg-gradient-to-r from-zinc-100 to-white"
@@ -163,7 +164,7 @@ export function Header({
     absolute inset-0
     flex items-center justify-between
     px-3
-    text-[9px] font-bold
+    text-3xs font-bold
     text-zinc-800
     pointer-events-none
   "
@@ -175,7 +176,7 @@ export function Header({
       </div>
 
       {/* Footer Info */}
-      <div className="hidden sm:block text-[10px] text-zinc-600">
+      <div className="hidden sm:block text-2xs text-zinc-600">
         {knownTotal} {UI.tracked}
         {' · '}
         {TOTAL_DROIDS - knownTotal} {UI.unknown}

@@ -20,7 +20,7 @@ export function TipCard({ tip }: Props) {
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div>
-          <div className="text-[10px] tracking-widest text-cyan-400 font-bold">
+          <div className="text-2xs tracking-widest text-cyan-400 font-bold">
             [{tip.category}]
           </div>
 

@@ -37,7 +37,7 @@ export function Footer() {
         <Link
           to="/tips"
           className="
-            px-3 py-1 rounded border text-[10px]
+            px-3 py-2 min-h-tap inline-flex items-center justify-center rounded border text-2xs
             border-zinc-700 text-zinc-500
             hover:border-cyan-400
             hover:text-cyan-300
@@ -50,7 +50,7 @@ export function Footer() {
         <Link
           to="/about"
           className="
-            px-3 py-1 rounded border text-[10px]
+            px-3 py-2 min-h-tap inline-flex items-center justify-center rounded border text-2xs
             border-zinc-700 text-zinc-500
             hover:border-cyan-400
             hover:text-cyan-300
@@ -65,7 +65,7 @@ export function Footer() {
           target="_blank"
           rel="noreferrer"
           className="
-    px-3 py-1 rounded border text-[10px]
+    px-3 py-2 min-h-tap inline-flex items-center justify-center rounded border text-2xs
     border-zinc-700 text-zinc-500
     hover:border-cyan-400
     hover:text-cyan-300
@@ -78,7 +78,7 @@ export function Footer() {
         <button
           onClick={shareApp}
           className="
-            px-3 py-1 rounded border text-[10px]
+            px-3 py-2 min-h-tap inline-flex items-center justify-center rounded border text-2xs
             border-zinc-700 text-zinc-500
             hover:border-cyan-400
             hover:text-cyan-300
@@ -92,7 +92,7 @@ export function Footer() {
           <button
             onClick={install}
             className="
-              px-3 py-1 rounded border text-[10px]
+              px-3 py-2 min-h-tap inline-flex items-center justify-center rounded border text-2xs
               border-emerald-600
               text-emerald-400
               shadow-[0_0_12px_rgba(16,185,129,.2)]
@@ -102,10 +102,10 @@ export function Footer() {
           </button>
         )}
       </div>
-      <div className="mt-4 pt-3 border-t border-zinc-800 text-[10px] leading-relaxed text-zinc-600">
+      <div className="mt-4 pt-3 border-t border-zinc-800 text-2xs leading-relaxed text-zinc-600">
         <button
           onClick={() => setFanOpen(!fanOpen)}
-          className="w-full text-center"
+          className="w-full min-h-tap flex items-center justify-center text-center"
         >
           <div className="font-bold tracking-wider">
             {UI.fanProject} {fanOpen ? '▲' : '▼'}
