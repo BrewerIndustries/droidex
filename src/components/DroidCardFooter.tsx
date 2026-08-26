@@ -49,7 +49,7 @@ export function DroidCardFooter({
   onTogglePresent,
 }: Props) {
   return (
-    <div className="w-full bg-black px-1.5 pt-1 pb-0.5 min-h-[5.2rem]">
+    <div className="w-full bg-black px-1.5 pt-1 pb-1.5 min-h-[5.2rem]">
       <p className="text-white font-black italic leading-tight truncate text-sm">
         {droid.name}
       </p>
@@ -58,14 +58,14 @@ export function DroidCardFooter({
         <TierDNA progress={facts.dna} />
       </div>
 
-      <p className="flex items-center justify-center gap-1 text-[9px] uppercase tracking-wider text-zinc-500">
+      <p className="flex items-center justify-center gap-1 text-3xs uppercase tracking-wider text-zinc-500">
         <badge.Icon size={10} />
         {droid.type}
       </p>
 
       <div className="mt-0.5">
         <span
-          className="text-[9px] font-bold px-1.5 py-px rounded-full uppercase tracking-wide inline-block"
+          className="text-3xs font-bold px-1.5 py-px rounded-full uppercase tracking-wide inline-block"
           style={{
             color: rarityColor,
             backgroundColor: rarityColor + '22',

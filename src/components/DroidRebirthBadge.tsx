@@ -27,14 +27,14 @@ export function DroidRebirthBadge({
       <span
         className="
           w-full
-          h-5
+          h-7
           px-0.5
           rounded-full
           border
           border-orange-500/40
           bg-orange-500/15
           text-orange-400
-          text-[9px]
+          text-3xs
           font-bold
           uppercase
           tracking-wide

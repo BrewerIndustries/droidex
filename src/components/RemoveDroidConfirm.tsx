@@ -68,20 +68,20 @@ export function RemoveDroidConfirm({ warning, onConfirm, onCancel }: Props) {
             >
               {title}
             </div>
-            <div className="mt-0.5 text-[10px] tracking-widest text-zinc-500">
+            <div className="mt-0.5 text-2xs tracking-widest text-zinc-500">
               {tier} · {name} · {STATION_LABEL[station]}
             </div>
           </div>
         </div>
 
-        <p className="mt-3 text-[11px] leading-relaxed text-zinc-400">
+        <p className="mt-3 text-xs leading-relaxed text-zinc-400">
           This is your last {tier} {name} in a station. Removing it takes the
           droid off hand:
         </p>
 
         {broken.length > 0 && (
           <div className="mt-2 space-y-1">
-            <div className="text-[9px] tracking-widest text-zinc-600">
+            <div className="text-3xs tracking-widest text-zinc-600">
               {manyRebirths
                 ? 'THESE REBIRTHS GO BACK TO MISSING'
                 : 'THIS REBIRTH GOES BACK TO MISSING'}
@@ -92,16 +92,16 @@ export function RemoveDroidConfirm({ warning, onConfirm, onCancel }: Props) {
                 className="flex items-center gap-2 rounded border border-orange-500/40 bg-orange-500/10 px-2 py-1"
               >
                 <RefreshCw size={10} className="shrink-0 text-orange-400" />
-                <span className="text-[10px] font-bold tracking-wide text-orange-300">
+                <span className="text-2xs font-bold tracking-wide text-orange-300">
                   RB{b.from} → RB{b.to}
                 </span>
-                <span className="flex-1 truncate text-right text-[10px] text-zinc-400">
+                <span className="flex-1 truncate text-right text-2xs text-zinc-400">
                   needs {b.tier} {b.name}
                 </span>
               </div>
             ))}
             {coversLowerTier && (
-              <p className="text-[9px] leading-relaxed text-zinc-600">
+              <p className="text-3xs leading-relaxed text-zinc-600">
                 A higher tier covers a lower-tier requirement, so your {tier}{' '}
                 {name} is what{' '}
                 {manyRebirths ? 'those rebirths are' : 'that one is'} counting
@@ -113,7 +113,7 @@ export function RemoveDroidConfirm({ warning, onConfirm, onCancel }: Props) {
 
         {fusions.length > 0 && (
           <div className="mt-2 space-y-1">
-            <div className="text-[9px] tracking-widest text-zinc-600">
+            <div className="text-3xs tracking-widest text-zinc-600">
               {fusions.length > 1
                 ? 'INGREDIENT FOR FUSIONS YOU HAVE NOT MADE'
                 : 'INGREDIENT FOR A FUSION YOU HAVE NOT MADE'}
@@ -125,24 +125,24 @@ export function RemoveDroidConfirm({ warning, onConfirm, onCancel }: Props) {
               >
                 <div className="flex items-center gap-2">
                   <Atom size={10} className="shrink-0 text-fuchsia-400" />
-                  <span className="text-[10px] font-bold tracking-wide text-fuchsia-300">
+                  <span className="text-2xs font-bold tracking-wide text-fuchsia-300">
                     {f.tier} {f.name}
                   </span>
                   {f.count > 1 && (
                     <span
                       title={`The recipe uses ${f.count} of them`}
-                      className="text-[9px] font-bold text-fuchsia-400/80"
+                      className="text-3xs font-bold text-fuchsia-400/80"
                     >
                       ×{f.count}
                     </span>
                   )}
-                  <span className="flex-1 truncate text-right text-[10px] text-zinc-400">
+                  <span className="flex-1 truncate text-right text-2xs text-zinc-400">
                     {f.recipe.join(' + ')}
                   </span>
                 </div>
               </div>
             ))}
-            <p className="text-[9px] leading-relaxed text-zinc-600">
+            <p className="text-3xs leading-relaxed text-zinc-600">
               Fusion keeps the tier of the droids fused, so only a {tier} {name}{' '}
               makes {fusions.length > 1 ? 'these' : 'this'}.
             </p>
@@ -154,14 +154,14 @@ export function RemoveDroidConfirm({ warning, onConfirm, onCancel }: Props) {
             type="button"
             autoFocus
             onClick={onCancel}
-            className="flex-1 rounded border border-cyan-700 bg-cyan-500/10 px-2 py-1.5 text-[11px] font-bold text-cyan-300 hover:border-cyan-500"
+            className="flex-1 rounded border border-cyan-700 bg-cyan-500/10 px-2 py-2.5 min-h-tap text-xs font-bold text-cyan-300 hover:border-cyan-500"
           >
             Keep on team
           </button>
           <button
             type="button"
             onClick={onConfirm}
-            className="flex-1 rounded border border-zinc-800 px-2 py-1.5 text-[11px] font-bold text-zinc-500 hover:border-red-800 hover:text-red-400"
+            className="flex-1 rounded border border-zinc-800 px-2 py-2.5 min-h-tap text-xs font-bold text-zinc-500 hover:border-red-800 hover:text-red-400"
           >
             Remove anyway
           </button>

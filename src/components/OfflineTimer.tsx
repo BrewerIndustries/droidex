@@ -23,6 +23,7 @@ export function OfflineTimer() {
         bg-zinc-900
         px-2
         py-1.5
+        min-h-tap
         text-cyan-400
       "
       >
@@ -48,7 +49,7 @@ export function OfflineTimer() {
   shadow-2xl
 "
         >
-          <div className="text-[10px] tracking-widest text-zinc-500 mb-2">
+          <div className="text-2xs tracking-widest text-zinc-500 mb-2">
             OFFLINE TIMER
           </div>
 

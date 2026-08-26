@@ -37,7 +37,7 @@ export function FilterPanel(props: Props) {
     <Panel title="FILTERS" scroll open={props.open} onToggle={props.onToggle}>
       <div className="flex flex-col">
         <div className="px-4 py-3 border-b border-zinc-800">
-          <p className="text-[9px] font-bold tracking-widest text-zinc-500 mb-2">
+          <p className="text-3xs font-bold tracking-widest text-zinc-500 mb-2">
             SEARCH
           </p>
 
@@ -45,7 +45,7 @@ export function FilterPanel(props: Props) {
         </div>
 
         <div className="px-4 py-3 border-b border-zinc-800">
-          <p className="text-[9px] font-bold tracking-widest text-zinc-500 mb-2">
+          <p className="text-3xs font-bold tracking-widest text-zinc-500 mb-2">
             RARITY
           </p>
 
@@ -54,7 +54,7 @@ export function FilterPanel(props: Props) {
       </div>
 
       <div className="px-4 py-3 border-b border-zinc-800">
-        <p className="text-[9px] font-bold tracking-widest text-zinc-500 mb-2">
+        <p className="text-3xs font-bold tracking-widest text-zinc-500 mb-2">
           CLASS
         </p>
 
@@ -62,7 +62,7 @@ export function FilterPanel(props: Props) {
       </div>
 
       <div className="px-4 py-3">
-        <p className="text-[9px] font-bold tracking-widest text-zinc-500 mb-2">
+        <p className="text-3xs font-bold tracking-widest text-zinc-500 mb-2">
           COLLECTION
         </p>
 
@@ -72,7 +72,7 @@ export function FilterPanel(props: Props) {
         />
 
         <div className="px-4 py-3 border-t border-zinc-800">
-          <p className="text-[9px] font-bold tracking-widest text-zinc-500 mb-2">
+          <p className="text-3xs font-bold tracking-widest text-zinc-500 mb-2">
             FLAWLESS
           </p>
 

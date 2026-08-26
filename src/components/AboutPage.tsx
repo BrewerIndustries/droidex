@@ -101,7 +101,7 @@ export function AboutPage() {
       </div>
 
       <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
-        <div className="text-cyan-400 text-[10px] font-bold tracking-widest">
+        <div className="text-cyan-400 text-2xs font-bold tracking-widest">
           DATA
         </div>
 
@@ -170,7 +170,7 @@ export function AboutPage() {
             <div>✓ Flawless</div>
             <div>✓ Rebirth Path</div>
             <div>✓ Rebirth Level</div>
-            <div className="pt-2 text-[11px] text-zinc-600">
+            <div className="pt-2 text-xs text-zinc-600">
               Exported as a JSON file. Can be transferred between devices.
             </div>
           </div>
@@ -178,7 +178,7 @@ export function AboutPage() {
       </div>
 
       <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
-        <div className="text-cyan-400 text-[8px] font-bold tracking-widest">
+        <div className="text-cyan-400 text-4xs font-bold tracking-widest">
           SYSTEM
         </div>
         <div className="mb-4">
@@ -209,7 +209,7 @@ export function AboutPage() {
 
             return (
               <div key={category} className="space-y-4">
-                <div className="text-[10px] tracking-widest text-cyan-500 font-bold uppercase">
+                <div className="text-2xs tracking-widest text-cyan-500 font-bold uppercase">
                   {category}
                 </div>
 
@@ -225,7 +225,7 @@ export function AboutPage() {
 
                       <div
                         className={`
-                text-[10px]
+                text-2xs
                 font-bold
                 tracking-widest
                 ${item.ok ? 'text-cyan-400' : 'text-orange-400'}
@@ -241,7 +241,7 @@ export function AboutPage() {
 
                     {item.recommendation && (
                       <>
-                        <div className="mt-3 ml-5 text-[10px] text-amber-400 tracking-widest">
+                        <div className="mt-3 ml-5 text-2xs text-amber-400 tracking-widest">
                           RECOMMENDATION
                         </div>
 
@@ -253,7 +253,7 @@ export function AboutPage() {
 
                     {item.technical && (
                       <>
-                        <div className="mt-3 ml-5 text-[10px] text-cyan-500 tracking-widest">
+                        <div className="mt-3 ml-5 text-2xs text-cyan-500 tracking-widest">
                           TECHNICAL
                         </div>
 
@@ -270,7 +270,7 @@ export function AboutPage() {
         </div>
       </div>
 
-      <div className="text-cyan-400 text-[10px] font-bold tracking-widest">
+      <div className="text-cyan-400 text-2xs font-bold tracking-widest">
         {UI.appGuide}
       </div>
       <ul className="mt-3 text-sm text-zinc-300 space-y-2">
@@ -280,7 +280,7 @@ export function AboutPage() {
         <li>{UI.feature4}</li>
       </ul>
       <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
-        <div className="text-cyan-400 text-[10px] font-bold tracking-widest">
+        <div className="text-cyan-400 text-2xs font-bold tracking-widest">
           APP GUIDE
         </div>
 
@@ -300,7 +300,7 @@ export function AboutPage() {
       </div>
 
       <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
-        <div className="text-cyan-400 text-[10px] font-bold tracking-widest">
+        <div className="text-cyan-400 text-2xs font-bold tracking-widest">
           {UI.builtWith}
         </div>
 
@@ -313,14 +313,14 @@ export function AboutPage() {
       </div>
 
       <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
-        <div className="text-cyan-400 text-[10px] font-bold tracking-widest">
+        <div className="text-cyan-400 text-2xs font-bold tracking-widest">
           {UI.specialTools}
         </div>
         <p className="mt-3 text-sm text-zinc-300">{UI.thumbnailTool}</p>
       </div>
 
       <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
-        <div className="text-cyan-400 text-[10px] font-bold tracking-widest">
+        <div className="text-cyan-400 text-2xs font-bold tracking-widest">
           {UI.fork}
         </div>
 
@@ -328,7 +328,7 @@ export function AboutPage() {
           href="https://github.com/BrewerIndustries/droidex"
           target="_blank"
           rel="noreferrer"
-          className="text-cyan-400 text-sm"
+          className="text-cyan-400 text-sm inline-flex items-center min-h-tap"
         >
           {UI.github}
         </a>

@@ -13,7 +13,7 @@ export function DroidAbilities({ info }: Props) {
             <span
               key={ability}
               className="
-                text-[8px]
+                text-4xs
                 px-1
                 py-px
                 rounded

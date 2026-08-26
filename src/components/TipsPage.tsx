@@ -39,7 +39,7 @@ export function TipsPage() {
             key={item}
             onClick={() => setFilter(item)}
             className={`
-  	    px-3 py-1 rounded border text-[10px]
+  	    px-3 py-2 min-h-tap inline-flex items-center justify-center rounded border text-2xs
   	    whitespace-nowrap transition-all
   	    ${
           filter === item

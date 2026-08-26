@@ -57,6 +57,8 @@ export function RebirthPanel({
   rounded-xl
   overflow-hidden
   rebirth-panel
+  lg:w-[17rem]
+  lg:shrink-0
   ${ready ? 'rebirth-panel-ready' : 'rebirth-panel-pending'}
 `}
       onMouseEnter={handleMouseEnter}
@@ -79,7 +81,7 @@ export function RebirthPanel({
           {/* NEED divider */}
           <div className="flex items-center gap-3 mb-3">
             <div className="need-divider-left flex-1 h-px" />
-            <span className="need-label text-[10px] font-black tracking-[0.3em] uppercase">
+            <span className="need-label text-2xs font-black tracking-[0.3em] uppercase">
               {UI.need}
             </span>
             <div className="need-divider-right flex-1 h-px" />
@@ -112,9 +114,10 @@ export function RebirthPanel({
 			border-t border-zinc-800
 			bg-zinc-950/70
 			hover:bg-zinc-900
-      px-4 py-3
+      px-4 py-3.5
+      min-h-tap
       text-center
-      text-[11px]
+      text-xs
       font-bold
       tracking-[0.25em]
       uppercase

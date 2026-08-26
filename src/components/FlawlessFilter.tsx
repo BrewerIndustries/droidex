@@ -28,7 +28,7 @@ export function FlawlessFilter({ active, onChange }: Props) {
             key={opt.value}
             type="button"
             onClick={() => onChange(opt.value)}
-            className="px-2.5 py-0.5 text-[10px] font-bold tracking-widest rounded-full border transition-all duration-100"
+            className="px-3 py-1.5 min-h-tap text-2xs font-bold tracking-widest rounded-full border transition-all duration-100 inline-flex items-center justify-center"
             style={{
               borderColor: opt.color,
               color: isActive ? '#000' : opt.color,

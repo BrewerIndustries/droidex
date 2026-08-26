@@ -21,7 +21,7 @@ const TIER_DNA: Record<string, { letter: string; color: string }> = {
 
 export function TierDNA({ progress }: Props) {
   return (
-    <div className="flex justify-center gap-0.5 text-[6px] font-black">
+    <div className="flex justify-center gap-0.5 text-4xs font-black">
       {TIER_ORDER.map((tier, index) => {
         const dna = TIER_DNA[tier];
         const reached = progress >= index + 1;

@@ -37,9 +37,9 @@ export function RebirthHeader({
           onToggle();
         }
       }}
-      className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-zinc-900/70 transition-colors cursor-pointer"
+      className="w-full flex flex-wrap items-center justify-between gap-y-2 px-4 py-2.5 hover:bg-zinc-900/70 transition-colors cursor-pointer"
     >
-      <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 min-w-0">
         <span className="glow-orange text-orange-400 font-bold text-sm tracking-widest uppercase">
           {UI.rebirth}
         </span>
@@ -51,7 +51,7 @@ export function RebirthHeader({
               e.stopPropagation();
               onSetRebirth(Math.max(0, rebirthLevel - 1));
             }}
-            className="w-6 h-6 rounded-sm bg-zinc-800 border border-zinc-700 text-zinc-300 hover:bg-orange-900/40 hover:border-orange-700/60 hover:text-orange-300 flex items-center justify-center text-sm leading-none transition-colors font-bold"
+            className="w-9 h-9 min-w-tap min-h-tap rounded-sm bg-zinc-800 border border-zinc-700 text-zinc-300 hover:bg-orange-900/40 hover:border-orange-700/60 hover:text-orange-300 flex items-center justify-center text-base leading-none transition-colors font-bold"
           >
             −
           </button>
@@ -66,7 +66,7 @@ export function RebirthHeader({
               e.stopPropagation();
               onSetRebirth(Math.min(maxRebirth, rebirthLevel + 1));
             }}
-            className="w-6 h-6 rounded-sm bg-zinc-800 border border-zinc-700 text-zinc-300 hover:bg-orange-900/40 hover:border-orange-700/60 hover:text-orange-300 flex items-center justify-center text-sm leading-none transition-colors font-bold"
+            className="w-9 h-9 min-w-tap min-h-tap rounded-sm bg-zinc-800 border border-zinc-700 text-zinc-300 hover:bg-orange-900/40 hover:border-orange-700/60 hover:text-orange-300 flex items-center justify-center text-base leading-none transition-colors font-bold"
           >
             +
           </button>

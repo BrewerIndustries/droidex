@@ -52,7 +52,7 @@ export function RebirthsPage({
           type="button"
           onClick={() => onSetRebirth(Math.max(0, rebirthLevel - 1))}
           disabled={rebirthLevel === 0}
-          className="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-300 hover:bg-zinc-700 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-base font-bold transition-colors"
+          className="w-10 h-10 min-w-tap min-h-tap rounded-lg bg-zinc-800 text-zinc-300 hover:bg-zinc-700 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-base font-bold transition-colors"
         >
           ←
         </button>
@@ -71,7 +71,7 @@ export function RebirthsPage({
           type="button"
           onClick={() => onSetRebirth(Math.min(MAX_REBIRTH, rebirthLevel + 1))}
           disabled={rebirthLevel >= MAX_REBIRTH}
-          className="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-300 hover:bg-zinc-700 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-base font-bold transition-colors"
+          className="w-10 h-10 min-w-tap min-h-tap rounded-lg bg-zinc-800 text-zinc-300 hover:bg-zinc-700 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-base font-bold transition-colors"
         >
           →
         </button>
@@ -114,7 +114,7 @@ export function RebirthsPage({
                     onClick={() =>
                       onMarkLevelDone(level.droids.map((d) => d.cardId))
                     }
-                    className={`px-2 py-1 rounded-md text-xs font-bold transition-colors ${
+                    className={`px-3 py-2 min-h-tap rounded-md text-xs font-bold transition-colors ${
                       isDone
                         ? 'text-zinc-500 hover:text-zinc-300'
                         : allMet
@@ -128,7 +128,7 @@ export function RebirthsPage({
               </div>
 
               {!isDone && (
-                <div className="mt-2 text-[11px] space-y-1">
+                <div className="mt-2 text-xs space-y-1">
                   {nextAction && (
                     <div className="text-sky-400 font-medium">{nextAction}</div>
                   )}
@@ -159,7 +159,7 @@ export function RebirthsPage({
                       className="flex flex-col items-center gap-1"
                     >
                       <div
-                        className={`relative w-[76px] h-[76px] rounded-xl border-2 overflow-hidden bg-zinc-900 ${
+                        className={`relative w-[4.75rem] h-[4.75rem] rounded-xl border-2 overflow-hidden bg-zinc-900 ${
                           isDone
                             ? 'border-zinc-700'
                             : isPresent
@@ -180,7 +180,7 @@ export function RebirthsPage({
                         />
                         <div className="absolute bottom-0 left-0 right-0 text-center py-0.5 bg-black/60">
                           <span
-                            className={`text-[8px] font-black uppercase tracking-wide ${TIER_TEXT[d.tier]}`}
+                            className={`text-4xs font-black uppercase tracking-wide ${TIER_TEXT[d.tier]}`}
                           >
                             {d.tier}
                           </span>
@@ -188,7 +188,7 @@ export function RebirthsPage({
 
                         {remainingRequirements > 0 && (
                           <div
-                            className={`absolute top-1 right-1 px-1 rounded border text-[8px] font-bold ${
+                            className={`absolute top-1 right-1 px-1 rounded border text-4xs font-bold ${
                               isLastRequirement
                                 ? 'bg-emerald-900/90 border-amber-500/50 text-amber-300'
                                 : 'bg-amber-900/90 border-amber-500/50 text-amber-300'
@@ -207,7 +207,7 @@ export function RebirthsPage({
                               e.stopPropagation();
                               onTogglePresent(d.cardId);
                             }}
-                            className={`absolute top-1 left-1 w-5 h-5 rounded-full flex items-center justify-center ${
+                            className={`tap-tl absolute top-1 left-1 w-5 h-5 rounded-full flex items-center justify-center ${
                               isPresent ? 'bg-green-500' : 'bg-red-500'
                             }`}
                           >
@@ -242,10 +242,10 @@ export function RebirthsPage({
                           </button>
                         )}
                       </div>
-                      <span className="text-white text-[10px] font-bold w-[76px] text-center truncate">
+                      <span className="text-white text-2xs font-bold w-[4.75rem] text-center truncate">
                         {d.name}
                       </span>
-                      <div className="w-[76px] mt-0.5">
+                      <div className="w-[4.75rem] mt-0.5">
                         <TierDNA progress={progress} />
                       </div>
                     </div>

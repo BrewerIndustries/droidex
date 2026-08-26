@@ -62,7 +62,7 @@ export function TeamPage({
 
       {/* Earnings summary */}
       <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
-        <div className="text-[10px] tracking-widest text-cyan-500 font-bold">
+        <div className="text-2xs tracking-widest text-cyan-500 font-bold">
           TEAM EARNINGS
         </div>
 
@@ -88,13 +88,13 @@ export function TeamPage({
         </div>
 
         {rebirthLevel > MAX_KNOWN_MULTIPLIER_LEVEL && (
-          <div className="mt-2 text-[10px] text-amber-500/80">
+          <div className="mt-2 text-2xs text-amber-500/80">
             Multiplier data stops at rebirth {MAX_KNOWN_MULTIPLIER_LEVEL}; using
             that value.
           </div>
         )}
 
-        <div className="mt-2 text-[10px] text-zinc-600">
+        <div className="mt-2 text-2xs text-zinc-600">
           {assignedCount} droid{assignedCount === 1 ? '' : 's'} assigned ·
           earnings count workstations only · a droid in a station matching its
           class earns 10% more
@@ -108,15 +108,15 @@ export function TeamPage({
           className="bg-zinc-900 border border-zinc-800 rounded-lg p-3"
         >
           <div className="flex items-baseline justify-between">
-            <div className="text-[10px] tracking-widest text-cyan-500 font-bold">
+            <div className="text-2xs tracking-widest text-cyan-500 font-bold">
               {STATION_LABEL[group.station]}
             </div>
-            <div className="text-[10px] text-zinc-500 tabular-nums">
+            <div className="text-2xs text-zinc-500 tabular-nums">
               {group.members.length} / {group.slots}
             </div>
           </div>
 
-          <div className="text-[10px] text-zinc-600 mt-0.5">
+          <div className="text-2xs text-zinc-600 mt-0.5">
             {STATION_NOTE[group.station]}
           </div>
 
@@ -127,7 +127,7 @@ export function TeamPage({
               return (
                 <div
                   key={m.index}
-                  className="flex items-center gap-2 bg-zinc-950 border border-zinc-800 rounded px-2 py-1"
+                  className="flex items-center gap-2 bg-zinc-950 border border-zinc-800 rounded px-2 py-1.5 min-h-tap"
                 >
                   {Badge && (
                     <Badge
@@ -142,19 +142,19 @@ export function TeamPage({
                   <span className="text-white text-xs font-bold truncate flex-1">
                     {m.name}
                   </span>
-                  <span className="text-[9px] text-zinc-500 tracking-wide">
+                  <span className="text-3xs text-zinc-500 tracking-wide">
                     {m.tier}
                   </span>
                   {m.station === 'COMPANION' && m.perk && (
                     <span
                       title="Active while this droid is your Companion"
-                      className="text-[10px] text-amber-300 truncate max-w-[10rem]"
+                      className="text-2xs text-amber-300 truncate max-w-[10rem]"
                     >
                       {m.perk}
                     </span>
                   )}
                   {m.income !== null && (
-                    <span className="text-[10px] text-emerald-400 tabular-nums">
+                    <span className="text-2xs text-emerald-400 tabular-nums">
                       {formatCredits(m.income + m.classMatchBonus)}/s
                     </span>
                   )}
@@ -166,7 +166,7 @@ export function TeamPage({
                           : `${m.type} in a ${m.station} station — no class bonus`
                       }
                       className={[
-                        'text-[9px] font-bold',
+                        'text-3xs font-bold',
                         m.classMatch ? 'text-cyan-300' : 'text-zinc-700',
                       ].join(' ')}
                     >
@@ -176,7 +176,7 @@ export function TeamPage({
                   <button
                     type="button"
                     onClick={() => onUnassign(m.index)}
-                    className="text-[10px] text-zinc-500 hover:text-red-400 px-1"
+                    className="text-2xs text-zinc-500 hover:text-red-400 px-2 min-w-tap min-h-tap flex items-center justify-center shrink-0"
                     title="Remove from station"
                   >
                     ✕
@@ -194,7 +194,7 @@ export function TeamPage({
                 onClick={() =>
                   setPicking(picking === group.station ? null : group.station)
                 }
-                className="w-full text-left text-[10px] text-zinc-600 border border-dashed border-zinc-800 rounded px-2 py-1 hover:border-cyan-700 hover:text-cyan-500"
+                className="w-full text-left text-2xs text-zinc-600 border border-dashed border-zinc-800 rounded px-2 py-1 min-h-tap flex items-center hover:border-cyan-700 hover:text-cyan-500"
               >
                 + empty slot
               </button>
@@ -275,19 +275,19 @@ function Picker({
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="SEARCH COLLECTED DROIDS..."
-          className="flex-1 bg-zinc-950 border border-zinc-800 rounded px-2 py-1 text-[11px] text-white placeholder:text-zinc-700"
+          className="flex-1 bg-zinc-950 border border-zinc-800 rounded px-2 py-2 min-h-tap text-xs text-white placeholder:text-zinc-700"
         />
         <button
           type="button"
           onClick={onClose}
-          className="text-[10px] text-zinc-500 hover:text-white px-1"
+          className="text-2xs text-zinc-500 hover:text-white px-2 min-w-tap min-h-tap flex items-center justify-center shrink-0"
         >
           ✕
         </button>
       </div>
 
       {sorted.length === 0 ? (
-        <div className="mt-2 text-[10px] text-zinc-600">
+        <div className="mt-2 text-2xs text-zinc-600">
           {q
             ? `Nothing collected matches "${search.trim()}".`
             : 'No droids collected yet. Mark them as collected in the Droidex first.'}
@@ -295,7 +295,7 @@ function Picker({
       ) : (
         <>
           {eligibleCount === 0 && (
-            <div className="mt-2 text-[10px] text-amber-500/80">
+            <div className="mt-2 text-2xs text-amber-500/80">
               This station is full at rebirth {rebirthLevel}.
             </div>
           )}
@@ -315,7 +315,7 @@ function Picker({
                     : `Cannot go here — ${reason}`
                 }
                 className={[
-                  'w-full flex items-center gap-2 rounded border px-2 py-1 text-left',
+                  'w-full flex items-center gap-2 rounded border px-2 py-2 min-h-tap text-left',
                   eligible
                     ? 'bg-zinc-950 border-zinc-800 hover:border-cyan-700'
                     : 'bg-zinc-950/40 border-zinc-900 opacity-50 cursor-not-allowed',
@@ -329,11 +329,11 @@ function Picker({
                 >
                   {card.droid.name}
                 </span>
-                <span className="text-[9px] text-zinc-500">{card.tier}</span>
+                <span className="text-3xs text-zinc-500">{card.tier}</span>
                 {already > 0 && (
                   <span
                     title={`${already} already on the team`}
-                    className="text-[9px] text-cyan-500"
+                    className="text-3xs text-cyan-500"
                   >
                     ×{already}
                   </span>
@@ -341,7 +341,7 @@ function Picker({
                 {eligible ? (
                   EARNING_STATIONS.includes(station) && (
                     <>
-                      <span className="text-[9px] text-emerald-400 tabular-nums">
+                      <span className="text-3xs text-emerald-400 tabular-nums">
                         {formatCredits(
                           (getDroidEconomy(card.droid.name, card.tier)
                             ?.income ?? 0) *
@@ -352,7 +352,7 @@ function Picker({
                       {classMatch && (
                         <span
                           title="Class matches this station — earns 10% more"
-                          className="text-[9px] font-bold text-cyan-300"
+                          className="text-3xs font-bold text-cyan-300"
                         >
                           +10%
                         </span>
@@ -360,7 +360,7 @@ function Picker({
                     </>
                   )
                 ) : (
-                  <span className="text-[9px] text-zinc-600 uppercase tracking-wide">
+                  <span className="text-3xs text-zinc-600 uppercase tracking-wide">
                     {reason}
                   </span>
                 )}

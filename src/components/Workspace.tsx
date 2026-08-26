@@ -79,7 +79,7 @@ export function Workspace(props: Props) {
         min-h-0
       "
       >
-        <aside className="order-first lg:order-last shrink-0 lg:w-64 lg:border-l border-b lg:border-b-0 border-zinc-800 flex flex-col bg-zinc-950 min-h-0">
+        <aside className="order-first lg:order-last shrink-0 lg:w-56 lg:border-l border-b lg:border-b-0 border-zinc-800 flex flex-col bg-zinc-950 min-h-0">
           <FilterPanel
             open={props.filtersOpen}
             onToggle={() => props.setFiltersOpen(!props.filtersOpen)}

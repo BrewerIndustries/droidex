@@ -63,7 +63,7 @@ const TIER_WITH_ALL: TierOrAll[] = ['ALL', ...TIER_ORDER];
 
 export function TierTabs({ active, onChange }: Props) {
   return (
-    <div className="flex px-3 pt-3 border-b border-zinc-800">
+    <div className="flex flex-wrap gap-y-1 px-3 pt-3 border-b border-zinc-800">
       {TIER_WITH_ALL.map((tier) => {
         const isActive = tier === active;
         const style = TIER_STYLE[tier];
@@ -73,7 +73,7 @@ export function TierTabs({ active, onChange }: Props) {
             type="button"
             onClick={() => onChange(tier)}
             className={[
-              'flex-1 px-1 py-1.5 text-[11px] font-bold tracking-wide text-center rounded-t-md border-t border-x transition-all duration-150',
+              'flex-1 basis-20 px-1 py-2.5 min-h-tap text-xs font-bold tracking-wide text-center rounded-t-md border-t border-x transition-all duration-150',
               isActive
                 ? style.active + ' -mb-px border-b border-b-zinc-950'
                 : style.inactive,

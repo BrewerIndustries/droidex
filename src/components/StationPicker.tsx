@@ -71,14 +71,14 @@ export function StationPicker({
             <div className="text-sm font-black italic text-white">
               {card.droid.name}
             </div>
-            <div className="text-[10px] tracking-widest text-zinc-500">
+            <div className="text-2xs tracking-widest text-zinc-500">
               {card.tier} · {card.droid.type}
             </div>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="text-zinc-600 hover:text-zinc-300 text-sm leading-none"
+            className="text-zinc-600 hover:text-zinc-300 text-sm leading-none min-w-tap min-h-tap flex items-center justify-center shrink-0"
           >
             ✕
           </button>
@@ -112,7 +112,7 @@ export function StationPicker({
                       : undefined
                 }
                 className={[
-                  'w-full flex items-center gap-2 rounded border px-2 py-1.5 text-left',
+                  'w-full flex items-center gap-2 rounded border px-2 py-2.5 min-h-tap text-left',
                   full
                     ? 'border-zinc-900 bg-zinc-950/40 opacity-40 cursor-not-allowed'
                     : hereCount > 0
@@ -123,29 +123,27 @@ export function StationPicker({
                 <span className="flex-1 text-xs font-bold text-white">
                   {LABEL[station]}
                   {hereCount > 0 && (
-                    <span className="ml-1 text-[9px] font-normal text-cyan-400">
+                    <span className="ml-1 text-3xs font-normal text-cyan-400">
                       ×{hereCount} here
                     </span>
                   )}
                 </span>
 
                 {match && (
-                  <span className="text-[9px] font-bold text-cyan-300">
-                    +10%
-                  </span>
+                  <span className="text-3xs font-bold text-cyan-300">+10%</span>
                 )}
 
                 {station === 'COMPANION' && perk ? (
-                  <span className="max-w-[9rem] truncate text-[9px] text-amber-300">
+                  <span className="max-w-[9rem] truncate text-3xs text-amber-300">
                     {perk}
                   </span>
                 ) : (
-                  <span className="text-[10px] tabular-nums text-emerald-400">
+                  <span className="text-2xs tabular-nums text-emerald-400">
                     {earns ? `${formatCredits(rate)}/s` : '—'}
                   </span>
                 )}
 
-                <span className="text-[9px] tabular-nums text-zinc-600">
+                <span className="text-3xs tabular-nums text-zinc-600">
                   {used}/{slots}
                 </span>
               </button>
@@ -155,7 +153,7 @@ export function StationPicker({
 
         {placed > 0 && (
           <div className="mt-3 space-y-1">
-            <div className="text-[9px] tracking-widest text-zinc-600">
+            <div className="text-3xs tracking-widest text-zinc-600">
               ON THE TEAM ({placed})
             </div>
             {placements.map((p) => (
@@ -163,12 +161,12 @@ export function StationPicker({
                 key={p.index}
                 type="button"
                 onClick={() => onRemove(p.index)}
-                className="w-full flex items-center gap-2 rounded border border-zinc-800 px-2 py-1 text-left hover:border-red-800"
+                className="w-full flex items-center gap-2 rounded border border-zinc-800 px-2 py-2 min-h-tap text-left hover:border-red-800"
               >
-                <span className="flex-1 text-[10px] text-zinc-400">
+                <span className="flex-1 text-2xs text-zinc-400">
                   {LABEL[p.station]}
                 </span>
-                <span className="text-[9px] tracking-wider text-zinc-600">
+                <span className="text-3xs tracking-wider text-zinc-600">
                   REMOVE
                 </span>
               </button>
@@ -176,7 +174,7 @@ export function StationPicker({
           </div>
         )}
 
-        <p className="mt-3 text-[9px] leading-relaxed text-zinc-600">
+        <p className="mt-3 text-3xs leading-relaxed text-zinc-600">
           Any droid works any station, and you can place several copies of the
           same droid. Matching its class earns 10% more. The Lounge earns
           nothing but keeps the droid on hand for rebirths.
