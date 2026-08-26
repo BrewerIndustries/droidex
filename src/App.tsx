@@ -17,6 +17,8 @@ import { useBackupReminder } from './hooks/useBackupReminder';
 import { useStoragePersistence } from './hooks/useStoragePersistence';
 import type { Station } from './data/rebirthUnlocks';
 import { StationPicker } from './components/StationPicker';
+import { RemoveDroidConfirm } from './components/RemoveDroidConfirm';
+import { getRemovalWarning, type RemovalWarning } from './lib/teamRemoval';
 
 type RarityOrAll = Rarity | 'ALL';
 type DroidTypeOrAll = DroidType | 'ALL';
@@ -77,6 +79,35 @@ export default function App() {
   // Which card's station chooser is open, if any. Any droid can work any
   // station, so the placement is a real choice rather than something to guess.
   const [stationPickerFor, setStationPickerFor] = useState<string | null>(null);
+
+  // Set while a removal is waiting on a second look, because pulling this droid
+  // would leave an upcoming rebirth short.
+  const [pendingRemoval, setPendingRemoval] = useState<RemovalWarning | null>(
+    null
+  );
+
+  /**
+   * Every "remove from team" goes through here rather than straight to
+   * unassignDroid, so the check sits in one place no matter which screen asked.
+   * Removals that cost nothing still happen in one click.
+   */
+  const requestUnassign = (index: number) => {
+    const warning = getRemovalWarning({
+      index,
+      team,
+      present,
+      collected,
+      rebirthPath,
+      rebirthLevel,
+    });
+
+    if (!warning) {
+      unassignDroid(index);
+      return;
+    }
+
+    setPendingRemoval(warning);
+  };
 
   return (
     <div className="min-h-screen bg-black flex flex-col font-mono">
@@ -162,7 +193,7 @@ export default function App() {
                 collected={collected}
                 rebirthLevel={rebirthLevel}
                 onAssign={assignDroid}
-                onUnassign={unassignDroid}
+                onUnassign={requestUnassign}
               />
             }
           />
@@ -179,8 +210,19 @@ export default function App() {
             assignDroid(stationPickerFor, station);
             setStationPickerFor(null);
           }}
-          onRemove={(index: number) => unassignDroid(index)}
+          onRemove={(index: number) => requestUnassign(index)}
           onClose={() => setStationPickerFor(null)}
+        />
+      )}
+
+      {pendingRemoval && (
+        <RemoveDroidConfirm
+          warning={pendingRemoval}
+          onConfirm={() => {
+            unassignDroid(pendingRemoval.index);
+            setPendingRemoval(null);
+          }}
+          onCancel={() => setPendingRemoval(null)}
         />
       )}
 

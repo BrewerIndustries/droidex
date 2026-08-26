@@ -48,6 +48,7 @@ No Play Store required.
 
 - Track all Droid Tycoon droids across every tier
 - Team tab: assign droids to stations and see live earnings
+- Removal guard: warns before pulling a droid a rebirth or fusion still needs
 - Per-tier cost / income / sell, with an efficiency rating and payback time
 - Collection tracking
 - Effective Present tracking
@@ -98,6 +99,28 @@ minute and per hour.
 tab immediately counts it against requirements — including via higher tiers, so
 a Beskar Loadlifter in a worker station satisfies a Diamond Loadlifter
 requirement. Removing a droid from its station clears that again.
+
+### Removing a droid asks first when it costs something
+
+Taking the last placed copy of a droid off the team takes it off hand, which can
+quietly undo work you have already done. Both removal paths — the ✕ on the Team
+tab and REMOVE in the card's station chooser — check first and put up a
+confirmation naming what would be lost:
+
+- **A rebirth goes back to missing.** Every rebirth still ahead on the selected
+  path is checked, starting with the one you are working toward, and the dialog
+  lists each affected level as `RB4 → RB5 — needs DIAMOND R9`. The check is on
+  what actually changes rather than on whether the name appears in the path, so
+  a Gold copy is flagged when it was the thing covering a Default requirement,
+  and the dialog says so.
+- **A fusion loses an ingredient.** If the droid feeds a fusion recipe whose
+  result you have not collected, the dialog names it with the full recipe.
+  Fusion keeps the tier of what you fused, so only that exact tier counts here —
+  there is no higher-tier fallback the way rebirth requirements have one.
+
+Removals that cost nothing stay one click: dropping a duplicate while another
+copy is still working, or unparking a droid no upcoming rebirth wants and whose
+fusion results are already collected, never prompts.
 
 ## Rebirth Planning
 
@@ -186,7 +209,9 @@ FUSE     MOUSE + MOUSE + ARG
 ```
 
 The result keeps the tier of what you fused — three Gold droids give a Gold
-result — so fusion droids exist at all seven tiers like any other.
+result — so fusion droids exist at all seven tiers like any other. Because there
+is no tier fallback, the Team tab warns before you remove a droid that is an
+ingredient for a fusion you have not made yet.
 
 Sell values are deliberately absent. The community sheet is still filling that
 column in and 16 of the 17 currently deviate from the standard tier progression,
