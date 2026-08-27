@@ -122,6 +122,12 @@ lets you move the droid or take it off the team.
 | Lounge | 5 | No — parked storage |
 | Companion | 1 | No — grants its perk, shown on the row |
 
+**Slots are positional.** Every slot in a station is numbered and holds its
+place: clicking the third empty slot fills the third slot, and pulling a droid
+out of it leaves that slot open rather than sliding the ones below it up. The
+team keeps the arrangement you gave it. Placements made from the card badge,
+which names a station and nothing more, take the first free slot.
+
 **You can place several copies of the same droid.** If you have crafted three
 Gold Gonks you can work all three, in the same station or spread across
 different ones. The card badge shows how many are placed.

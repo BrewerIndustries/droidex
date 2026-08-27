@@ -15,7 +15,7 @@ interface Props {
   team: TeamAssignments;
   collected: Set<string>;
   rebirthLevel: number;
-  onAssign: (cardId: string, station: Station) => void;
+  onAssign: (cardId: string, station: Station, slot: number) => void;
   onUnassign: (index: number) => void;
 }
 
@@ -44,7 +44,12 @@ export function TeamPage({
   onAssign,
   onUnassign,
 }: Props) {
-  const [picking, setPicking] = useState<Station | null>(null);
+  // Which empty slot the picker is open for. Positional, so the droid chosen
+  // lands in the slot that was clicked rather than wherever there is room.
+  const [picking, setPicking] = useState<{
+    station: Station;
+    slot: number;
+  } | null>(null);
 
   const groups = getStationGroups(team, rebirthLevel);
   const earnings = getTeamEarnings(team, rebirthLevel);
@@ -121,7 +126,35 @@ export function TeamPage({
           </div>
 
           <div className="mt-2 space-y-1">
-            {group.members.map((m) => {
+            {group.cells.map((m, slot) => {
+              if (!m) {
+                // A position past the current capacity is not offered — the
+                // rebirth level has to come back up before it can be filled.
+                if (slot >= group.slots) return null;
+                const open =
+                  picking?.station === group.station && picking.slot === slot;
+                return (
+                  <button
+                    key={`empty-${slot}`}
+                    type="button"
+                    onClick={() =>
+                      setPicking(open ? null : { station: group.station, slot })
+                    }
+                    className={[
+                      'w-full text-left text-2xs border border-dashed rounded px-2 py-1 min-h-tap flex items-center gap-2',
+                      open
+                        ? 'border-cyan-700 text-cyan-500'
+                        : 'border-zinc-800 text-zinc-600 hover:border-cyan-700 hover:text-cyan-500',
+                    ].join(' ')}
+                  >
+                    <span className="text-3xs tabular-nums text-zinc-700">
+                      {slot + 1}
+                    </span>
+                    <span>+ empty slot</span>
+                  </button>
+                );
+              }
+
               const card = cardIndex.get(m.cardId);
               const Badge = card ? TYPE_BADGE[card.droid.type]?.Icon : null;
               return (
@@ -129,6 +162,9 @@ export function TeamPage({
                   key={m.index}
                   className="flex items-center gap-2 bg-zinc-950 border border-zinc-800 rounded px-2 py-1.5 min-h-tap"
                 >
+                  <span className="text-3xs tabular-nums text-zinc-700">
+                    {slot + 1}
+                  </span>
                   {Badge && (
                     <Badge
                       size={12}
@@ -184,31 +220,17 @@ export function TeamPage({
                 </div>
               );
             })}
-
-            {Array.from({
-              length: Math.max(0, group.slots - group.members.length),
-            }).map((_, i) => (
-              <button
-                key={`empty-${i}`}
-                type="button"
-                onClick={() =>
-                  setPicking(picking === group.station ? null : group.station)
-                }
-                className="w-full text-left text-2xs text-zinc-600 border border-dashed border-zinc-800 rounded px-2 py-1 min-h-tap flex items-center hover:border-cyan-700 hover:text-cyan-500"
-              >
-                + empty slot
-              </button>
-            ))}
           </div>
 
-          {picking === group.station && (
+          {picking?.station === group.station && (
             <Picker
               station={group.station}
+              slot={picking.slot}
               team={team}
               collected={collected}
               rebirthLevel={rebirthLevel}
               onPick={(cardId) => {
-                onAssign(cardId, group.station);
+                onAssign(cardId, group.station, picking.slot);
                 setPicking(null);
               }}
               onClose={() => setPicking(null)}
@@ -231,6 +253,7 @@ function Row({ label, value }: { label: string; value: string }) {
 
 function Picker({
   station,
+  slot,
   team,
   collected,
   rebirthLevel,
@@ -238,6 +261,8 @@ function Picker({
   onClose,
 }: {
   station: Station;
+  /** The position being filled, so eligibility is about that one slot. */
+  slot: number;
   team: TeamAssignments;
   collected: Set<string>;
   rebirthLevel: number;
@@ -247,9 +272,13 @@ function Picker({
   const [search, setSearch] = useState('');
 
   const q = search.trim().toLowerCase();
-  const matches = candidatesFor(station, collected, team, rebirthLevel).filter(
-    (c) => c.card.droid.name.toLowerCase().includes(q)
-  );
+  const matches = candidatesFor(
+    station,
+    collected,
+    team,
+    rebirthLevel,
+    slot
+  ).filter((c) => c.card.droid.name.toLowerCase().includes(q));
 
   // Eligible first, best earner first where the station pays out; the rest
   // follow greyed out so a search never comes back mysteriously empty.
@@ -270,6 +299,9 @@ function Picker({
 
   return (
     <div className="mt-2 border-t border-zinc-800 pt-2">
+      <div className="text-3xs tracking-widest text-cyan-600 mb-1">
+        FILLING SLOT {slot + 1}
+      </div>
       <div className="flex items-center gap-2">
         <input
           value={search}
@@ -296,7 +328,7 @@ function Picker({
         <>
           {eligibleCount === 0 && (
             <div className="mt-2 text-2xs text-amber-500/80">
-              This station is full at rebirth {rebirthLevel}.
+              Slot {slot + 1} cannot be filled at rebirth {rebirthLevel}.
             </div>
           )}
 
@@ -310,8 +342,8 @@ function Picker({
                 title={
                   eligible
                     ? classMatch
-                      ? `Assign to a ${station} slot — matches its class, earns 10% more`
-                      : `Assign to a ${station} slot — no class bonus`
+                      ? `Put in ${station} slot ${slot + 1} — matches its class, earns 10% more`
+                      : `Put in ${station} slot ${slot + 1} — no class bonus`
                     : `Cannot go here — ${reason}`
                 }
                 className={[
