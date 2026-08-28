@@ -278,13 +278,14 @@ to keep a stat visible is the worse trade.
 v1.27 added the Fusion lab, unlocked at Rebirth 3: combine three droids into one
 better one. **17 droids are fusion-exclusive** and cannot be bought at all.
 
-They sit in the Droidex among the droids of their own rarity — a Rare fusion
-droid after the Rare buyable ones, a Mythic one after the Mythic — rather than
-in a block of their own. Rarity order is sorted from `RARITY_ORDER` rather than
-left to the order `droids.ts` happens to list things in, where the seventeen
-were one run at the end because they were added together. The sort is stable, so
-within a rarity the data order survives and the buyable droids stay ahead of the
-fusion ones.
+They sit in the Droidex among the droids of their own rarity, alphabetically,
+rather than in a block of their own — BTL-R between BDX EXPLORER and BU-4D.
+Cards sort on `RARITY_ORDER` and then by name, rather than being left to the
+order `droids.ts` happens to list things in, where the seventeen were one run at
+the end because they were added together. Names compare with `numeric` collation
+so R9 comes before R10 and RIC before RIC-1200: names here are mostly a letter
+and a number, which a plain string compare gets wrong the moment one reaches two
+digits.
 
 Their cards show the recipe instead of the usual cost/efficiency block, because
 those figures do not apply to something with no purchase price:
