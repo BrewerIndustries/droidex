@@ -21,6 +21,14 @@ import {
 export interface TeamPlacement {
   cardId: string;
   station: Station;
+  /**
+   * Which slot of that station the droid sits in, 0-based.
+   *
+   * Positions are held rather than packed: pulling the droid out of slot 2
+   * leaves slot 2 empty instead of sliding slot 3 up into it, so the team keeps
+   * the shape the player arranged.
+   */
+  slot: number;
 }
 
 export type TeamAssignments = TeamPlacement[];
@@ -44,9 +52,40 @@ export function usedSlots(
   return assignments.filter((p) => p.station === station).length;
 }
 
+/** Which slot positions of this station are currently occupied. */
+export function occupiedSlots(
+  assignments: TeamAssignments,
+  station: Station
+): Set<number> {
+  return new Set(
+    assignments.filter((p) => p.station === station).map((p) => p.slot)
+  );
+}
+
+/**
+ * The lowest empty position in a station, or null when it is full.
+ *
+ * Used when something assigns without naming a slot — the droid card's station
+ * picker, say — so a one-click placement still lands in a definite position.
+ */
+export function firstFreeSlot(
+  assignments: TeamAssignments,
+  station: Station,
+  rebirthLevel: number
+): number | null {
+  const taken = occupiedSlots(assignments, station);
+  const slots = slotsAt(station, rebirthLevel);
+  for (let i = 0; i < slots; i++) {
+    if (!taken.has(i)) return i;
+  }
+  return null;
+}
+
 export interface TeamMember {
   /** Position in the placements list, for removing this exact copy. */
   index: PlacementIndex;
+  /** Which slot of the station this droid holds, 0-based. */
+  slot: number;
   cardId: string;
   name: string;
   tier: Tier;
@@ -65,6 +104,13 @@ export interface TeamMember {
 export interface StationGroup {
   station: Station;
   members: TeamMember[];
+  /**
+   * The station laid out by position: one entry per slot, null where empty.
+   *
+   * Longer than `slots` when a placement sits past the current capacity, which
+   * happens if the rebirth level is dialled back down after placing.
+   */
+  cells: (TeamMember | null)[];
   slots: number;
   full: boolean;
 }
@@ -91,7 +137,7 @@ const cardIndex = new Map(ALL_CARDS.map((c) => [c.id, c]));
 
 export function getTeam(assignments: TeamAssignments): TeamMember[] {
   const members: TeamMember[] = [];
-  assignments.forEach(({ cardId, station }, index) => {
+  assignments.forEach(({ cardId, station, slot }, index) => {
     const card = cardIndex.get(cardId);
     if (!card) return; // stale save referencing a droid that no longer exists
     const eco = getDroidEconomy(card.droid.name, card.tier);
@@ -100,6 +146,7 @@ export function getTeam(assignments: TeamAssignments): TeamMember[] {
     const classMatch = earning && isClassMatch(station, card.droid.type);
     members.push({
       index,
+      slot,
       cardId,
       name: card.droid.name,
       tier: card.tier,
@@ -114,6 +161,35 @@ export function getTeam(assignments: TeamAssignments): TeamMember[] {
   return members;
 }
 
+/**
+ * A station's slots in order, with its droids sitting where they were put.
+ *
+ * A member whose slot is already taken — only possible from a save written
+ * before positions existed, or a hand-edited one — falls into the next free
+ * cell rather than being dropped.
+ */
+function layoutStation(
+  members: TeamMember[],
+  slots: number
+): (TeamMember | null)[] {
+  const length = members.reduce((max, m) => Math.max(max, m.slot + 1), slots);
+  const cells: (TeamMember | null)[] = Array.from({ length }, () => null);
+
+  const displaced: TeamMember[] = [];
+  members.forEach((m) => {
+    if (m.slot >= 0 && cells[m.slot] === null) cells[m.slot] = m;
+    else displaced.push(m);
+  });
+
+  displaced.forEach((m) => {
+    const free = cells.indexOf(null);
+    if (free === -1) cells.push(m);
+    else cells[free] = m;
+  });
+
+  return cells;
+}
+
 export function getStationGroups(
   assignments: TeamAssignments,
   rebirthLevel: number
@@ -122,7 +198,13 @@ export function getStationGroups(
   return STATIONS.map((station) => {
     const members = team.filter((m) => m.station === station);
     const slots = slotsAt(station, rebirthLevel);
-    return { station, members, slots, full: members.length >= slots };
+    return {
+      station,
+      members,
+      cells: layoutStation(members, slots),
+      slots,
+      full: members.length >= slots,
+    };
   });
 }
 
@@ -153,19 +235,36 @@ export function getTeamEarnings(
 
 /**
  * Whether a card can go into a station right now. Class is not a constraint —
- * any droid works any station — so this is just: the station needs a free slot,
- * and a droid cannot be in two places at once.
+ * any droid works any station — so this is just about free space.
+ *
+ * Pass `slot` to ask about one particular position, which is what the Team page
+ * does: clicking the third empty slot should fill the third slot, and the answer
+ * is no if something already sits there.
  */
 export function canAssign(
   cardId: string,
   station: Station,
   assignments: TeamAssignments,
-  rebirthLevel: number
+  rebirthLevel: number,
+  slot?: number
 ): { ok: boolean; reason?: string } {
   const card = cardIndex.get(cardId);
   if (!card) return { ok: false, reason: 'Unknown droid' };
 
-  if (usedSlots(assignments, station) >= slotsAt(station, rebirthLevel)) {
+  if (slot !== undefined) {
+    if (slot < 0 || slot >= slotsAt(station, rebirthLevel)) {
+      return {
+        ok: false,
+        reason: `Slot locked at rebirth ${rebirthLevel}`,
+      };
+    }
+    if (occupiedSlots(assignments, station).has(slot)) {
+      return { ok: false, reason: 'slot taken' };
+    }
+    return { ok: true };
+  }
+
+  if (firstFreeSlot(assignments, station, rebirthLevel) === null) {
     return {
       ok: false,
       reason: `No free ${station} slot at rebirth ${rebirthLevel}`,
@@ -187,7 +286,7 @@ export function autoStationFor(
   cardId: string,
   assignments: TeamAssignments,
   rebirthLevel: number
-): Station | null {
+): { station: Station; slot: number } | null {
   const card = cardIndex.get(cardId);
   if (!card) return null;
 
@@ -201,8 +300,8 @@ export function autoStationFor(
     'LOUNGE',
   ];
   for (const station of order) {
-    if (canAssign(cardId, station, assignments, rebirthLevel).ok)
-      return station;
+    const slot = firstFreeSlot(assignments, station, rebirthLevel);
+    if (slot !== null) return { station, slot };
   }
   return null;
 }
@@ -241,7 +340,8 @@ export function candidatesFor(
   station: Station,
   collected: Set<string>,
   assignments: TeamAssignments,
-  rebirthLevel: number
+  rebirthLevel: number,
+  slot?: number
 ): Candidate[] {
   return ALL_CARDS.filter((c) => collected.has(c.id)).map((card) => {
     const classMatch =
@@ -251,14 +351,14 @@ export function candidatesFor(
     // Already-placed copies do not disqualify a card; you can work several of
     // the same droid. Only a full station does.
     const already = placedCount(assignments, card.id);
-    const check = canAssign(card.id, station, assignments, rebirthLevel);
+    const check = canAssign(card.id, station, assignments, rebirthLevel, slot);
     if (!check.ok) {
       return {
         card,
         classMatch,
         already,
         eligible: false,
-        reason: 'no free slot',
+        reason: check.reason ?? 'no free slot',
       };
     }
     return { card, classMatch, already, eligible: true };
