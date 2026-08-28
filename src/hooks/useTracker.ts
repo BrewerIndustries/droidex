@@ -1,6 +1,10 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import type { TeamAssignments } from '../lib/team';
-import type { Station } from '../data/rebirthUnlocks';
+import {
+  firstFreeSlot,
+  occupiedSlots,
+  type TeamAssignments,
+} from '../lib/team';
+import { STATIONS, type Station } from '../data/rebirthUnlocks';
 
 const STORAGE_KEY = 'droidex_v2';
 const BACKUP_KEY = 'droidex_v2_backup';
@@ -13,10 +17,18 @@ interface StoredState {
   rebirthPath: number;
 
   /**
-   * Placements. Absent in saves written before the Team tab existed, and an
-   * object in saves written before duplicates were supported.
+   * Placements. Absent in saves written before the Team tab existed, an object
+   * in saves written before duplicates were supported, and without slot
+   * positions in saves written before the team became positional.
    */
-  team?: TeamAssignments | Record<string, Station>;
+  team?: StoredPlacement[] | Record<string, Station>;
+}
+
+/** A placement as it may appear on disk: `slot` is missing in older saves. */
+interface StoredPlacement {
+  cardId: string;
+  station: Station;
+  slot?: number;
 }
 function readLocalStorage(): StoredState | null {
   const candidates = [
@@ -49,16 +61,50 @@ function readLocalStorage(): StoredState | null {
 /**
  * Placements used to be a cardId -> station object, which allowed only one copy
  * of each droid. Saves in that shape are converted to the list form on load.
+ *
+ * Older saves also predate slot positions. Those droids are packed into the
+ * first positions of their station in the order they were placed, which is
+ * exactly how they used to be drawn — so a save opened after this change looks
+ * the same as it did before it.
  */
 function migrateTeam(
-  stored: TeamAssignments | Record<string, Station> | undefined
+  stored: StoredPlacement[] | Record<string, Station> | undefined
 ): TeamAssignments {
   if (!stored) return [];
-  if (Array.isArray(stored)) return stored;
-  return Object.entries(stored).map(([cardId, station]) => ({
-    cardId,
-    station,
-  }));
+
+  const list: StoredPlacement[] = Array.isArray(stored)
+    ? stored
+    : Object.entries(stored).map(([cardId, station]) => ({ cardId, station }));
+
+  // Positions already on disk are kept; the rest fill the gaps left over,
+  // per station, in placement order.
+  const taken = new Map<Station, Set<number>>(
+    STATIONS.map((station) => [station, new Set<number>()])
+  );
+  const slotOf = new Array<number | null>(list.length).fill(null);
+
+  list.forEach((p, i) => {
+    const used = taken.get(p.station);
+    if (!used) return;
+    if (Number.isInteger(p.slot) && p.slot! >= 0 && !used.has(p.slot!)) {
+      used.add(p.slot!);
+      slotOf[i] = p.slot!;
+    }
+  });
+
+  return list.flatMap((p, i) => {
+    const used = taken.get(p.station);
+    if (!used) return []; // stale save naming a station that no longer exists
+
+    let slot = slotOf[i];
+    if (slot === null) {
+      slot = 0;
+      while (used.has(slot)) slot++;
+      used.add(slot);
+    }
+
+    return [{ cardId: p.cardId, station: p.station, slot }];
+  });
 }
 
 function writeLocalStorage(state: StoredState) {
@@ -238,10 +284,23 @@ export function useTracker(_uid: string | null) {
   /**
    * Put a droid in a station. A droid sitting in a slot is by definition on
    * hand, so this also marks it present and the rebirth tracker picks it up.
+   *
+   * `slot` names the exact position to fill, which is what clicking an empty
+   * slot on the Team page does. Left out — the droid card's station picker
+   * names a station and nothing more — it takes the first free position.
    */
   const assignDroid = useCallback(
-    (cardId: string, station: Station) => {
-      const nextTeam = [...teamRef.current, { cardId, station }];
+    (cardId: string, station: Station, slot?: number) => {
+      const team = teamRef.current;
+
+      let target = slot;
+      if (target === undefined || occupiedSlots(team, station).has(target)) {
+        const free = firstFreeSlot(team, station, rebirthLevelRef.current);
+        if (free === null) return; // station full — nothing to fill
+        target = free;
+      }
+
+      const nextTeam = [...team, { cardId, station, slot: target }];
       teamRef.current = nextTeam;
       setTeam(nextTeam);
 
