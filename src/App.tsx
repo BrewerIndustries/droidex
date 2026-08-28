@@ -11,10 +11,12 @@ import { AboutPage } from './components/AboutPage';
 import { RebirthPathSelector } from './components/RebirthPathSelector';
 import { Workspace } from './components/Workspace';
 import { TeamPage } from './components/TeamPage';
+import { FusionPage } from './components/FusionPage';
 import { TabNav } from './components/TabNav';
 import { BackupReminder } from './components/BackupReminder';
 import { useBackupReminder } from './hooks/useBackupReminder';
 import { useStoragePersistence } from './hooks/useStoragePersistence';
+import { useViewMode } from './hooks/useViewMode';
 import type { Station } from './data/rebirthUnlocks';
 import { StationPicker } from './components/StationPicker';
 import { RemoveDroidConfirm } from './components/RemoveDroidConfirm';
@@ -52,6 +54,8 @@ export default function App() {
     useState<CollectionStatus>('ALL');
 
   const [flawlessStatus, setFlawlessStatus] = useState<FlawlessStatus>('ALL');
+
+  const [view, setView] = useViewMode();
 
   const [search, setSearch] = useState('');
   const [filtersOpen, setFiltersOpen] = useState(true);
@@ -162,6 +166,8 @@ export default function App() {
                 onToggleFlawless={toggleFlawless}
                 team={team}
                 onTeamOpen={setStationPickerFor}
+                view={view}
+                onView={setView}
               />
             }
           />
@@ -196,6 +202,10 @@ export default function App() {
                 onUnassign={requestUnassign}
               />
             }
+          />
+          <Route
+            path="/fusion"
+            element={<FusionPage collected={collected} />}
           />
           <Route path="/tips" element={<TipsPage />} />
           <Route path="/about" element={<AboutPage />} />

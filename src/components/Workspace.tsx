@@ -4,6 +4,7 @@ import { CollectionPanel } from './CollectionPanel';
 import { RebirthPanel } from './RebirthPanel';
 import type { TierOrAll, DroidType, Rarity } from '../lib/droidTypes';
 import { TierTabs } from './TierTabs';
+import type { ViewMode } from '../hooks/useViewMode';
 
 type RarityOrAll = Rarity | 'ALL';
 type DroidTypeOrAll = DroidType | 'ALL';
@@ -54,6 +55,9 @@ type Props = {
 
   team: TeamAssignments;
   onTeamOpen: (id: string) => void;
+
+  view: ViewMode;
+  onView: (view: ViewMode) => void;
 };
 
 export function Workspace(props: Props) {
@@ -116,6 +120,8 @@ export function Workspace(props: Props) {
             onToggleFlawless={props.onToggleFlawless}
             team={props.team}
             onTeamOpen={props.onTeamOpen}
+            view={props.view}
+            onView={props.onView}
           />
         </div>
         <RebirthPanel
