@@ -47,6 +47,7 @@ No Play Store required.
 ## Features
 
 - Track all Droid Tycoon droids across every tier
+- Grid or list view for the collection, remembered between visits
 - Fusion tab: all 17 recipes, and which tiers of each you have made
 - Team tab: assign droids to stations and see live earnings
 - Removal guard: warns before pulling a droid a rebirth or fusion still needs
@@ -241,6 +242,26 @@ yet — those cards fall back to the class icon until art lands.
 
 Data source for droids and rebirths:
 https://star-wars-droid-tycoon.fandom.com/wiki/Rebirths
+
+## Grid or List
+
+The collection panel has a **GRID / LIST** toggle. The grid is the card wall —
+artwork, full per-tier stats, the badges. The list is one line per droid: name,
+rarity, tier, the tier-DNA strip, income and cost, and the same present and team
+controls the card carries.
+
+Both views run off the same `useDroidGridState`, so the filters, the search and
+the ordering cannot drift between them — switching view changes how the cards are
+drawn, never which cards are shown.
+
+The choice is remembered in `localStorage` under `droidex_view`, deliberately
+outside the save file: it is a preference about the screen in front of you, not
+collection data, and it has no business travelling in an export or being restored
+onto another device.
+
+Below 640px the list drops its income/cost column — at that width the name, the
+tier strip and two 44pt controls are already the whole line, and truncating names
+to keep a stat visible is the worse trade.
 
 ## Fusion Droids
 

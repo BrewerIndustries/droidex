@@ -16,6 +16,7 @@ import { TabNav } from './components/TabNav';
 import { BackupReminder } from './components/BackupReminder';
 import { useBackupReminder } from './hooks/useBackupReminder';
 import { useStoragePersistence } from './hooks/useStoragePersistence';
+import { useViewMode } from './hooks/useViewMode';
 import type { Station } from './data/rebirthUnlocks';
 import { StationPicker } from './components/StationPicker';
 import { RemoveDroidConfirm } from './components/RemoveDroidConfirm';
@@ -53,6 +54,8 @@ export default function App() {
     useState<CollectionStatus>('ALL');
 
   const [flawlessStatus, setFlawlessStatus] = useState<FlawlessStatus>('ALL');
+
+  const [view, setView] = useViewMode();
 
   const [search, setSearch] = useState('');
   const [filtersOpen, setFiltersOpen] = useState(true);
@@ -163,6 +166,8 @@ export default function App() {
                 onToggleFlawless={toggleFlawless}
                 team={team}
                 onTeamOpen={setStationPickerFor}
+                view={view}
+                onView={setView}
               />
             }
           />
