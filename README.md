@@ -299,6 +299,13 @@ Iconic droids are bought with Nova Crystals and earn a percentage of total incom
 rather than a flat rate, so they show those values instead of an efficiency
 rating.
 
+**Some Companion perks step up with the tier.** A Rainbow TRAK-R grants +6
+pickaxe levels where its lower tiers grant +3. Perks are stored once per droid
+with a `tierPerks` override for the tiers known to differ; a tier with no
+override shows the droid's base perk. No public source documents a scaling rule,
+so overrides are added only as values are read out of the game — if a perk in the
+app looks low for a high tier, that is a gap rather than a claim.
+
 Chips *returned on sale* are still missing. The game does pay chips when you sell
 a self-crafted droid and the amount scales with rarity and tier, but no public
 source documents the values, so only the upgrade side (`UPG`, `/CHIP`) is shown.

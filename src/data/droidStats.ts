@@ -74,7 +74,17 @@ export interface TierStats {
 
 export interface DroidStats {
   rarity: string;
+  /** The Companion perk, and the value at every tier without an override. */
   perk: string;
+  /**
+   * Tiers whose perk differs from `perk`.
+   *
+   * Some perks step up as the droid is upgraded — Rainbow TRAK-R grants +6
+   * pickaxe levels where its lower tiers grant +3. Only tiers actually read out
+   * of the game are listed; the rest fall back to `perk` rather than guessing at
+   * a scaling rule, since no public source documents one.
+   */
+  tierPerks?: Partial<Record<Tier, string>>;
   costNote?: string;
   incomeNote?: string;
   tiers: Partial<Record<Tier, TierStats>>;
@@ -526,6 +536,7 @@ export const DROID_STATS: Record<string, DroidStats> = {
   'TRAK-R': {
     rarity: 'Epic',
     perk: '+3 Pickaxe Level',
+    tierPerks: { RAINBOW: '+6 Pickaxe Level' },
     tiers: {
       DEFAULT: { cost: 3000000, income: 330 },
       GOLD: { cost: 12000000, income: 660 },
