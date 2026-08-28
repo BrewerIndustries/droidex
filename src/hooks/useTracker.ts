@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   firstFreeSlot,
+  movePlacement,
   occupiedSlots,
   type TeamAssignments,
 } from '../lib/team';
@@ -324,6 +325,33 @@ export function useTracker(_uid: string | null) {
   );
 
   /**
+   * Move a placed droid to another slot, swapping with whatever is there.
+   *
+   * Only positions change, so `present` and `collected` are untouched: both
+   * droids are still on the team, and a swap cannot make a rebirth requirement
+   * or a fusion ingredient go missing the way a removal can.
+   */
+  const moveDroid = useCallback(
+    (index: number, station: Station, slot: number) => {
+      const nextTeam = movePlacement(teamRef.current, index, station, slot);
+      if (nextTeam === teamRef.current) return;
+
+      teamRef.current = nextTeam;
+      setTeam(nextTeam);
+
+      writeLocalStorage({
+        collected: Array.from(collected),
+        present: Array.from(present),
+        flawless: Array.from(flawless),
+        rebirthLevel: rebirthLevelRef.current,
+        rebirthPath: rebirthPathRef.current,
+        team: nextTeam,
+      });
+    },
+    [collected, present, flawless]
+  );
+
+  /**
    * Take one copy out of its station, by position.
    *
    * Symmetric with assign, but only the *last* copy clears `present` — while
@@ -366,6 +394,7 @@ export function useTracker(_uid: string | null) {
     team,
     assignDroid,
     unassignDroid,
+    moveDroid,
 
     toggleCollected,
     togglePresent,

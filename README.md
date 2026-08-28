@@ -130,6 +130,16 @@ out of it leaves that slot open rather than sliding the ones below it up. The
 team keeps the arrangement you gave it. Placements made from the card badge,
 which names a station and nothing more, take the first free slot.
 
+**Click a placed droid to move it.** The menu lays out the whole base — every
+station, every slot, with whoever is in it — and picking one moves the droid
+there. Landing on an occupied slot **swaps** the two, which is what "put this
+one in slot 1" means when slot 1 is taken, and it is why moving is its own
+action rather than a remove and a re-add: removing first would free the slot,
+drop the droid from "on hand" if it were the last copy, and put up the removal
+warning for a change that loses nothing. Neither droid leaves the team, so a
+move can never break a rebirth requirement or a fusion the way a removal can.
+Remove is still on the menu, and still goes through that warning.
+
 **You can place several copies of the same droid.** If you have crafted three
 Gold Gonks you can work all three, in the same station or spread across
 different ones. The card badge shows how many are placed.

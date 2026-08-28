@@ -10,6 +10,7 @@ import {
 import { formatCredits, getDroidEconomy } from '../lib/droidEconomy';
 import { RARITY_COLOR, TYPE_BADGE } from '../lib/droidTheme';
 import { ALL_CARDS } from '../data/droids';
+import { PlacementMenu } from './PlacementMenu';
 
 interface Props {
   team: TeamAssignments;
@@ -17,6 +18,7 @@ interface Props {
   rebirthLevel: number;
   onAssign: (cardId: string, station: Station, slot: number) => void;
   onUnassign: (index: number) => void;
+  onMove: (index: number, station: Station, slot: number) => void;
 }
 
 const STATION_LABEL: Record<Station, string> = {
@@ -43,6 +45,7 @@ export function TeamPage({
   rebirthLevel,
   onAssign,
   onUnassign,
+  onMove,
 }: Props) {
   // Which empty slot the picker is open for. Positional, so the droid chosen
   // lands in the slot that was clicked rather than wherever there is room.
@@ -50,6 +53,9 @@ export function TeamPage({
     station: Station;
     slot: number;
   } | null>(null);
+
+  // Which placed droid's move menu is open, by position in the placements list.
+  const [moving, setMoving] = useState<number | null>(null);
 
   const groups = getStationGroups(team, rebirthLevel);
   const earnings = getTeamEarnings(team, rebirthLevel);
@@ -162,53 +168,61 @@ export function TeamPage({
                   key={m.index}
                   className="flex items-center gap-2 bg-zinc-950 border border-zinc-800 rounded px-2 py-1.5 min-h-tap"
                 >
-                  <span className="text-3xs tabular-nums text-zinc-700">
-                    {slot + 1}
-                  </span>
-                  {Badge && (
-                    <Badge
-                      size={12}
-                      style={{
-                        color: card
-                          ? RARITY_COLOR[card.droid.rarity]
-                          : undefined,
-                      }}
-                    />
-                  )}
-                  <span className="text-white text-xs font-bold truncate flex-1">
-                    {m.name}
-                  </span>
-                  <span className="text-3xs text-zinc-500 tracking-wide">
-                    {m.tier}
-                  </span>
-                  {m.station === 'COMPANION' && m.perk && (
-                    <span
-                      title="Active while this droid is your Companion"
-                      className="text-2xs text-amber-300 truncate max-w-[10rem]"
-                    >
-                      {m.perk}
+                  <button
+                    type="button"
+                    onClick={() => setMoving(m.index)}
+                    title={`${m.name} (${m.tier}) — click to move slots`}
+                    className="flex flex-1 items-center gap-2 min-w-0 min-h-tap text-left"
+                  >
+                    <span className="text-3xs tabular-nums text-zinc-700">
+                      {slot + 1}
                     </span>
-                  )}
-                  {m.income !== null && (
-                    <span className="text-2xs text-emerald-400 tabular-nums">
-                      {formatCredits(m.income + m.classMatchBonus)}/s
+                    {Badge && (
+                      <Badge
+                        size={12}
+                        style={{
+                          color: card
+                            ? RARITY_COLOR[card.droid.rarity]
+                            : undefined,
+                        }}
+                      />
+                    )}
+                    <span className="text-white text-xs font-bold truncate flex-1">
+                      {m.name}
                     </span>
-                  )}
-                  {m.income !== null && (
-                    <span
-                      title={
-                        m.classMatch
-                          ? `${m.type} in a ${m.station} station — earning the 10% class bonus`
-                          : `${m.type} in a ${m.station} station — no class bonus`
-                      }
-                      className={[
-                        'text-3xs font-bold',
-                        m.classMatch ? 'text-cyan-300' : 'text-zinc-700',
-                      ].join(' ')}
-                    >
-                      +10%
+                    <span className="text-3xs text-zinc-500 tracking-wide">
+                      {m.tier}
                     </span>
-                  )}
+                    {m.station === 'COMPANION' && m.perk && (
+                      <span
+                        title="Active while this droid is your Companion"
+                        className="text-2xs text-amber-300 truncate max-w-[10rem]"
+                      >
+                        {m.perk}
+                      </span>
+                    )}
+                    {m.income !== null && (
+                      <span className="text-2xs text-emerald-400 tabular-nums">
+                        {formatCredits(m.income + m.classMatchBonus)}/s
+                      </span>
+                    )}
+                    {m.income !== null && (
+                      <span
+                        title={
+                          m.classMatch
+                            ? `${m.type} in a ${m.station} station — earning the 10% class bonus`
+                            : `${m.type} in a ${m.station} station — no class bonus`
+                        }
+                        className={[
+                          'text-3xs font-bold',
+                          m.classMatch ? 'text-cyan-300' : 'text-zinc-700',
+                        ].join(' ')}
+                      >
+                        +10%
+                      </span>
+                    )}
+                  </button>
+
                   <button
                     type="button"
                     onClick={() => onUnassign(m.index)}
@@ -238,6 +252,23 @@ export function TeamPage({
           )}
         </div>
       ))}
+
+      {moving !== null && (
+        <PlacementMenu
+          index={moving}
+          team={team}
+          rebirthLevel={rebirthLevel}
+          onMove={(station, slot) => {
+            onMove(moving, station, slot);
+            setMoving(null);
+          }}
+          onRemove={() => {
+            onUnassign(moving);
+            setMoving(null);
+          }}
+          onClose={() => setMoving(null)}
+        />
+      )}
     </div>
   );
 }
