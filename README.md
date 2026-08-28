@@ -278,6 +278,14 @@ to keep a stat visible is the worse trade.
 v1.27 added the Fusion lab, unlocked at Rebirth 3: combine three droids into one
 better one. **17 droids are fusion-exclusive** and cannot be bought at all.
 
+They sit in the Droidex among the droids of their own rarity — a Rare fusion
+droid after the Rare buyable ones, a Mythic one after the Mythic — rather than
+in a block of their own. Rarity order is sorted from `RARITY_ORDER` rather than
+left to the order `droids.ts` happens to list things in, where the seventeen
+were one run at the end because they were added together. The sort is stable, so
+within a rarity the data order survives and the buyable droids stay ahead of the
+fusion ones.
+
 Their cards show the recipe instead of the usual cost/efficiency block, because
 those figures do not apply to something with no purchase price:
 

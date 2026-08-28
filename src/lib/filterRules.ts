@@ -2,7 +2,7 @@
 
 import type { DroidCard } from '../data/droids';
 
-import { TIER_ORDER } from '../data/droids';
+import { RARITY_ORDER, TIER_ORDER } from '../data/droids';
 
 import type { Rarity, DroidType, TierOrAll } from './droidTypes';
 
@@ -63,11 +63,24 @@ export function getVisibleCards(input: VisibleCardFilters): DroidCard[] {
     return true;
   });
 
-  if (input.tier === 'ALL') {
-    const tierIndex = Object.fromEntries(TIER_ORDER.map((t, i) => [t, i]));
+  const rarityIndex = Object.fromEntries(RARITY_ORDER.map((r, i) => [r, i]));
+  const tierIndex = Object.fromEntries(TIER_ORDER.map((t, i) => [t, i]));
 
-    filtered.sort((a, b) => tierIndex[a.tier] - tierIndex[b.tier]);
-  }
+  // Rarity is sorted rather than left to the order droids happen to sit in
+  // `droids.ts`, where the 17 fusion droids are one block at the end — they
+  // were listed together because they were added together, which put a Rare
+  // fusion droid after every Mythic. Sorting puts each one in its own rarity
+  // run instead. Array#sort is stable, so within a rarity the data order is
+  // kept, and the buyable droids stay ahead of the fusion ones.
+  filtered.sort((a, b) => {
+    // With a tier selected there is one card per droid, so rarity is the only
+    // question. Showing every tier at once keeps tier as the outer grouping.
+    if (input.tier === 'ALL') {
+      const byTier = tierIndex[a.tier] - tierIndex[b.tier];
+      if (byTier !== 0) return byTier;
+    }
+    return rarityIndex[a.droid.rarity] - rarityIndex[b.droid.rarity];
+  });
 
   return filtered;
 }
