@@ -42,7 +42,8 @@ export interface DroidEconomy {
   chipsOnSale: number | null;
   /**
    * What this droid grants while set as the Companion, e.g. "20% Crafting
-   * Speed". Only takes effect in the Companion slot.
+   * Speed", for this droid *at this tier* — a few perks step up with the tier.
+   * Only takes effect in the Companion slot.
    */
   perk: string;
   /** Free-text stand-ins for Iconics, e.g. "30 Nova Crystals" or "15%/s". */
@@ -78,7 +79,7 @@ export function getDroidEconomy(name: string, tier: Tier): DroidEconomy | null {
     upgradeChips,
     chipValue,
     chipsOnSale: null,
-    perk: entry.perk,
+    perk: entry.tierPerks?.[tier] ?? entry.perk,
     costNote: entry.costNote,
     incomeNote: entry.incomeNote,
   };

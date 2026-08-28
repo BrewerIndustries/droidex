@@ -1,6 +1,9 @@
 import type { TeamAssignments } from '../lib/team';
 import { Panel } from './Panel';
 import { DroidGrid } from './DroidGrid';
+import { DroidList } from './DroidList';
+import { ViewToggle } from './ViewToggle';
+import type { ViewMode } from '../hooks/useViewMode';
 
 import type { TierOrAll, DroidType, Rarity } from '../lib/droidTypes';
 
@@ -37,6 +40,9 @@ type Props = {
 
   team: TeamAssignments;
   onTeamOpen: (id: string) => void;
+
+  view: ViewMode;
+  onView: (view: ViewMode) => void;
 };
 
 export function CollectionPanel(props: Props) {
@@ -48,26 +54,50 @@ export function CollectionPanel(props: Props) {
       open={props.open}
       onToggle={props.onToggle}
     >
-      <DroidGrid
-        rebirthPath={props.rebirthPath}
-        rebirthLevel={props.rebirthLevel}
-        tier={props.tier}
-        rarity={props.rarity}
-        droidClass={props.droidClass}
-        collectionStatus={props.collectionStatus}
-        flawlessStatus={props.flawlessStatus}
-        rebirthFilter="ALL"
-        search={props.search}
-        collected={props.collected}
-        present={props.present}
-        flawless={props.flawless}
-        onToggle={props.onToggleCollected}
-        onTogglePresent={props.onTogglePresent}
-        onToggleFlawless={props.onToggleFlawless}
-        team={props.team}
-        onTeamOpen={props.onTeamOpen}
-        highlightedIds={props.highlightedIds}
-      />
+      <ViewToggle view={props.view} onChange={props.onView} />
+
+      {props.view === 'LIST' ? (
+        <DroidList
+          rebirthPath={props.rebirthPath}
+          rebirthLevel={props.rebirthLevel}
+          tier={props.tier}
+          rarity={props.rarity}
+          droidClass={props.droidClass}
+          collectionStatus={props.collectionStatus}
+          flawlessStatus={props.flawlessStatus}
+          rebirthFilter="ALL"
+          search={props.search}
+          collected={props.collected}
+          present={props.present}
+          flawless={props.flawless}
+          onToggle={props.onToggleCollected}
+          onTogglePresent={props.onTogglePresent}
+          team={props.team}
+          onTeamOpen={props.onTeamOpen}
+          highlightedIds={props.highlightedIds}
+        />
+      ) : (
+        <DroidGrid
+          rebirthPath={props.rebirthPath}
+          rebirthLevel={props.rebirthLevel}
+          tier={props.tier}
+          rarity={props.rarity}
+          droidClass={props.droidClass}
+          collectionStatus={props.collectionStatus}
+          flawlessStatus={props.flawlessStatus}
+          rebirthFilter="ALL"
+          search={props.search}
+          collected={props.collected}
+          present={props.present}
+          flawless={props.flawless}
+          onToggle={props.onToggleCollected}
+          onTogglePresent={props.onTogglePresent}
+          onToggleFlawless={props.onToggleFlawless}
+          team={props.team}
+          onTeamOpen={props.onTeamOpen}
+          highlightedIds={props.highlightedIds}
+        />
+      )}
     </Panel>
   );
 }

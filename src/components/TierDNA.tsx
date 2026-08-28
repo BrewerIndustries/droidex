@@ -9,7 +9,7 @@ interface Props {
 // One marker per tier, in TIER_ORDER, so the strip never drifts from the
 // tier list. Letters repeat across tiers (DEFAULT/DIAMOND, GOLD/GALACTIC);
 // the colour is what tells them apart.
-const TIER_DNA: Record<string, { letter: string; color: string }> = {
+export const TIER_DNA: Record<string, { letter: string; color: string }> = {
   DEFAULT: { letter: 'D', color: 'text-zinc-300' },
   GOLD: { letter: 'G', color: 'text-amber-400' },
   DIAMOND: { letter: 'D', color: 'text-sky-300' },
