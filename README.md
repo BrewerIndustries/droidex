@@ -47,6 +47,7 @@ No Play Store required.
 ## Features
 
 - Track all Droid Tycoon droids across every tier
+- Fusion tab: all 17 recipes, and which tiers of each you have made
 - Team tab: assign droids to stations and see live earnings
 - Removal guard: warns before pulling a droid a rebirth or fusion still needs
 - Per-tier cost / income / sell, with an efficiency rating and payback time
@@ -264,6 +265,24 @@ Sell values are deliberately absent. The community sheet is still filling that
 column in and 16 of the 17 currently deviate from the standard tier progression,
 some by absurd margins, so it is better to show nothing than something wrong.
 Companion perks for these droids are not documented anywhere yet either.
+
+### The Fusion tab
+
+All 17 recipes on one screen, grouped by rarity, each showing which tiers of the
+result you have made. Because fusion keeps the tier, "have I made this?" is a
+question per variant rather than per droid — so each recipe carries a seven-tier
+strip and a count, and the totals read in variants (119) rather than droids (17).
+
+The strip reads each tier on its own rather than filling up to a high-water mark
+the way the card grid's tier-DNA does. Fusion earns that: you can fuse three
+Rainbow ingredients into a Rainbow result without ever having held the Gold one,
+so a collection with gaps in it is normal rather than a sign of missing data.
+
+Ingredients carry how many of their own tiers you hold, and dim when you hold
+none — enough to see what a recipe is waiting on without the tab trying to solve
+craftability, which it cannot: the tracker records *whether* a droid is
+collected, not how many copies are on hand, and a recipe wanting two of
+something needs the count.
 
 ## Droid Economy
 

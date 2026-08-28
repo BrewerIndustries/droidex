@@ -11,6 +11,7 @@ import { AboutPage } from './components/AboutPage';
 import { RebirthPathSelector } from './components/RebirthPathSelector';
 import { Workspace } from './components/Workspace';
 import { TeamPage } from './components/TeamPage';
+import { FusionPage } from './components/FusionPage';
 import { TabNav } from './components/TabNav';
 import { BackupReminder } from './components/BackupReminder';
 import { useBackupReminder } from './hooks/useBackupReminder';
@@ -196,6 +197,10 @@ export default function App() {
                 onUnassign={requestUnassign}
               />
             }
+          />
+          <Route
+            path="/fusion"
+            element={<FusionPage collected={collected} />}
           />
           <Route path="/tips" element={<TipsPage />} />
           <Route path="/about" element={<AboutPage />} />
