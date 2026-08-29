@@ -7,6 +7,8 @@ import {
 } from '../lib/fusion';
 import { RARITY_COLOR, TYPE_BADGE } from '../lib/droidTheme';
 import { TierOwnedStrip } from './TierOwnedStrip';
+import { TierFilterChips } from './TierFilterChips';
+import type { TierOrAll } from '../lib/droidTypes';
 
 interface Props {
   collected: Set<string>;
@@ -29,9 +31,10 @@ const FILTERS: { key: Filter; label: string }[] = [
  */
 export function FusionPage({ collected }: Props) {
   const [filter, setFilter] = useState<Filter>('ALL');
+  const [tier, setTier] = useState<TierOrAll>('ALL');
 
-  const groups = getFusionGroups(collected);
-  const totals = getFusionTotals(collected);
+  const groups = getFusionGroups(collected, tier);
+  const totals = getFusionTotals(collected, tier);
 
   const matches = (r: FusionRecipe) =>
     filter === 'ALL' ||
@@ -64,7 +67,8 @@ export function FusionPage({ collected }: Props) {
             {totals.variantsCollected}
           </span>
           <span className="text-sm text-zinc-500 tabular-nums">
-            / {totals.variants} variants
+            / {totals.variants}{' '}
+            {tier === 'ALL' ? 'variants' : `${tier.toLowerCase()} fusions`}
           </span>
         </div>
 
@@ -78,12 +82,25 @@ export function FusionPage({ collected }: Props) {
         </div>
 
         <div className="mt-2 text-2xs text-zinc-600 tabular-nums">
-          {totals.droidsStarted}/{totals.droids} fusion droids made at some tier
-          · {totals.droidsComplete} complete at every tier
+          {tier === 'ALL' ? (
+            <>
+              {totals.droidsStarted}/{totals.droids} fusion droids made at some
+              tier · {totals.droidsComplete} complete at every tier
+            </>
+          ) : (
+            <>
+              {totals.droidsStarted}/{totals.droids} fusion droids made at{' '}
+              {tier.toLowerCase()}
+            </>
+          )}
         </div>
       </div>
 
-      {/* Filter */}
+      {/* Filters */}
+      <div className="space-y-1">
+        <TierFilterChips value={tier} onChange={setTier} label="fusion tiers" />
+      </div>
+
       <div className="flex gap-1">
         {FILTERS.map((f) => (
           <button
@@ -105,8 +122,12 @@ export function FusionPage({ collected }: Props) {
       {shown.length === 0 ? (
         <div className="text-2xs text-zinc-600">
           {filter === 'MISSING'
-            ? 'Every fusion droid is made at one tier or more.'
-            : 'No fusion droids made yet. Mark them collected in the Droidex as you fuse them.'}
+            ? tier === 'ALL'
+              ? 'Every fusion droid is made at one tier or more.'
+              : `Every fusion droid is made at ${tier.toLowerCase()}.`
+            : tier === 'ALL'
+              ? 'No fusion droids made yet. Mark them collected in the Droidex as you fuse them.'
+              : `No fusion droids made at ${tier.toLowerCase()} yet.`}
         </div>
       ) : (
         shown.map((group) => (

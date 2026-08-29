@@ -49,6 +49,11 @@ export default function App() {
   } = useTracker(null);
 
   const [tier, setTier] = useState<TierOrAll>('DEFAULT');
+
+  // Combined keeps its own tier. The tabs mean something different there —
+  // which variants to draw, not which cards to list — and the useful default
+  // differs with them: one tier for the grid, every tier for the dots.
+  const [variantTier, setVariantTier] = useState<TierOrAll>('ALL');
   const [rarity, setRarity] = useState<RarityOrAll>('ALL');
   const [droidClass, setDroidClass] = useState<DroidTypeOrAll>('ALL');
   const [collectionStatus, setCollectionStatus] =
@@ -169,6 +174,8 @@ export default function App() {
                 onTeamOpen={setStationPickerFor}
                 view={view}
                 onView={setView}
+                variantTier={variantTier}
+                onVariantTier={setVariantTier}
               />
             }
           />

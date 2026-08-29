@@ -266,8 +266,13 @@ droid *per tier*, so the collection is 561 cards behind seven tier tabs and
 "which tiers of Gonk do I have?" means visiting seven of them. Combined puts a
 droid on one row with its seven variants as coloured dots — filled for
 collected, hollow for not — so the answer is one glance, and changing it is one
-tap on the dot. The tier tabs are hidden in this view: a tier to filter to is a
-question it has already answered.
+tap on the dot.
+
+The tier tabs mean something different here: which *variants* to draw, rather
+than which tier's cards to list. Picking Gold leaves every droid on screen
+showing only its Gold dot, so "which droids am I missing in Gold?" is that tab
+plus the MISSING filter. Each view keeps its own tier, so combined can sit on
+ALL — which is the whole point of it — without resetting the grid's tab.
 
 The dot is 20px inside a 44pt target. Seven dots plus a name will not fit across
 a phone at full size, so the dots take their own line under the name rather than
@@ -276,9 +281,10 @@ Colour carries the tier because the letters cannot: Default and Diamond are both
 "D", Gold and Galactic both "G". Every dot names its tier and state in a title
 for anyone the colour fails.
 
-Combined draws all seven variants regardless of the collection filter, so
-filtering to OWNED narrows which *droids* are listed without punching holes in
-their dots. A cyan ring marks a variant that is also on hand for rebirths.
+The collection filter applies to the variants left after the tier filter, so
+OWNED means owned *at that tier* — and with the tier on ALL it means owned at
+any tier, which keeps every dot on screen rather than punching holes in the row.
+A cyan ring marks a variant that is also on hand for rebirths.
 
 All three views run off the same `useDroidGridState`, so the filters, the search
 and the ordering cannot drift between them — switching view changes how the
@@ -329,7 +335,9 @@ Companion perks for these droids are not documented anywhere yet either.
 ### The Fusion tab
 
 All 17 recipes on one screen, grouped by rarity, each showing which tiers of the
-result you have made. Because fusion keeps the tier, "have I made this?" is a
+result you have made. A tier filter narrows the recipes to one variant rather
+than dropping recipes: picking Rainbow still lists all seventeen, each showing
+only its Rainbow answer, and the totals switch from 119 variants to 17. Because fusion keeps the tier, "have I made this?" is a
 question per variant rather than per droid — so each recipe carries a seven-tier
 strip and a count, and the totals read in variants (119) rather than droids (17).
 
