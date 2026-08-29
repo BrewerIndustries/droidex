@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 
-export type ViewMode = 'GRID' | 'LIST';
+export type ViewMode = 'GRID' | 'LIST' | 'COMBINED';
+
+const MODES: ViewMode[] = ['GRID', 'LIST', 'COMBINED'];
 
 const STORAGE_KEY = 'droidex_view';
 
@@ -14,7 +16,8 @@ const STORAGE_KEY = 'droidex_view';
 export function useViewMode(): [ViewMode, (mode: ViewMode) => void] {
   const [mode, setMode] = useState<ViewMode>(() => {
     try {
-      return localStorage.getItem(STORAGE_KEY) === 'LIST' ? 'LIST' : 'GRID';
+      const stored = localStorage.getItem(STORAGE_KEY) as ViewMode | null;
+      return stored && MODES.includes(stored) ? stored : 'GRID';
     } catch {
       return 'GRID'; // private mode, or site data blocked
     }
