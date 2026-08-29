@@ -47,7 +47,8 @@ No Play Store required.
 ## Features
 
 - Track all Droid Tycoon droids across every tier
-- Grid or list view for the collection, remembered between visits
+- Grid, list or combined view for the collection, remembered between visits
+- Combined view: every droid once, with a tappable dot per tier
 - Fusion tab: all 17 recipes, and which tiers of each you have made
 - Team tab: assign droids to stations and see live earnings
 - Removal guard: warns before pulling a droid a rebirth or fusion still needs
@@ -253,23 +254,42 @@ yet — those cards fall back to the class icon until art lands.
 Data source for droids and rebirths:
 https://star-wars-droid-tycoon.fandom.com/wiki/Rebirths
 
-## Grid or List
+## Grid, List or Combined
 
-The collection panel has a **GRID / LIST** toggle. The grid is the card wall —
-artwork, full per-tier stats, the badges. The list is one line per droid: name,
-rarity, tier, the tier-DNA strip, income and cost, and the same present and team
-controls the card carries.
+The collection panel has a **GRID / LIST / COMBINED** toggle. The grid is the
+card wall — artwork, full per-tier stats, the badges. The list is one line per
+card: name, rarity, tier, the tier-DNA strip, income and cost, and the same
+present and team controls the card carries.
 
-Both views run off the same `useDroidGridState`, so the filters, the search and
-the ordering cannot drift between them — switching view changes how the cards are
-drawn, never which cards are shown.
+**Combined** answers a different question. Grid and list both show one card per
+droid *per tier*, so the collection is 561 cards behind seven tier tabs and
+"which tiers of Gonk do I have?" means visiting seven of them. Combined puts a
+droid on one row with its seven variants as coloured dots — filled for
+collected, hollow for not — so the answer is one glance, and changing it is one
+tap on the dot. The tier tabs are hidden in this view: a tier to filter to is a
+question it has already answered.
+
+The dot is 20px inside a 44pt target. Seven dots plus a name will not fit across
+a phone at full size, so the dots take their own line under the name rather than
+shrinking the target — which is the thing the tablet pass was written to stop.
+Colour carries the tier because the letters cannot: Default and Diamond are both
+"D", Gold and Galactic both "G". Every dot names its tier and state in a title
+for anyone the colour fails.
+
+Combined draws all seven variants regardless of the collection filter, so
+filtering to OWNED narrows which *droids* are listed without punching holes in
+their dots. A cyan ring marks a variant that is also on hand for rebirths.
+
+All three views run off the same `useDroidGridState`, so the filters, the search
+and the ordering cannot drift between them — switching view changes how the
+cards are drawn, never which cards are shown.
 
 The choice is remembered in `localStorage` under `droidex_view`, deliberately
 outside the save file: it is a preference about the screen in front of you, not
 collection data, and it has no business travelling in an export or being restored
 onto another device.
 
-Below 640px the list drops its income/cost column — at that width the name, the
+Below 640px the per-card list drops its income/cost column — at that width the name, the
 tier strip and two 44pt controls are already the whole line, and truncating names
 to keep a stat visible is the worse trade.
 

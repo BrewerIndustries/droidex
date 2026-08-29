@@ -15,6 +15,27 @@ export const TYPE_BADGE: Record<string, { Icon: LucideIcon; bg: string }> = {
   BATTLE: { Icon: Crosshair, bg: '#dc2626' },
 };
 
+/**
+ * The colour each tier is drawn in, as a value rather than a class, for the
+ * roster's variant dots — they need the same colour as a fill, as a border and
+ * at reduced opacity, which a Tailwind class cannot supply three ways.
+ *
+ * Rainbow has no single colour, so it carries a gradient and the others repeat
+ * their hex as a flat one, letting the dot use one code path.
+ */
+export const TIER_DOT: Record<string, { hex: string; fill: string }> = {
+  DEFAULT: { hex: '#a1a1aa', fill: '#a1a1aa' },
+  GOLD: { hex: '#fbbf24', fill: '#fbbf24' },
+  DIAMOND: { hex: '#7dd3fc', fill: '#7dd3fc' },
+  RAINBOW: {
+    hex: '#a855f7',
+    fill: 'linear-gradient(135deg,#f87171,#fbbf24,#4ade80,#38bdf8,#a855f7)',
+  },
+  BESKAR: { hex: '#e4e4e7', fill: '#e4e4e7' },
+  GALACTIC: { hex: '#a855f7', fill: '#a855f7' },
+  STELLAR: { hex: '#fb923c', fill: '#fb923c' },
+};
+
 export const TIER_BORDER: Record<string, string> = {
   DEFAULT: 'border-zinc-600',
   GOLD: 'border-amber-400',
