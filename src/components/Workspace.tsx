@@ -58,6 +58,9 @@ type Props = {
 
   view: ViewMode;
   onView: (view: ViewMode) => void;
+
+  variantTier: TierOrAll;
+  onVariantTier: (tier: TierOrAll) => void;
 };
 
 export function Workspace(props: Props) {
@@ -65,9 +68,13 @@ export function Workspace(props: Props) {
 
   return (
     <div className="flex flex-col flex-1">
-      {/* Combined shows every variant as a dot, so a tier to filter to is a
-          question it has already answered. Grid and list still need one. */}
-      {props.view !== 'COMBINED' && (
+      {/* One control, two meanings by view: which tier's cards grid and list
+          show, and which variants' dots combined draws. They keep separate
+          state so each view remembers its own — and so combined can open on
+          ALL, which is the whole point of it, without resetting the grid. */}
+      {props.view === 'COMBINED' ? (
+        <TierTabs active={props.variantTier} onChange={props.onVariantTier} />
+      ) : (
         <TierTabs active={props.tier} onChange={props.onTier} />
       )}
 
@@ -126,6 +133,7 @@ export function Workspace(props: Props) {
             onTeamOpen={props.onTeamOpen}
             view={props.view}
             onView={props.onView}
+            variantTier={props.variantTier}
           />
         </div>
         <RebirthPanel

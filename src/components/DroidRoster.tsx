@@ -1,6 +1,6 @@
 import { RefreshCw } from 'lucide-react';
 import { placedCount, type TeamAssignments } from '../lib/team';
-import type { DroidType, Rarity, Tier } from '../lib/droidTypes';
+import type { DroidType, Rarity, Tier, TierOrAll } from '../lib/droidTypes';
 import type { Droid } from '../data/droids';
 import { useDroidGridState } from '../hooks/useDroidGridState';
 import { hasEffectiveCard } from '../lib/droidHierarchy';
@@ -11,6 +11,8 @@ type CollectionStatus = 'ALL' | 'OWNED' | 'MISSING';
 type FlawlessStatus = 'ALL' | 'FLAWLESS' | 'MISSING';
 
 interface Props {
+  /** Which variants to draw. 'ALL' shows every tier's dot. */
+  tier: TierOrAll;
   rarity: Rarity | 'ALL';
   droidClass: DroidType | 'ALL';
   collectionStatus: CollectionStatus;
@@ -62,6 +64,7 @@ interface RosterRow {
  * rarity and class filters behave identically, then collapse by droid.
  */
 export function DroidRoster({
+  tier,
   rarity,
   droidClass,
   collectionStatus,
@@ -133,11 +136,26 @@ export function DroidRoster({
     });
   });
 
-  const rows = [...byDroid.values()].filter((row) => {
-    if (collectionStatus === 'OWNED') return row.collectedCount > 0;
-    if (collectionStatus === 'MISSING') return row.collectedCount === 0;
-    return true;
-  });
+  // Narrowing to a tier drops the other dots rather than the row, so the
+  // question becomes "which droids am I missing in Gold?" with every droid
+  // still listed and answering it. The count and the collection filter follow
+  // the dots that are left, so OWNED means owned *at that tier*.
+  const rows = [...byDroid.values()]
+    .map((row) => {
+      if (tier === 'ALL') return row;
+      const variants = row.variants.filter((v) => v.tier === tier);
+      return {
+        ...row,
+        variants,
+        collectedCount: variants.filter((v) => v.collected).length,
+      };
+    })
+    .filter((row) => {
+      if (row.variants.length === 0) return false; // Iconics are Default only
+      if (collectionStatus === 'OWNED') return row.collectedCount > 0;
+      if (collectionStatus === 'MISSING') return row.collectedCount === 0;
+      return true;
+    });
 
   if (rows.length === 0) {
     return (

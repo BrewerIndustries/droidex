@@ -44,6 +44,9 @@ type Props = {
 
   view: ViewMode;
   onView: (view: ViewMode) => void;
+
+  /** Which variants the combined view draws. */
+  variantTier: TierOrAll;
 };
 
 export function CollectionPanel(props: Props) {
@@ -61,6 +64,7 @@ export function CollectionPanel(props: Props) {
         <DroidRoster
           rebirthPath={props.rebirthPath}
           rebirthLevel={props.rebirthLevel}
+          tier={props.variantTier}
           rarity={props.rarity}
           droidClass={props.droidClass}
           collectionStatus={props.collectionStatus}
