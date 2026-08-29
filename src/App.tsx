@@ -79,6 +79,14 @@ export default function App() {
     }
   }, [location.pathname]);
 
+  // Land at the top of the tab you just opened. The tab bar now follows you
+  // down a long list, so it is reachable from the bottom of one — which means
+  // arriving 1,700px into the next tab is a thing that can happen, and it reads
+  // as the app having lost your place.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const { persistence } = useStoragePersistence();
 
   const backupReminder = useBackupReminder({
