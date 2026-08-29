@@ -47,6 +47,7 @@ No Play Store required.
 ## Features
 
 - Track all Droid Tycoon droids across every tier
+- Tab bar that gets out of the way scrolling down and returns on the way up
 - Grid, list or combined view for the collection, remembered between visits
 - Combined view: every droid once, with a tappable dot per tier
 - Fusion tab: all 17 recipes, and which tiers of each you have made
@@ -253,6 +254,27 @@ yet — those cards fall back to the class icon until art lands.
 
 Data source for droids and rebirths:
 https://star-wars-droid-tycoon.fandom.com/wiki/Rebirths
+
+## The tab bar follows you
+
+The lists here run long — 87 droids, seventeen recipes, every rebirth on a path.
+The tab bar sticks to the top of the window, slides out of the way while you
+scroll down, and comes back the moment you scroll up. Reaching another tab from
+the bottom of a list is one flick rather than a trip back to the top.
+
+What it watches is the *turn*, not the position: any upward movement past a few
+pixels brings it back, wherever you are in the list. Small movements are
+ignored so a resting thumb or the bounce at the end of a fling does not make it
+flicker, and inside the first 96px it never hides at all — up there it is
+sitting in its own space and hiding it would gain nothing.
+
+Changing tab also returns you to the top of the one you opened. That only
+became possible to get wrong once the bar was reachable from the bottom of a
+list; before, you were already at the top when you could reach it.
+
+Only the window is watched. Above `lg` the collection panel can scroll inside
+itself with the page unmoved and the bar on screen the whole time, and hiding
+it there would take away a control that was never in the way.
 
 ## Grid, List or Combined
 
