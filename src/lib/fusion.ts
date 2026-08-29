@@ -1,4 +1,4 @@
-import type { Rarity, Tier } from './droidTypes';
+import type { Rarity, Tier, TierOrAll } from './droidTypes';
 import { DROIDS, RARITY_ORDER, TIER_ORDER, type Droid } from '../data/droids';
 
 /**
@@ -78,11 +78,20 @@ function toIngredients(
   });
 }
 
-/** Every fusion recipe, tagged with which of its variants are collected. */
-export function getFusionRecipes(collected: Set<string>): FusionRecipe[] {
+/**
+ * Every fusion recipe, tagged with which of its variants are collected.
+ *
+ * `tier` narrows a recipe to one variant rather than dropping recipes, so
+ * "which Rainbow fusions am I missing?" still lists all seventeen — each
+ * showing only the Rainbow answer.
+ */
+export function getFusionRecipes(
+  collected: Set<string>,
+  tier: TierOrAll = 'ALL'
+): FusionRecipe[] {
   return FUSION_DROIDS.map((droid) => {
-    const variants: FusionVariant[] = TIER_ORDER.filter((tier) =>
-      droid.tiers.includes(tier)
+    const variants: FusionVariant[] = TIER_ORDER.filter(
+      (t) => droid.tiers.includes(t) && (tier === 'ALL' || t === tier)
     ).map((tier) => {
       const cardId = `${droid.name}_${tier}`;
       return { tier, cardId, collected: collected.has(cardId) };
@@ -100,8 +109,11 @@ export function getFusionRecipes(collected: Set<string>): FusionRecipe[] {
 }
 
 /** The recipes grouped by rarity, rarest last, skipping empty groups. */
-export function getFusionGroups(collected: Set<string>): FusionGroup[] {
-  const recipes = getFusionRecipes(collected);
+export function getFusionGroups(
+  collected: Set<string>,
+  tier: TierOrAll = 'ALL'
+): FusionGroup[] {
+  const recipes = getFusionRecipes(collected, tier);
   return RARITY_ORDER.map((rarity) => ({
     rarity,
     recipes: recipes.filter((r) => r.rarity === rarity),
@@ -119,8 +131,11 @@ export interface FusionTotals {
   variants: number;
 }
 
-export function getFusionTotals(collected: Set<string>): FusionTotals {
-  const recipes = getFusionRecipes(collected);
+export function getFusionTotals(
+  collected: Set<string>,
+  tier: TierOrAll = 'ALL'
+): FusionTotals {
+  const recipes = getFusionRecipes(collected, tier);
 
   return {
     droidsStarted: recipes.filter((r) => r.collectedCount > 0).length,
