@@ -65,7 +65,11 @@ export function Workspace(props: Props) {
 
   return (
     <div className="flex flex-col flex-1">
-      <TierTabs active={props.tier} onChange={props.onTier} />
+      {/* Combined shows every variant as a dot, so a tier to filter to is a
+          question it has already answered. Grid and list still need one. */}
+      {props.view !== 'COMBINED' && (
+        <TierTabs active={props.tier} onChange={props.onTier} />
+      )}
 
       <div
         className="
