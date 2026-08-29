@@ -36,6 +36,7 @@ export default function App() {
     team,
     assignDroid,
     unassignDroid,
+    moveDroid,
 
     toggleCollected,
     togglePresent,
@@ -200,6 +201,7 @@ export default function App() {
                 rebirthLevel={rebirthLevel}
                 onAssign={assignDroid}
                 onUnassign={requestUnassign}
+                onMove={moveDroid}
               />
             }
           />

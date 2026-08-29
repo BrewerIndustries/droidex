@@ -130,6 +130,16 @@ out of it leaves that slot open rather than sliding the ones below it up. The
 team keeps the arrangement you gave it. Placements made from the card badge,
 which names a station and nothing more, take the first free slot.
 
+**Click a placed droid to move it.** The menu lays out the whole base — every
+station, every slot, with whoever is in it — and picking one moves the droid
+there. Landing on an occupied slot **swaps** the two, which is what "put this
+one in slot 1" means when slot 1 is taken, and it is why moving is its own
+action rather than a remove and a re-add: removing first would free the slot,
+drop the droid from "on hand" if it were the last copy, and put up the removal
+warning for a change that loses nothing. Neither droid leaves the team, so a
+move can never break a rebirth requirement or a fusion the way a removal can.
+Remove is still on the menu, and still goes through that warning.
+
 **You can place several copies of the same droid.** If you have crafted three
 Gold Gonks you can work all three, in the same station or spread across
 different ones. The card badge shows how many are placed.
@@ -267,6 +277,15 @@ to keep a stat visible is the worse trade.
 
 v1.27 added the Fusion lab, unlocked at Rebirth 3: combine three droids into one
 better one. **17 droids are fusion-exclusive** and cannot be bought at all.
+
+They sit in the Droidex among the droids of their own rarity, alphabetically,
+rather than in a block of their own — BTL-R between BDX EXPLORER and BU-4D.
+Cards sort on `RARITY_ORDER` and then by name, rather than being left to the
+order `droids.ts` happens to list things in, where the seventeen were one run at
+the end because they were added together. Names compare with `numeric` collation
+so R9 comes before R10 and RIC before RIC-1200: names here are mostly a letter
+and a number, which a plain string compare gets wrong the moment one reaches two
+digits.
 
 Their cards show the recipe instead of the usual cost/efficiency block, because
 those figures do not apply to something with no purchase price:

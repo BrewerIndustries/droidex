@@ -1,5 +1,5 @@
 import type { Rarity, Tier } from './droidTypes';
-import { DROIDS, TIER_ORDER, type Droid } from '../data/droids';
+import { DROIDS, RARITY_ORDER, TIER_ORDER, type Droid } from '../data/droids';
 
 /**
  * One tier of a fusion droid, and whether it has been collected.
@@ -41,9 +41,6 @@ export interface FusionGroup {
   rarity: Rarity;
   recipes: FusionRecipe[];
 }
-
-/** The rarities fusion droids come in, in the order the game lists them. */
-const FUSION_RARITY_ORDER: Rarity[] = ['RARE', 'EPIC', 'LEGENDARY', 'MYTHIC'];
 
 const droidIndex = new Map(DROIDS.map((d) => [d.name, d]));
 
@@ -105,7 +102,7 @@ export function getFusionRecipes(collected: Set<string>): FusionRecipe[] {
 /** The recipes grouped by rarity, rarest last, skipping empty groups. */
 export function getFusionGroups(collected: Set<string>): FusionGroup[] {
   const recipes = getFusionRecipes(collected);
-  return FUSION_RARITY_ORDER.map((rarity) => ({
+  return RARITY_ORDER.map((rarity) => ({
     rarity,
     recipes: recipes.filter((r) => r.rarity === rarity),
   })).filter((group) => group.recipes.length > 0);
