@@ -32,6 +32,13 @@ scripts/debug_crops/
 .DS_Store
 Thumbs.db
 
+# iCloud sync-conflict duplicates. The repo sits on a synced Desktop, which
+# resolves a race by writing a second copy beside the original — "DroidList
+# 2.tsx". Nothing imports them and the build never sees them, but they get
+# swept into `git add -A` otherwise; two sets reached commits before this.
+* 2.*
+* 3.*
+
 # Logs
 *.log
 npm-debug.log*

@@ -234,6 +234,41 @@ export function getTeamEarnings(
 }
 
 /**
+ * Move one placement to a station and slot, swapping if something is there.
+ *
+ * A swap rather than a refusal because the interesting move is almost always
+ * into a taken slot — putting the best earner in slot 1 means the droid in
+ * slot 1 goes where this one came from. Neither droid leaves the team, so
+ * nothing here touches `present`.
+ *
+ * Returns the assignments unchanged when the move is a no-op or the index is
+ * stale, so callers can hand the result straight to state.
+ */
+export function movePlacement(
+  assignments: TeamAssignments,
+  index: PlacementIndex,
+  station: Station,
+  slot: number
+): TeamAssignments {
+  const moving = assignments[index];
+  if (!moving) return assignments;
+  if (moving.station === station && moving.slot === slot) return assignments;
+
+  const occupantIndex = assignments.findIndex(
+    (p, i) => i !== index && p.station === station && p.slot === slot
+  );
+
+  return assignments.map((placement, i) => {
+    if (i === index) return { ...placement, station, slot };
+    // The droid already there takes the vacated slot, rather than being
+    // evicted from the team.
+    if (i === occupantIndex)
+      return { ...placement, station: moving.station, slot: moving.slot };
+    return placement;
+  });
+}
+
+/**
  * Whether a card can go into a station right now. Class is not a constraint —
  * any droid works any station — so this is just about free space.
  *
